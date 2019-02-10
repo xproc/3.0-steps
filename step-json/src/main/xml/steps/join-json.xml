@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xmlns="http://docbook.org/ns/docbook"
+         xmlns:e="http://www.w3.org/1999/XSL/Spec/ElementSyntax"
+         xmlns:p="http://www.w3.org/ns/xproc"
+         xmlns:xi="http://www.w3.org/2001/XInclude"
+         xmlns:xlink="http://www.w3.org/1999/xlink"
+         xml:id="c.join-json"
+         version="5.0-extension w3c-xproc">
+<title>p:join-json</title>
+
+<para>T.B.D.</para>
+
+<p:declare-step type="p:join-json">
+  <p:input port="source"/>
+  <p:output port="result"/>
+</p:declare-step>
+
+<para>T.B.D.</para>
+
+</section>
