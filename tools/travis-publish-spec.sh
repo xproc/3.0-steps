@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set | grep TRAVIS
-
 if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
     echo "Cannot publish pull requests."
     exit
