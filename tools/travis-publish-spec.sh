@@ -21,8 +21,11 @@ if [ "$GIT_PUB_REPO" != "" ]; then
 
         TIP=${TRAVIS_TAG:="head"}
 
+        # N.B. gh-pages here is updated by two different repositories.
+        # Consequently, we don't try to remove the old files.
+        # Occasional manual cleanup may be required.
+
         cd gh-pages
-        git rm -rf ./${TRAVIS_BRANCH}/${TIP} > /dev/null
         mkdir -p ./${TRAVIS_BRANCH}/${TIP}
         cp -Rf $TRAVIS_BUILD_DIR/build/dist/* ./${TRAVIS_BRANCH}/${TIP}
 
