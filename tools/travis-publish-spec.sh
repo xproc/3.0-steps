@@ -22,14 +22,13 @@ if [ "$GIT_PUB_REPO" != "" ]; then
         TIP=${TRAVIS_TAG:="head"}
 
         cd gh-pages
-        echo git rm -rf ./${TRAVIS_BRANCH}/${TIP}
         git rm -rf ./${TRAVIS_BRANCH}/${TIP} > /dev/null
         mkdir -p ./${TRAVIS_BRANCH}/${TIP}
         cp -Rf $TRAVIS_BUILD_DIR/build/dist/* ./${TRAVIS_BRANCH}/${TIP}
 
         git add --verbose -f .
-        #git commit -m "Successful travis build $TRAVIS_BUILD_NUMBER"
-        #git push -fq origin gh-pages > /dev/null
+        git commit -m "Successful travis build $TRAVIS_BUILD_NUMBER"
+        git push -fq origin gh-pages > /dev/null
 
         echo -e "Published specification to gh-pages.\n"
     fi
