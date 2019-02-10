@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# temporarily disable; it surely won't work
+# temporarily disable; it surely won't work.
 exit
 
 if [ "$TRAVIS_REPO_SLUG" == "$GIT_PUB_REPO" ]; then
