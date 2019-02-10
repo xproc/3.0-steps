@@ -1,6 +1,3 @@
-XProc steps
-===========
+# XProc 3.0: Steps
 
-This repository is for "official" extension steps, things like
-p:template, p:zip, and p:unzip. Please issue pull requests to the
-"extensions" repository to propose new steps.
+TBD

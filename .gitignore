@@ -1,0 +1,14 @@
+/.gradle/
+/build/
+/buildSrc/.gradle/
+/buildSrc/build/
+/overview/build/
+/step-validation/build/
+/step-os/build/
+/step-paged-media/build/
+/step-run/build/
+/step-file/build/
+/step-text/build/
+/steps-intro/build/
+/steps/build/
+
