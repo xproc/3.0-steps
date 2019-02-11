@@ -193,6 +193,7 @@ linkend="rfc2119"/>.</para>
 <xi:include href="steps/text-head.xml"/>
 <xi:include href="steps/text-join.xml"/>
 <xi:include href="steps/text-replace.xml"/>
+<xi:include href="steps/text-sort.xml"/>
 <xi:include href="steps/text-tail.xml"/>
 <xi:include href="steps/unescape-markup.xml"/>
 <xi:include href="steps/unwrap.xml"/>
