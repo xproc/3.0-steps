@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="c.markdown-to-html" xmlns:p="http://www.w3.org/ns/xproc" xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns="http://docbook.org/ns/docbook">
+  <title>p:markdown-to-html</title>
+
+  <para>The <code>p:markdown-to-html</code> step returns lines from the beginning of a text document.</para>
+
+  <p:declare-step type="p:markdown-to-html">
+    <p:input port="source" primary="true" sequence="false" content-types="text/*"/>
+    <p:output port="result" primary="true" sequence="false" content-types="application/xhtml+xml"/>
+    <p:option name="parameters" required="false" as="map(xs:QName, item()*)"/>
+  </p:declare-step>
+
+  <para>The <tag>p:markdown-to-html</tag> step expects on its <port>source</port> port a text document in Markdown
+    syntax (TBD: REF TO MARKDOWN SPEC?) and converts this into XHTML. The result is returned on its <port>result</port>
+    port.</para>
+  
+  <para>TBD</para>
+
+  <simplesect>
+    <title>Document properties</title>
+    <para feature="load-preserves-none">No document properties are preserved.</para>
+  </simplesect>
+</section>
