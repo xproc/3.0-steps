@@ -189,6 +189,7 @@ linkend="rfc2119"/>.</para>
 <xi:include href="steps/store.xml"/>
 <xi:include href="steps/string-replace.xml"/>
 <xi:include href="steps/tee.xml"/>
+<xi:include href="steps/text-count.xml"/>
 <xi:include href="steps/text-head.xml"/>
 <xi:include href="steps/text-join.xml"/>
 <xi:include href="steps/text-replace.xml"/>
