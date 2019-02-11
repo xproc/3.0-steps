@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="c.text-replace" xmlns:p="http://www.w3.org/ns/xproc" xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns="http://docbook.org/ns/docbook">
+  <title>p:text-replace</title>
+
+  <para>The <code>p:text-replace</code> step replaces all occurrences of substrings in a text document that match a
+    supplied regular expression with a given replacement string.</para>
+
+  <p:declare-step type="p:text-replace">
+    <p:input port="source" primary="true" sequence="false" content-types="text/*"/>
+    <p:output port="result" primary="true" sequence="false" content-types="text/*"/>
+    <p:option name="pattern" required="true" as="xs:string"/>
+    <p:option name="replacement" required="true" as="xs:string"/>
+    <p:option name="flags" required="false" as="xs:string"/>
+  </p:declare-step>
+
+  <para>The <code>p:text-replace</code> step replaces all occurrences of substrings in the text document appearing on
+    its <port>source</port> port that match a supplied regular expression with a given replacement string. The result is
+    returned (as another text document) on its <port>result</port> port. </para>
+  <para>This step is a convenience wrapper around the XPath <link
+      xlink:href="https://www.w3.org/TR/xpath-functions-31/#func-replace"><function>fn:replace</function></link>
+    function to ease text replacements in the document flow of a pipeline.</para>
+
+  <para>The <option>pattern</option>, <option>replacement</option> and <option>flags</option> options are specified the
+    same as the parameters with the same names of the <link
+      xlink:href="https://www.w3.org/TR/xpath-functions-31/#func-replace"><function>fn:replace</function></link>
+    function.</para>
+
+  <simplesect>
+    <title>Document properties</title>
+    <para feature="add-attribute-preserves-all">All document properties are preserved.</para>
+  </simplesect>
+</section>
