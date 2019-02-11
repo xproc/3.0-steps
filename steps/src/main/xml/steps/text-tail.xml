@@ -12,7 +12,7 @@
   </p:declare-step>
   
   <para>The <tag>p:text-tail</tag> step returns on its <port>result</port> port lines from the text document that
-    appears on its <port>input</port> port:</para>
+    appears on its <port>source</port> port:</para>
   <itemizedlist>
     <listitem>
       <para>If the <option>count</option> option is positive, the <tag>p:text-tail</tag> step returns the last
