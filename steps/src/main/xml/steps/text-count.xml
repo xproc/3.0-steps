@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="c.text-count" xmlns:p="http://www.w3.org/ns/xproc" xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns="http://docbook.org/ns/docbook">
+  <title>p:text-count</title>
+
+  <para>The <code>p:text-count</code> step counts the number of lines in a text document and returns a single XML
+    document containing that number.</para>
+
+  <p:declare-step type="p:text-count">
+    <p:input port="source" primary="true" sequence="false" content-types="text/*"/>
+    <p:output port="result" primary="true" sequence="false" content-types="application/xml"/>
+  </p:declare-step>
+
+  <para>The <tag>p:text-count</tag> step counts the number of lines in the text document appearing on its
+      <port>source</port> port. It returns on its <port>result</port> port an XML document containing a single
+      <tag>c:result</tag> element whose contents is the string representing this count.</para>
+
+  <para>Lines are identified as described in <link xlink:href="https://www.w3.org/TR/xml/#sec-line-ends">XML, 2.11
+      End-of-Line Handling</link>.</para>
+
+  <simplesect>
+    <title>Document properties</title>
+    <para feature="count-preserves-none">No document properties are preserved.</para>
+  </simplesect>
+</section>

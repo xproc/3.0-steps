@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="c.text-sort" xmlns:p="http://www.w3.org/ns/xproc" xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns="http://docbook.org/ns/docbook">
+  <title>p:text-sort</title>
+
+  <para>The <code>p:text-sort</code> step sorts lines in a text document.</para>
+
+  <p:declare-step type="p:text-sort">
+    <p:input port="source" primary="true" sequence="false" content-types="text/*"/>
+    <p:output port="result" primary="true" sequence="false" content-types="text/*"/>
+    <p:option name="order" required="false" as="xs:string" select="'ascending'" values="('ascending', 'descending')"/>
+    <p:option name="case-order" required="false" as="xs:string" values="('upper-first', 'lower-first')"/>
+    <p:option name="lang" required="false" as="xs:language"/>
+    <p:option name="data-type" required="false" as="xs:string" select="'text'" values="('text', 'number')"/>
+    <p:option name="collation" required="false" as="xs:string"
+      select="'https://www.w3.org/2005/xpath-functions/collation/codepoint'"/>
+    <p:option name="stable" required="false" as="xs:boolean" select="true()"/>
+  </p:declare-step>
+
+  <para>The <tag>p:text-sort</tag> step sorts the lines in the text document appearing on its <port>source</port> port
+    and returns the result as another text document on its <port>result</port> port. The full lines are used as the
+    sorting key.</para>
+  <itemizedlist>
+    <listitem>
+      <para>The <option>order</option> option defines whether the lines are processed in ascending or descending order.
+        Its value <rfc2119>must</rfc2119> be one of <code>ascending</code> or <code>descending</code>. The default is
+          <code>ascending</code>.</para>
+    </listitem>
+    <listitem>
+      <para>The <option>case-order</option> option defines whether upper-case letters are to be collated before or after
+        lower-case letters. Its value <rfc2119>must</rfc2119> be one of <code>upper-first</code> or
+          <code>lower-first</code>. The default is language-dependent.</para>
+    </listitem>
+    <listitem>
+      <para>The <option>lang</option> option defines the language whose collating conventions are to be used. The
+        default depends on the processing environment. Its value must be a valid language code (e.g.
+        <code>en-EN</code>).</para>
+    </listitem>
+    <listitem>
+      <para>The <option>data-type</option> option defines whether the lines are to be collated alphabetically or
+        numerically. Its value <rfc2119>must</rfc2119> be one of <code>text</code> or <code>number</code>. The default
+        is <code>text</code>.</para>
+    </listitem>
+    <listitem>
+      <para>The <option>collation</option> option identifies how strings are to be compared with each other. Its value
+        must be a valid collation URI. The only collation XProc processors <rfc2119>must</rfc2119> support is the
+        Unicode Codepoint Collation <link xlink:href="https://www.w3.org/2005/xpath-functions/collation/codepoint/"
+            ><code>https://www.w3.org/2005/xpath-functions/collation/codepoint</code></link>. This is also its default.
+        Support for other collations is <glossterm>implementation-defined</glossterm>.</para>
+    </listitem>
+    <listitem>
+      <para>If the <option>stable</option> option is set to <code>false</code> this indicates that there is no
+        requirement to retain the original order of items that have equal values for all the sort keys.</para>
+    </listitem>
+  </itemizedlist>
+
+  <para>Lines are identified as described in <link xlink:href="https://www.w3.org/TR/xml/#sec-line-ends">XML, 2.11
+      End-of-Line Handling</link>.</para>
+
+  <simplesect>
+    <title>Document properties</title>
+    <para feature="add-attribute-preserves-all">All document properties are preserved.</para>
+  </simplesect>
+</section>

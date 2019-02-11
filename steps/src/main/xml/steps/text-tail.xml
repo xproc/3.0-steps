@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="c.text-tail" xmlns:p="http://www.w3.org/ns/xproc" xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns="http://docbook.org/ns/docbook">
+  <title>p:text-tail</title>
+  
+  <para>The <code>p:text-tail</code> step returns lines from the end of a text document.</para>
+  
+  <p:declare-step type="p:text-tail">
+    <p:input port="source" primary="true" sequence="false" content-types="text/*"/>
+    <p:output port="result" primary="true" sequence="false" content-types="text/*"/>
+    <p:option name="count" required="true" as="xs:integer"/>
+  </p:declare-step>
+  
+  <para>The <tag>p:text-tail</tag> step returns on its <port>result</port> port lines from the text document that
+    appears on its <port>source</port> port:</para>
+  <itemizedlist>
+    <listitem>
+      <para>If the <option>count</option> option is positive, the <tag>p:text-tail</tag> step returns the last
+        <option>count</option> lines</para>
+    </listitem>
+    <listitem>
+      <para>If the <option>count</option> option is zero, the <tag>p:text-tail</tag> step returns all lines</para>
+    </listitem>
+    <listitem>
+      <para>If the <option>count</option> option is negative, the <tag>p:text-tail</tag> step returns all lines except
+        the last <option>count</option> lines</para>
+    </listitem>
+  </itemizedlist>
+  
+  <para>Lines are identified as described in <link xlink:href="https://www.w3.org/TR/xml/#sec-line-ends">XML, 2.11
+    End-of-Line Handling</link>.</para>
+  
+  <simplesect>
+    <title>Document properties</title>
+    <para feature="add-attribute-preserves-all">All document properties are preserved.</para>
+  </simplesect>
+</section>
