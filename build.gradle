@@ -80,6 +80,15 @@ def getenv(String name) {
   }
 }
 
+def deltaxml() {
+  def dxml = new File("deltaxml")
+  if (dxml.exists() && dxml.isDirectory()) {
+    return "diff"
+  } else {
+    return ""
+  }
+}
+
 // ======================================================================
 // Make sure that step build artifacts get published so that they
 // can be used by the build process for the language specification
@@ -185,8 +194,8 @@ task steps(dependsOn: [ "xproc_schemas", "spec_schemas",
   param("travis-tag", getenv("TRAVIS_TAG"))
 
   option("style", new File("tools/xsl/xproc-specs.xsl"))
-  option("diffkey", getenv("DELTAXML_DIFF_KEY"))
-  option("webid", "steps")
+  option("diff", deltaxml())
+  option("specid", "steps")
   option("diffloc", new File("build/dist/steps/diff.html").getAbsolutePath())
 
   pipeline "tools/xpl/formatspec.xpl"
@@ -237,6 +246,10 @@ task step_validation(type: DocBookTask,
   param("travis-tag", getenv("TRAVIS_TAG"))
 
   option("style", new File("tools/xsl/xproc-specs.xsl"))
+  option("diff", deltaxml())
+  option("specid", "validation")
+  option("diffloc", new File("build/dist/validation/diff.html").getAbsolutePath())
+
   pipeline "tools/xpl/formatspec.xpl"
 }
 buildspecs.dependsOn "step_validation"
@@ -285,6 +298,10 @@ task step_os(type: DocBookTask,
   param("travis-tag", getenv("TRAVIS_TAG"))
 
   option("style", new File("tools/xsl/xproc-specs.xsl"))
+  option("diff", deltaxml())
+  option("specid", "os")
+  option("diffloc", new File("build/dist/os/diff.html").getAbsolutePath())
+
   pipeline "tools/xpl/formatspec.xpl"
 }
 buildspecs.dependsOn "step_os"
@@ -333,6 +350,10 @@ task step_json(type: DocBookTask,
   param("travis-tag", getenv("TRAVIS_TAG"))
 
   option("style", new File("tools/xsl/xproc-specs.xsl"))
+  option("diff", deltaxml())
+  option("specid", "json")
+  option("diffloc", new File("build/dist/json/diff.html").getAbsolutePath())
+
   pipeline "tools/xpl/formatspec.xpl"
 }
 buildspecs.dependsOn "step_json"
@@ -381,6 +402,10 @@ task step_run(type: DocBookTask,
   param("travis-tag", getenv("TRAVIS_TAG"))
 
   option("style", new File("tools/xsl/xproc-specs.xsl"))
+  option("diff", deltaxml())
+  option("specid", "run")
+  option("diffloc", new File("build/dist/run/diff.html").getAbsolutePath())
+
   pipeline "tools/xpl/formatspec.xpl"
 }
 buildspecs.dependsOn "step_run"
@@ -429,6 +454,10 @@ task step_paged_media(type: DocBookTask,
   param("travis-tag", getenv("TRAVIS_TAG"))
 
   option("style", new File("tools/xsl/xproc-specs.xsl"))
+  option("diff", deltaxml())
+  option("specid", "paged-media")
+  option("diffloc", new File("build/dist/paged-media/diff.html").getAbsolutePath())
+
   pipeline "tools/xpl/formatspec.xpl"
 }
 buildspecs.dependsOn "step_paged_media"
@@ -477,6 +506,10 @@ task step_file(type: DocBookTask,
   param("travis-tag", getenv("TRAVIS_TAG"))
 
   option("style", new File("tools/xsl/xproc-specs.xsl"))
+  option("diff", deltaxml())
+  option("specid", "file")
+  option("diffloc", new File("build/dist/file/diff.html").getAbsolutePath())
+
   pipeline "tools/xpl/formatspec.xpl"
 }
 buildspecs.dependsOn "step_file"
@@ -525,6 +558,10 @@ task step_text(type: DocBookTask,
   param("travis-tag", getenv("TRAVIS_TAG"))
 
   option("style", new File("tools/xsl/xproc-specs.xsl"))
+  option("diff", deltaxml())
+  option("specid", "text")
+  option("diffloc", new File("build/dist/text/diff.html").getAbsolutePath())
+
   pipeline "tools/xpl/formatspec.xpl"
 }
 buildspecs.dependsOn "step_text"
