@@ -27,7 +27,7 @@
       <rfc2119>must</rfc2119> support the <biblioref linkend="zip"/> format, specified with the value <code>zip</code>.
       <impl>It is <glossterm>implementation-defined</glossterm> what other formats are supported.</impl></para>
 
-  <para>The <option>parameters</option> can be used to supply parameters to control casting. <impl>The semantics of the
+  <para>The <option>parameters</option> can be used to supply parameters to control the archiving. <impl>The semantics of the
       keys and the allowed values for these keys are <glossterm>implementation-defined</glossterm>.</impl>
     <error code="C0079">It is a <glossterm>dynamic error</glossterm> if the map <option>parameters</option> contains an
       entry whose key is defined by the implementation and whose value is not valid for that key.</error></para>
@@ -105,7 +105,6 @@
       <para>Do we need to say anything about serialization options for XML contents?</para>
       <para>Not sure whether JSON needs more specifications</para>
     </note>
-    
 
   </section>
 
