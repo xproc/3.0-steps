@@ -27,8 +27,8 @@
       <rfc2119>must</rfc2119> support the <biblioref linkend="zip"/> format, specified with the value <code>zip</code>.
       <impl>It is <glossterm>implementation-defined</glossterm> what other formats are supported.</impl></para>
 
-  <para>The <option>parameters</option> can be used to supply parameters to control the archiving. <impl>The semantics of the
-      keys and the allowed values for these keys are <glossterm>implementation-defined</glossterm>.</impl>
+  <para>The <option>parameters</option> can be used to supply parameters to control the archiving. <impl>The semantics
+      of the keys and the allowed values for these keys are <glossterm>implementation-defined</glossterm>.</impl>
     <error code="C0079">It is a <glossterm>dynamic error</glossterm> if the map <option>parameters</option> contains an
       entry whose key is defined by the implementation and whose value is not valid for that key.</error></para>
 
@@ -64,6 +64,10 @@
     <para>The optional <code>href</code> attribute is interpreted as follows:</para>
     <itemizedlist>
       <listitem>
+        <para><error code="D0064">It is a <glossterm>dynamic error</glossterm> if the <option>href</option> attribute is
+            present and its value is not a valid <type>xs:anyURI</type>.</error></para>
+      </listitem>
+      <listitem>
         <para>When the <tag>c:file</tag> elements has any child nodes, it is ignored.</para>
       </listitem>
       <listitem>
@@ -74,8 +78,7 @@
       <listitem>
         <para>If the above doesn't apply, the value of the <code>href</code> attribute is interpreted as a URI and the
           document is loaded from this.</para>
-        <para><error code="D0064">It is a <glossterm>dynamic error</glossterm> if in this case the <option>href</option>
-            attribute value is not a valid <type>xs:anyURI</type>.</error></para>
+
         <para><error code="D0011">It is a <glossterm>dynamic error</glossterm> if the resource referenced by the
               <option>href</option> option does not exist, cannot be accessed or is not a file</error></para>
         <para> If the <option>href</option> option is relative, it is made absolute against the base URI of the
@@ -94,10 +97,10 @@
 
     <para>When the <code>c:file</code> element has any child nodes this is taken as the contents of the archive's entry.
       The <code>href</code> attribute is ignored in this case.</para>
-    
+
     <para>The <code>p:archive</code> step should strive to retain the order of the <tag>c:file</tag> elements when
-      constructing the archive. For instance, an e-book in EPub format has a non-compressed entry that must be
-      first in the archive. It should be possible to construct such an archive using <code>p:archive</code>.</para>
+      constructing the archive. For instance, an e-book in EPub format has a non-compressed entry that must be first in
+      the archive. It should be possible to construct such an archive using <code>p:archive</code>.</para>
 
     <para>The <code>c:file</code> elements may contain additional <glossterm>implementation-defined</glossterm>
       attributes.</para>
