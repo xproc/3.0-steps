@@ -162,6 +162,7 @@ linkend="rfc2119"/>.</para>
 
 <xi:include href="steps/add-attribute.xml"/>
 <xi:include href="steps/add-xml-base.xml"/>
+<xi:include href="steps/archive.xml"/>
 <xi:include href="steps/cast-content-type.xml"/>
 <xi:include href="steps/compare.xml"/>
 <xi:include href="steps/count.xml"/>
