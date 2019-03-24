@@ -26,6 +26,7 @@
     <bibliomixed xml:id="tagsoup"/>
     <bibliomixed xml:id="bib.uuid"/>
     <bibliomixed xml:id="bib.sha"/>
+    <bibliomixed xml:id="zip"/>
   </bibliolist>
 </section>
 <section xml:id="informative-references">
