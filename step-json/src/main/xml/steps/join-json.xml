@@ -18,9 +18,9 @@ If the sequence on port <code>source</code> is empty, the empty sequence is retu
 </p:declare-step>
 
 <para>If option <code>flatten-arrays</code> is <literal>false</literal>, a member in the array is created for each document in
-the sequence appearing on port<code>source</code>. Therefor the produced array with have the same number of
+the sequence appearing on port<code>source</code>. Therefore the produced array with have the same number of
 members as the number of documents appearing on port <code>source</code>. However if <code>flatten-arrays</code> is
-<literal>true</literal>, for each member of an array appearing at the top level of a JSON-document 
+<literal>true</literal>, for each member of an array appearing at the top level of a JSON document 
 on port <code>source</code> a new member in the resulting array will be created.</para>
 
 </section>
