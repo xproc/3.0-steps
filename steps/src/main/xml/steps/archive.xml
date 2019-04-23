@@ -37,7 +37,7 @@
         <glossterm>implementation-defined</glossterm>.</impl>
   </para>
 
-  <section xml:id="cv.request">
+  <section xml:id="cv.manifest">
     <title>Specifying an archive manifest</title>
 
     <para>An archive manifest is represented by a <tag>c:archive</tag> root element.</para>
@@ -48,8 +48,8 @@
     </note>
     <!--<e:rng-pattern name="..."/>-->
 
-    <para>The <code>c:archive</code> root element may contain additional <glossterm>implementation-defined</glossterm>
-      attributes.</para>
+    <para><impl>The <code>c:archive</code> root element may contain additional <glossterm>implementation-defined</glossterm>
+      attributes.</impl></para>
 
     <para>All entries in the archive must be present as <tag>c:file</tag> child elements:</para>
 
@@ -102,8 +102,8 @@
       constructing the archive. For instance, an e-book in EPub format has a non-compressed entry that must be first in
       the archive. It should be possible to construct such an archive using <code>p:archive</code>.</para>
 
-    <para>The <code>c:file</code> elements may contain additional <glossterm>implementation-defined</glossterm>
-      attributes.</para>
+    <para><impl>The <code>c:file</code> elements may contain additional <glossterm>implementation-defined</glossterm>
+      attributes.</impl></para>
     <note role="editorial">
       <para>Do we need to say anything about serialization options for XML contents?</para>
       <para>Not sure whether JSON needs more specifications</para>
