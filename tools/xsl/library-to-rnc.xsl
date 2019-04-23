@@ -88,6 +88,12 @@
         </xsl:message>
 	<xsl:value-of select="'xsd:string'"/>
       </xsl:when>
+      <xsl:when test="@as = 'xs:string*' or @as = 'xs:anyURI*'">
+        <!-- We have options that take list values, but you can't specify lists of strings in RELAX NG. -->
+        <!-- This is OK though because if you put the value in the option shortcut form, it's flattened -->
+        <!-- into a single string anyway. -->
+	<xsl:value-of select="replace(replace(substring-before(@as, '*'), 'xs:', 'xsd:'), '#', '')"/>
+      </xsl:when>
       <xsl:otherwise>
 	<xsl:value-of select="replace(replace(@as, 'xs:', 'xsd:'), '#', '')"/>
       </xsl:otherwise>

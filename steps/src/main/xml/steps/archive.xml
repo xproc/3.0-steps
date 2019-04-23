@@ -113,8 +113,8 @@
 
     <e:rng-pattern name="VocabArchive" xml:id="cv.archive"/>
 
-    <para>The <code>c:archive</code> root element may contain additional <glossterm>implementation-defined</glossterm>
-      attributes.</para>
+    <para><impl>The <code>c:archive</code> root element may contain additional <glossterm>implementation-defined</glossterm>
+      attributes.</impl></para>
 
     <para>All entries in the archive must be present as <tag>c:entry</tag> child elements:</para>
 
@@ -172,8 +172,8 @@
       constructing the archive. For instance, an e-book in EPUB format has a non-compressed entry that must be first in
       the archive. It should be possible to construct such an archive using <code>p:archive</code>.</para>
 
-    <para>The <code>c:entry</code> elements may contain additional <glossterm>implementation-defined</glossterm>
-      attributes.</para>
+    <para><impl>The <code>c:entry</code> elements may contain additional <glossterm>implementation-defined</glossterm>
+      attributes.</impl></para>
     <note role="editorial">
       <para>Do we need to say anything about serialization options for XML contents?</para>
       <para>Not sure whether JSON needs more specifications</para>
