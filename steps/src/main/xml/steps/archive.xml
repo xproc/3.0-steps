@@ -140,7 +140,7 @@
           documents are found, the <emphasis>first</emphasis> of these is used as entry for the archive.</para>
         <note role="editorial">
           <para>In the interest of portability and reproducibility, shouldn’t we raise a dynamic
-            error if the same <code>href</code> attribute is used on manifest entry? If the
+            error if the same <code>href</code> attribute is used on another manifest entry? If the
             documents are, for example, taken from the <port>secondary</port> port of a
               <code>p:xslt</code> step, the document order may be different among implementations,
             file systems, etc.</para>
