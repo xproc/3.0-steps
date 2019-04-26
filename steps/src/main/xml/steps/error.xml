@@ -8,8 +8,8 @@
 to the step.</para>
 
 <p:declare-step type="p:error">
-    <p:input port="source" sequence="true" content-types="application/xml text/xml */*+xml text/*"/>
-    <p:output port="result" sequence="true" content-types="application/xml text/xml */*+xml text/*"/>
+    <p:input port="source" sequence="true" content-types="xml text"/>
+    <p:output port="result" sequence="true" content-types="any"/>
     <p:option name="code" required="true" as="xs:QName"/>
 </p:declare-step>
 
