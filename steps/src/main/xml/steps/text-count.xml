@@ -7,7 +7,7 @@
     document containing that number.</para>
 
   <p:declare-step type="p:text-count">
-    <p:input port="source" primary="true" sequence="false" content-types="text/*"/>
+    <p:input port="source" primary="true" sequence="false" content-types="text"/>
     <p:output port="result" primary="true" sequence="false" content-types="application/xml"/>
   </p:declare-step>
 

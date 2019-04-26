@@ -7,8 +7,8 @@
 <para>The <tag>p:xinclude</tag> step applies <biblioref linkend="xinclude"/> processing to the <port>source</port> document.</para>
 
 <p:declare-step type="p:xinclude">
-  <p:input port="source" content-types="application/xml text/xml */*+xml"/>
-  <p:output port="result" content-types="application/xml text/xml */*+xml"/>
+  <p:input port="source" content-types="xml html"/>
+  <p:output port="result" content-types="xml html"/>
   <p:option name="fixup-xml-base" as="xs:boolean" select="false()"/>
   <p:option name="fixup-xml-lang" as="xs:boolean" select="false()"/>
 </p:declare-step>

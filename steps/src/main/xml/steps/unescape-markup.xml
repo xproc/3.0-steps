@@ -12,8 +12,8 @@ same document element with children that result from the parse. This
 is the reverse of the <tag>p:escape-markup</tag> step.</para>
 
 <p:declare-step type="p:unescape-markup">
-  <p:input port="source" content-types="application/xml text/xml */*+xml text/*"/>
-  <p:output port="result" content-types="application/xml text/xml */*+xml"/>
+  <p:input port="source" content-types="xml html"/>
+  <p:output port="result" content-types="xml html"/>
   <p:option name="namespace" as="xs:anyURI?"/>
   <p:option name="content-type" as="xs:string" select="'application/xml'"/>
   <p:option name="encoding" as="xs:string?"/>
