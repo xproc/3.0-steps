@@ -12,8 +12,8 @@ with <code>xml:base</code> attributes added to or corrected on each element as s
 by the options on this step.</para>
 
 <p:declare-step type="p:add-xml-base">
-   <p:input port="source" content-types="application/xml text/xml */*+xml"/>
-   <p:output port="result" content-types="application/xml"/>
+   <p:input port="source" content-types="xml html"/>
+   <p:output port="result" content-types="xml html"/>
    <p:option name="all" as="xs:boolean" select="false()"/>
    <p:option name="relative" as="xs:boolean" select="true()"/>
 </p:declare-step>

@@ -5,7 +5,7 @@
 discards them. It has no output.</para>
 
 <p:declare-step type="p:sink">
-   <p:input port="source" content-types="*/*" sequence="true"/>
+   <p:input port="source" content-types="any" sequence="true"/>
 </p:declare-step>
 
 <simplesect>

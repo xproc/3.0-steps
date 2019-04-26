@@ -9,8 +9,8 @@
 based on a (possibly dynamically constructed) XPath select expression.</para>
 
 <p:declare-step type="p:filter">
-  <p:input port="source" content-types="application/xml text/xml */*+xml"/>
-  <p:output port="result" sequence="true" content-types="application/xml"/>
+  <p:input port="source" content-types="xml html"/>
+  <p:output port="result" sequence="true" content-types="xml html"/>
   <p:option name="select" required="true" as="xs:string" e:type="XPathExpression"/>
 </p:declare-step>
 

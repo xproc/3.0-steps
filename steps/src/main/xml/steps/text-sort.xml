@@ -6,8 +6,8 @@
   <para>The <code>p:text-sort</code> step sorts lines in a text document.</para>
 
   <p:declare-step type="p:text-sort">
-    <p:input port="source" primary="true" sequence="false" content-types="text/*"/>
-    <p:output port="result" primary="true" sequence="false" content-types="text/*"/>
+    <p:input port="source" primary="true" sequence="false" content-types="text"/>
+    <p:output port="result" primary="true" sequence="false" content-types="text"/>
     <p:option name="order" required="false" as="xs:string" select="'ascending'" values="('ascending', 'descending')"/>
     <p:option name="case-order" required="false" as="xs:string" values="('upper-first', 'lower-first')"/>
     <p:option name="lang" required="false" as="xs:language"/>

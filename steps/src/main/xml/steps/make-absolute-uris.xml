@@ -10,8 +10,8 @@ attribute's value in the source document an absolute IRI value in the
 result document.</para>
 
 <p:declare-step type="p:make-absolute-uris">
-  <p:input port="source" content-types="application/xml text/xml */*+xml"/>
-  <p:output port="result" content-types="application/xml"/>
+  <p:input port="source" content-types="xml html"/>
+  <p:output port="result" content-types="xml html"/>
   <p:option name="match" required="true" as="xs:string" e:type="XSLTSelectionPattern"/>
   <p:option name="base-uri" as="xs:anyURI?"/>
 </p:declare-step>

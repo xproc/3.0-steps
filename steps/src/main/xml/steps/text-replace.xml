@@ -7,8 +7,8 @@
     supplied regular expression with a given replacement string.</para>
 
   <p:declare-step type="p:text-replace">
-    <p:input port="source" primary="true" sequence="false" content-types="text/*"/>
-    <p:output port="result" primary="true" sequence="false" content-types="text/*"/>
+    <p:input port="source" primary="true" sequence="false" content-types="text"/>
+    <p:output port="result" primary="true" sequence="false" content-types="text"/>
     <p:option name="pattern" required="true" as="xs:string"/>
     <p:option name="replacement" required="true" as="xs:string"/>
     <p:option name="flags" required="false" as="xs:string"/>

@@ -9,7 +9,7 @@
 for some value and injects it into the <port>source</port> document.</para>
 
 <p:declare-step type="p:hash">
-  <p:input port="source" primary="true" content-types="*/*"/>
+  <p:input port="source" primary="true" content-types="any"/>
   <p:output port="result" content-types="application/xml"/>
   <p:option name="parameters" as="map(xs:QName,item()*)?"/>
   <p:option name="value" required="true" as="xs:string"/>

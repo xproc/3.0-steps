@@ -9,7 +9,7 @@
 <port>source</port> document with a new parent element.</para>
 
 <p:declare-step type="p:wrap">
-   <p:input port="source" content-types="application/xml text/xml */*+xml"/>
+   <p:input port="source" content-types="xml html"/>
    <p:output port="result" content-types="application/xml"/>
    <p:option name="wrapper" required="true" as="xs:QName"/>
    <p:option name="match" required="true" as="xs:string" e:type="XSLTSelectionPattern"/>

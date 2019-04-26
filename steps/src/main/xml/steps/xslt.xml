@@ -7,9 +7,9 @@
 <para>The <tag>p:xslt</tag> step applies an XSLT stylesheet to a document.</para>
 
 <p:declare-step type="p:xslt">
-  <p:input port="source" content-types="*/*" sequence="true" primary="true"/>
-  <p:input port="stylesheet" content-types="application/xml text/xml */*+xml"/>
-  <p:output port="result" primary="true" sequence="false" content-types="*/*"/>
+  <p:input port="source" content-types="any" sequence="true" primary="true"/>
+  <p:input port="stylesheet" content-types="xml"/>
+  <p:output port="result" primary="true" sequence="false" content-types="any"/>
   <p:output port="secondary" sequence="true" content-types="*/*"/>
   <p:option name="parameters" as="map(xs:QName,item()*)?"/>
   <p:option name="initial-mode" as="xs:QName?"/>

@@ -6,8 +6,8 @@
   <para>The <code>p:text-join</code> step concatenates text documents.</para>
   
   <p:declare-step type="p:text-join">
-    <p:output port="source" primary="true" sequence="true" content-types="text/*"/>
-    <p:output port="result" primary="true" sequence="false" content-types="text/*"/>
+    <p:output port="source" primary="true" sequence="true" content-types="text"/>
+    <p:output port="result" primary="true" sequence="false" content-types="text"/>
     <p:option name="separator" required="false" as="xs:string"/>
     <p:option name="prefix" required="false" as="xs:string"/>
     <p:option name="suffix" required="false" as="xs:string"/>
