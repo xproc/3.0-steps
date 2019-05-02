@@ -774,6 +774,14 @@ AnyElement =
    }
 
 [
+   sa:model = "anyNonXProcElement"
+]
+AnyNonXProcElement =
+   element * - (c:* | p:*) {
+      (_any.attr | text | AnyElement)*
+   }
+
+[
    sa:model = "anyNode"
 ]
 Any =
@@ -930,7 +938,7 @@ VocabData =
 VocabArchive =
    element c:archive {
       VocabEntry* &
-      AnyElement*
+      AnyNonXProcElement*
    }
 
 [
