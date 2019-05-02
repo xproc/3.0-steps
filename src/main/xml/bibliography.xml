@@ -137,6 +137,11 @@ Anders Berglund, editor. W3C Recommendation. 5 December 2006.</bibliomixed>
 Query Language</citetitle>. Scott Boag, Don Chamberlin, Mary Fernández, et. al.,
 editors. W3C Recommendation. 23 January 2007.</bibliomixed>
 
+<bibliomixed xml:id="xvrl"><abbrev>XVRL</abbrev><citetitle xlink:href="http://spec.xproc.org/xvrl/">Extensible 
+  Validation Reporting Language</citetitle>
+2019.
+</bibliomixed>
+  
 <bibliomixed xml:id="iso19757-2"><abbrev>RELAX NG</abbrev>ISO/IEC JTC 1/SC 34.
 <citetitle xlink:href="http://www.iso.org/iso/iso_catalogue/catalogue_tc/catalogue_detail.htm?csnumber=52348">ISO/IEC 19757-2:2008(E)
 Document Schema Definition Language (DSDL) -- Part 2:
@@ -164,6 +169,12 @@ OASIS Committee Specification.
 Languages (DSDL) — Part 3: Rule-based validation — Schematron</citetitle>
 2016.
 </bibliomixed>
+  
+  <bibliomixed xml:id="schematron-skeleton"><abbrev>Schematron Skeleton</abbrev>
+  <citetitle xlink:href="http://schematron.com/front-page/the-schematron-skeleton-implementation/">Schematron 
+  “Skeleton” Implementation</citetitle>
+  2017.
+  </bibliomixed>
 
 <bibliomixed xml:id="xmlschema-1"><abbrev>W3C XML Schema: Part 1</abbrev>
 <citetitle xlink:href="http://www.w3.org/TR/xmlschema-1/">XML Schema Part 1:

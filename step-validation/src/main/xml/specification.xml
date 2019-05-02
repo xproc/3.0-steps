@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="../../../../../3.0-specification/schema/dbspec.rnc" type="application/relax-ng-compact-syntax"?>
 <specification xmlns="http://docbook.org/ns/docbook"
                xmlns:cs="http://www.w3.org/XML/XProc/2006/04/components#"
                xmlns:e="http://www.w3.org/1999/XSL/Spec/ElementSyntax"
@@ -52,7 +53,8 @@ An XML Pipeline Language</link> published by the W3C.</para>
 <title>Introduction</title>
 
 <para>This specification describes the <code>p:validate-with-relax-ng</code>,
-<code>p:validate-with-schematron</code>, and <code>p:validate-with-xml-schema</code>
+<code>p:validate-with-schematron</code>, <code>p:validate-with-xml-schema</code>,
+<code>p:validate-with-nvdl</code>, and the generic <code>p:validate</code>
 steps. Each is independently optional.
 A machine-readable description of
 these steps may be found in
@@ -64,6 +66,28 @@ general nature of <biblioref linkend="xproc30"/>
 steps is assumed; for background details, see
 <biblioref linkend="xproc30-steps"/>.</para>
 </section>
+  
+  <section>
+    <title>Common Options and Outputs</title>
+    <para>All steps in this specification provide a boolean option <option>assert-valid</option>. If any of the validated
+      documents is found to be invalid according to the respective schema, and possibly other parameters that influence
+      determination of validity, a dynamic error is raised.</para>
+    <para>If no such error is raised, each step generates a validation report document on its <port>report</port> port. The
+      document <rfc2119>should</rfc2119> be valid with respect to the <biblioref linkend="xvrl"/> schema. There may
+    be multiple report documents on the <port>report</port> port, including other vocabularies such as SVRL.
+    If a step performs multiple validations, as may be the case for <code>p:validate</code>, all individual XVRL reports 
+      <rfc2119>should</rfc2119> be consolidated into a single XVRL report by the step.</para>
+    <note role="editorial">
+      <para>Should the XVRL spec be built using the XProc infrastructure? I added a preliminary biblioref that points
+      to <uri>http://spec.xproc.org/xvrl/</uri></para>
+    </note>
+    <note role="editorial">
+      <para>Should we allow also text and json content types for the report port? Only as an additional alternative,
+      or instead of the XML report? </para>
+      <para>Should we add a parameter to <code>p:cast-content-type</code> that allows to convert between XML and JSON
+      XVRL serialization formats (once JSON serialization is specified for XVRL)?</para>
+    </note>
+  </section>
 
   <section xml:id="c.validate-with-relax-ng">
 <title>Validate with RELAX NG</title>
@@ -73,9 +97,10 @@ steps is assumed; for background details, see
 validation to the <port>source</port> document.</para>
 
 <p:declare-step type="p:validate-with-relax-ng">
-  <p:input port="source" primary="true"  content-types="application/xml text/xml */*+xml"/>
-  <p:input port="schema" content-types="application/xml */*+xml text/*"/>
+  <p:input port="source" primary="true"  content-types="xml html"/>
+  <p:input port="schema" content-types="xml text"/>
   <p:output port="result" content-types="application/xml"/>
+  <p:output port="report" sequence="true" content-types="application/xml json"/>
   <p:option name="dtd-attribute-values" select="false()" as="xs:boolean"/>
   <p:option name="dtd-id-idref-warnings" select="false()" as="xs:boolean"/>
   <p:option name="assert-valid" select="true()" as="xs:boolean"/>
@@ -131,12 +156,12 @@ No document properties on the <port>schemas</port> port are preserved.</para>
 processing to the <port>source</port> document.</para>
 
 <p:declare-step type="p:validate-with-schematron">
-  <p:input port="source" primary="true" content-types="application/xml text/xml */*+xml"/>
-  <p:input port="schema" content-types="application/xml text/xml */*+xml"/>
+  <p:input port="source" primary="true" content-types="xml html"/>
+  <p:input port="schema" content-types="xml"/>
   <p:output port="result" primary="true" content-types="application/xml"/>
-  <p:output port="report" sequence="true" content-types="application/xml"/>
+  <p:output port="report" sequence="true" content-types="application/xml json"/>
   <p:option name="parameters" as="map(xs:QName,item()*)?"/>
-  <p:option name="phase" select="'#ALL'" as="xs:string"/>
+  <p:option name="phase" select="'#DEFAULT'" as="xs:string"/>
   <p:option name="assert-valid" select="true()" as="xs:boolean"/>
 </p:declare-step>
 
@@ -148,15 +173,30 @@ and any Schematron assertions fail or reports succeed.</error></para>
 Schematron validation phase with which validation begins.</para>
 
 <para>The <option>parameters</option> option provides name/value pairs which
-correspond to Schematron external variables.</para>
+correspond to Schematron external variables, to parameters that influence
+code generation, or to parameters that influence SVRL to XVRL conversion.</para>
+
+    <para>There are multiple Schematron implementations. An XProc processor that implements this step <rfc2119>should</rfc2119>
+      at least support the <biblioref linkend="schematron-skeleton"/> implementation.</para>
+    <para>How the Schematron implementation is selected is
+    <glossterm>implementation-defined</glossterm>. A processor might select an implementation based on the schema’s 
+      <code role="attribute">queryBinding</code> attribute and/or provide configuration options.</para>
+    
+    <para>The <option>parameters</option> map may contain two special entries, <literal>c:compile</literal> and
+        <literal>c:xvrl</literal>, both are maps. If a code-generating implementation such as Skeleton is used, the entries of
+      the <literal>c:compile</literal> map, for example <literal>allow-foreign</literal>, will be passed to the code
+      generator.</para>
+    <para>The SVRL to XVRL conversion can be influenced by the entries of the <literal>c:xvrl</literal> map. Which parameters
+      this conversion accepts is <glossterm>implementation-defined</glossterm>.</para>
+    <para>All other parameters of the <option>parameters</option> option will be passed to the generated code if applicable,
+      or to a hypothetical native Schematron validator that does without code generation.</para>
 
 <para>The <port>result</port> output from this step is a copy of the
 input.</para>
 
-<para>Schematron assertions and reports, if any,
-<rfc2119>must</rfc2119> appear on the <port>report</port> port. The
-output <rfc2119>should</rfc2119> be in <citetitle>Schematron
-Validation Report Language</citetitle> (SVRL).</para>
+<para>In addition to the mandatory XVRL report, a <citetitle>Schematron
+Validation Report Language</citetitle> (SVRL) report should be provided 
+  on the <port>report</port> port.</para>
 
 <para>The output of this step
 <rfc2119>may</rfc2119> include PSVI annotations.</para>
@@ -165,7 +205,7 @@ Validation Report Language</citetitle> (SVRL).</para>
 <title>Document properties</title>
 <para feature="validate-with-schematron-preserves-all">All document properties
 on the <port>source</port> port are preserved on the <port>result</port> port.
-No document properties on the <port>schemas</port> port are preserved. No document
+No document properties on the <port>schema</port> port are preserved. No document
 properties are preserved on the <port>report</port> port.</para>
 </section>
 </section>
@@ -319,8 +359,10 @@ failure causes the entire pipeline to fail.</para>
 <bibliolist>
 <bibliomixed xml:id="xproc30"/>
 <bibliomixed xml:id="xproc30-steps"/>
+<bibliomixed xml:id="xvrl"/>
 <bibliomixed xml:id="iso19757-2"/>
 <bibliomixed xml:id="iso19757-3"/>
+<bibliomixed xml:id="schematron-skeleton"/>
 <bibliomixed xml:id="relaxng-compact-syntax"/>
 <bibliomixed xml:id="relaxng-dtd-compat"/>
 <bibliomixed xml:id="xmlschema-1"/>
