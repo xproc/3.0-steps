@@ -9,9 +9,9 @@
 documents and divides it into two sequences.</para>
 
 <p:declare-step type="p:split-sequence">
-  <p:input port="source" content-types="application/xml text/xml */*+xml" sequence="true"/>
-  <p:output port="matched" sequence="true" primary="true" content-types="application/xml"/>
-  <p:output port="not-matched" sequence="true" content-types="application/xml"/>
+  <p:input port="source" content-types="xml html" sequence="true"/>
+  <p:output port="matched" sequence="true" primary="true" content-types="xml html"/>
+  <p:output port="not-matched" sequence="true" content-types="xml html"/>
   <p:option name="initial-only" as="xs:boolean" select="false()"/>
   <p:option name="test" required="true" as="xs:string" e:type="XPathExpression"/>
 </p:declare-step>

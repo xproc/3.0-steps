@@ -6,8 +6,8 @@
   <para>The <code>p:text-head</code> step returns lines from the beginning of a text document.</para>
 
   <p:declare-step type="p:text-head">
-    <p:input port="source" primary="true" sequence="false" content-types="text/*"/>
-    <p:output port="result" primary="true" sequence="false" content-types="text/*"/>
+    <p:input port="source" primary="true" sequence="false" content-types="text"/>
+    <p:output port="result" primary="true" sequence="false" content-types="text"/>
     <p:option name="count" required="true" as="xs:integer"/>
   </p:declare-step>
 

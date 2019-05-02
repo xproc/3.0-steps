@@ -9,8 +9,8 @@
 properties on the source document.</para>
 
 <p:declare-step type="p:set-properties">
-   <p:input port="source" content-types="*/*"/>
-   <p:output port="result" content-types="*/*"/>
+   <p:input port="source" content-types="any"/>
+   <p:output port="result" content-types="any"/>
    <p:option name="properties" required="true" as="map(xs:QName,item()*)"/>
    <p:option name="merge" default="false()" as="xs:boolean"/>
 </p:declare-step>

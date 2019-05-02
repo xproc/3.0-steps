@@ -9,8 +9,8 @@
 version of) its input to a URI. The step outputs its input unchanged.</para>
 
   <p:declare-step type="p:tee">
-    <p:input port="source" content-types="*/*" sequence="true"/>
-    <p:output port="result" sequence="true" content-types="*/*"/>
+    <p:input port="source" content-types="any" sequence="true"/>
+    <p:output port="result" sequence="true" content-types="any"/>
     <p:option name="href" required="true" as="xs:anyURI"/>
     <p:option name="serialization" as="map(xs:QName,item()*)?"/>
     <p:option name="enable" as="xs:boolean" select="true()"/>
