@@ -142,6 +142,12 @@ editors. W3C Recommendation. 23 January 2007.</bibliomixed>
 2019.
 </bibliomixed>
   
+  <bibliomixed xml:id="iso19757-4"><abbrev>NVDL</abbrev>ISO/IEC JTC 1/SC 34.
+<citetitle>ISO/IEC 19757-4:2006(E) Document Schema Definition
+Languages (DSDL) — Part 4: Namespace-based Validation Dispatching Language (NVDL)</citetitle>
+2006.
+</bibliomixed>
+  
 <bibliomixed xml:id="iso19757-2"><abbrev>RELAX NG</abbrev>ISO/IEC JTC 1/SC 34.
 <citetitle xlink:href="http://www.iso.org/iso/iso_catalogue/catalogue_tc/catalogue_detail.htm?csnumber=52348">ISO/IEC 19757-2:2008(E)
 Document Schema Definition Language (DSDL) -- Part 2:

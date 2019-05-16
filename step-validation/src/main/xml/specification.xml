@@ -31,7 +31,7 @@
 </authorgroup>
 
 <abstract>
-<para>This specification describes the <code>p:validate-with-relax-ng</code>,
+<para>This specification describes the <code>p:validate-with-nvdl</code>, <code>p:validate-with-relax-ng</code>,
 <code>p:validate-with-schematron</code>, and <code>p:validate-with-xml-schema</code>
 step for
 <citetitle>XProc 3.0: An XML Pipeline Language</citetitle>.</para>
@@ -67,28 +67,91 @@ steps is assumed; for background details, see
 <biblioref linkend="xproc30-steps"/>.</para>
 </section>
   
-  <section>
+  <section xml:id="validation-common">
     <title>Common Options and Outputs</title>
     <para>All steps in this specification provide a boolean option <option>assert-valid</option>. If any of the validated
       documents is found to be invalid according to the respective schema, and possibly other parameters that influence
       determination of validity, a dynamic error is raised.</para>
-    <para>If no such error is raised, each step generates a validation report document on its <port>report</port> port. The
-      document <rfc2119>should</rfc2119> be valid with respect to the <biblioref linkend="xvrl"/> schema. There may
-    be multiple report documents on the <port>report</port> port, including other vocabularies such as SVRL.
-    If a step performs multiple validations, as may be the case for <code>p:validate</code>, all individual XVRL reports 
-      <rfc2119>should</rfc2119> be consolidated into a single XVRL report by the step.</para>
+    <note xml:id="note-assert-valid">
+      <para>Historically, the validation steps (apart from <tag>p:validate-with-schematron</tag>) could only report errors
+      by setting <option>assert-valid</option> to <literal>true</literal> and catching the errors. A <tag>c:errors</tag> 
+        document on the <port>error</port> of the corresponding <tag>p:catch</tag> recovery pipeline had to be sent to an 
+        output, either verbatim or after postprocessing. Now, if <option>assert-valid</option> is <literal>false</literal>, 
+        an XVRL document will be available on the <port>report</port> of the validation step. It uses the XVRL severity 
+        vocabulary to indicate whether the validation failed, and to which degree. This allows more nuance in reporting
+      errors. Previously, <literal>assert-valid="true"</literal> on <tag>p:validate-with-schematron</tag> would always
+      throw an error even if the reported findings were only intended as less severe, for example if the schema author used 
+        <literal>info</literal> or <literal>warning</literal> in <code>sch:report/@role</code>.</para>
+    </note>
+    <para>If no such error is raised, each step generates at least one validation report document on its
+        <port>report</port> port. Unless another serialization format is requested, the mandatory report document
+        <rfc2119>should</rfc2119> be valid with respect to the <biblioref linkend="xvrl"/> schema. There may be multiple
+      report documents on the <port>report</port> port, including other vocabularies such as SVRL. If a step performs
+      multiple validations, as may be the case for <code>p:validate</code>, all individual XVRL reports
+        <rfc2119>should</rfc2119> be consolidated into a single XVRL report by the step.</para>
     <note role="editorial">
       <para>Should the XVRL spec be built using the XProc infrastructure? I added a preliminary biblioref that points
       to <uri>http://spec.xproc.org/xvrl/</uri></para>
     </note>
     <note role="editorial">
       <para>Should we allow also text and json content types for the report port? Only as an additional alternative,
-      or instead of the XML report? </para>
+      or instead of the XML report?</para>
       <para>Should we add a parameter to <code>p:cast-content-type</code> that allows to convert between XML and JSON
       XVRL serialization formats (once JSON serialization is specified for XVRL)?</para>
     </note>
+    <para>Each of the validation steps has a <option>parameters</option> option. The supported keys and their semantics are
+        <glossterm>implementation-defined</glossterm>, and they can be different for each validation step. Keys in the
+        <literal>c</literal> namespace, <uri type="namespace">http://www.w3.org/ns/xproc-step</uri>, namely
+        <literal>c:compile</literal> and <literal>c:xvrl</literal>, hold itself maps that control schema compilation and XVRL
+      generation, respectively. Schema compilation is, for example, the process of converting a Schematron schema into an XSLT
+      stylesheet. For the <literal>c:xvrl</literal> map, XProc implementations that implement any of the validation steps
+        <rfc2119>should</rfc2119> also support the basic parameters that are defined in the <biblioref linkend="xvrl"/>
+      specification, <literal>format</literal> and <literal>severity</literal>.</para>
   </section>
 
+  <section xml:id="c.validate-with-nvdl">
+    <title>Validate with NVDL</title>
+
+    <para>The <tag>p:validate-with-nvdl</tag> step applies <biblioref linkend="iso19757-4"/> validation to the
+        <port>source</port> document.</para>
+
+    <p:declare-step type="p:validate-with-nvdl">
+      <p:input port="source" primary="true" content-types="xml html"/>
+      <p:input port="nvdl" content-types="xml"/>
+      <p:input port="schemas" sequence="true" content-types="text xml"/>
+      <p:output port="result" primary="true" content-types="xml html"/>
+      <p:output port="report" sequence="true" content-types="application/xml json"/>
+      <p:option name="assert-valid" select="true()" as="xs:boolean"/>
+      <p:option name="parameters" as="map(xs:QName,item()*)?"/>
+    </p:declare-step>
+
+    <para>The <port>source</port> document is validated using the namespace dispatching rules contained in the 
+      <port>nvdl</port> document.</para>
+
+    <para>The dispatching rules may contain URI references that point to the actual schemas to be used. As long as these schemas
+      are accessible, it is not necessary to pass anything on the schemas port. However, if one or more schemas are provided on
+      the <port>schemas</port> port, then these schemas should be used in validation.</para>
+
+    <para><error code="C0053">It is a <glossterm>dynamic error</glossterm> if the <option>assert-valid</option> option is
+          <literal>true</literal> and the input document is not valid.</error></para>
+
+    <para>The output from this step is a copy of the input. The output of this step <rfc2119>may</rfc2119> include PSVI
+      annotations.</para>
+    
+    <note role="editorial" xml:id="ednote-nvdl">
+      <para>Should the step also provide the <option>dtd-attribute-values</option> and <option>dtd-id-idref-warnings</option>
+      options for Relax NG validations? Is there a way to instruct <link xlink:href="https://github.com/relaxng/jing-trang">Jing</link> 
+        to use these options, maybe in NVDL extension attributes? Probably not in the foreseeable future.</para>
+    </note>
+
+    <section>
+      <title>Document properties</title>
+      <para feature="validate-with-nvdl-preserves-all">All document properties on the <port>source</port> port are preserved
+        on the <port>result</port> port. No document properties on the <port>schemas</port> and <port>nvdl</port> ports 
+        are preserved. No document properties are preserved on the <port>report</port> port.</para>
+    </section>
+  </section>
+  
   <section xml:id="c.validate-with-relax-ng">
 <title>Validate with RELAX NG</title>
 
@@ -98,12 +161,13 @@ validation to the <port>source</port> document.</para>
 
 <p:declare-step type="p:validate-with-relax-ng">
   <p:input port="source" primary="true"  content-types="xml html"/>
-  <p:input port="schema" content-types="xml text"/>
-  <p:output port="result" content-types="application/xml"/>
+  <p:input port="schema" content-types="text xml"/>
+  <p:output port="result" primary="true" content-types="xml html"/>
   <p:output port="report" sequence="true" content-types="application/xml json"/>
   <p:option name="dtd-attribute-values" select="false()" as="xs:boolean"/>
   <p:option name="dtd-id-idref-warnings" select="false()" as="xs:boolean"/>
   <p:option name="assert-valid" select="true()" as="xs:boolean"/>
+  <p:option name="parameters" as="map(xs:QName,item()*)?"/>
 </p:declare-step>
 
 <para>The values of the <option>dtd-attribute-values</option> and
@@ -144,7 +208,8 @@ augmented by application of the
 <title>Document properties</title>
 <para feature="validate-with-relax-ng-preserves-all">All document properties on
 the <port>source</port> port are preserved on the <port>result</port> port.
-No document properties on the <port>schemas</port> port are preserved.</para>
+No document properties on the <port>schema</port> port are preserved. No document
+properties are preserved on the <port>report</port> port.</para>
 </section>
 </section>
 
@@ -218,12 +283,14 @@ properties are preserved on the <port>report</port> port.</para>
 validity assessment to the <port>source</port> input.</para>
 
 <p:declare-step type="p:validate-with-xml-schema">
-  <p:input port="source" primary="true" content-types="application/xml text/xml */*+xml"/>
-  <p:input port="schema" sequence="true" content-types="application/xml text/xml */*+xml"/>
-  <p:output port="result" content-types="application/xml"/>
+  <p:input port="source" primary="true"  content-types="xml html"/>
+  <p:input port="schema" content-types="xml"/>
+  <p:output port="result" primary="true" content-types="xml html"/>
+  <p:output port="report" sequence="true" content-types="application/xml json"/>
   <p:option name="use-location-hints" select="false()" as="xs:boolean"/>
   <p:option name="try-namespaces" select="false()" as="xs:boolean"/>
   <p:option name="assert-valid" select="true()" as="xs:boolean"/>
+  <p:option name="parameters" as="map(xs:QName,item()*)?"/>
   <p:option name="mode" select="'strict'" as="xs:token" values="('strict','lax')"/>
   <p:option name="version" as="xs:string?"/>
 </p:declare-step>
@@ -362,6 +429,7 @@ failure causes the entire pipeline to fail.</para>
 <bibliomixed xml:id="xvrl"/>
 <bibliomixed xml:id="iso19757-2"/>
 <bibliomixed xml:id="iso19757-3"/>
+<bibliomixed xml:id="iso19757-4"/>
 <bibliomixed xml:id="schematron-skeleton"/>
 <bibliomixed xml:id="relaxng-compact-syntax"/>
 <bibliomixed xml:id="relaxng-dtd-compat"/>
