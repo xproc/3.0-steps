@@ -1,3 +1,5 @@
+<?xml version="1.0"?>
+<?xml-model href="../../../../../schema/dbspec.rnc" type="application/relax-ng-compact-syntax"?>
 <section xmlns="http://docbook.org/ns/docbook"
          xmlns:e="http://www.w3.org/1999/XSL/Spec/ElementSyntax"
          xmlns:p="http://www.w3.org/ns/xproc"
@@ -12,6 +14,7 @@
   <p:output port="result" content-type="application/xml"/>
   <p:option name="path" required="true" as="xs:anyURI"/>
   <p:option name="detailed" as="xs:boolean" select="false()"/>
+  <p:option name="recursive" as="xs:boolean" select="false()"/>
   <p:option name="include-filter" as="xs:string*" e:type="RegularExpression"/>
   <p:option name="exclude-filter" as="xs:string*" e:type="RegularExpression"/>
 </p:declare-step>
@@ -38,20 +41,35 @@ environment in which the pipeline is run.</error></para>
 <para>If the <option>detailed</option> option is true, the pipeline
 author is requesting additional information about the matching entries,
 see <xref linkend="dir-list-details"/>.</para>
+  
+  <para>If the <option>recursive</option> option is true, a <tag>c:directory</tag> element in the result document 
+    will include <tag>c:file</tag>, <tag>c:other</tag>, and <tag>c:directory</tag> elements for the corresponding
+    items in the given directory, if there are any.</para>
 
 <para>If present, the value of the <option>include-filter</option> or
 <option>exclude-filter</option> option <rfc2119>must</rfc2119> be a sequence of strings, each
 one representing a regular expressions as specified in <biblioref linkend="xpath31-functions"/>,
     section 7.61 “<literal>Regular Expression Syntax</literal>”.</para>
 
-<para>If any <option>include-filter</option> pattern matches a
-directory entry's name, the entry is included in the output. If any
-<option>exclude-filter</option> pattern matches a directory entry's
-name, the entry is excluded in the output. If both options are
+<para>The regular expressions will be matched against an item’s file system path relative to the top-level path that was
+  given in the <option>path</option> option. Prior to be matched against the regular expression, the relative path
+will be completed with a leading slash and, if the item is a directory, with a trailing slash.</para>
+  <para>Examples: A file <literal>file.txt</literal> in the directory specified by <option>path</option> will become
+    <literal>/file.txt</literal>. A relative path <literal>dir1/file.txt</literal> will become
+      <literal>/dir1/file.txt</literal>. A relative path <literal>dir1/dir2</literal> will become
+      <literal>/dir1/dir2/</literal>. A relative path <literal>a/a/b/file.txt</literal> will become 
+    <literal>/a/a/b/file.txt</literal>.</para>
+  <para>Regular expression that match <literal>/a/a/b/file.txt</literal> are, for example,
+  <literal>^/(\w+/){2,3}.+\.txt$</literal> or <literal>/file\.[^/]+$</literal>.</para>
+
+<para>If any <option>include-filter</option> pattern matches the slash-augmented relative path, the entry is included in the output. If any
+<option>exclude-filter</option> pattern matches the slash-augmented relative path, the entry is excluded in the output. If both options are
 provided, the include filter is processed first, then the exclude
 filter. As a result: an item is included if it matches (at least) one
 of the <option>include-filter</option> values and none of the
 <option>exclude-filter</option> values.</para>
+  <para>If no <option>include-filter</option> is given, that is, if <option>include-filter</option> is an empty
+  sequence, any item will be included in the result (unless it is excluded by <option>exclude-filter</option>).</para>
 
 <note>
 <para>There is no way to specify a list of values using attribute value
@@ -99,15 +117,19 @@ special are <glossterm>implementation-defined</glossterm>.</impl>
 </listitem>
 </itemizedlist>
 
-<para>When a directory entry is a subdirectory, that directory's entries are not
-output as part of that entry's <tag>c:directory</tag>.  A user must apply this step
-again to the subdirectory to list subdirectory contents.</para>
+<para>When a directory entry is a subdirectory, unless the <option>recursive</option> is <literal>true</literal>,
+  that directory's entries are not output as part of that entry's <tag>c:directory</tag>.</para>
 
 <para>Each of the elements <tag>c:file</tag>, <tag>c:directory</tag>,
 and <tag>c:other</tag> has a <code>name</code> attribute when it
-appears within the top-level <tag>c:directory</tag> element, whose
+appears within a <tag>c:directory</tag> element, whose
 value is a relative IRI reference, giving the (local) file or
 directory name.</para>
+  <para>Each item in the result document, apart from the top-level <tag>c:directory</tag>, gets an
+      <code>xml:base</code> attribute that contains its path relative to the base URI of the
+    top-level <tag>c:directory</tag> element. In the case of immediate children of the top-level element,
+  the value of this <code>xml:base</code> attribute is identical to the value of the <code>name</code>
+  attribute.</para>
 
 <section xml:id="dir-list-details">
 <title>Directory list details</title>
