@@ -818,6 +818,7 @@ VocabParamSet =
 VocabDirectory =
    element c:directory {
       attribute name { text },
+      attribute uri { xsd:anyURI },
       ((VocabFile|VocabDirectory|VocabOther)*)
    }
 [
@@ -826,6 +827,7 @@ VocabDirectory =
 VocabFile =
    element c:file {
       attribute name { text },
+      attribute uri { xsd:anyURI },
       content-types.attr?,
       empty
    }
@@ -835,6 +837,7 @@ VocabFile =
 VocabOther =
    element c:other {
       attribute name { text },
+      attribute uri { xsd:anyURI },
       empty
    }
 [
