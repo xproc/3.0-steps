@@ -32,7 +32,7 @@ element node whose QName is the value specified in the
 <option>wrapper</option> option. That new element contains copies of
 all of the children of the original document node.</para>
 
-<para>When the match pattern does not match the document node,
+<para>When the <glossterm>selection pattern</glossterm> does not match the document node,
 every node that matches the specified <option>match</option>
 pattern is replaced with a new element node whose QName is the value
 specified in the <option>wrapper</option> option.

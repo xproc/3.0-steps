@@ -30,7 +30,7 @@ be copied already exists, the value specified on the
 this step produces a copy of the <port>source</port> port's document
 with the matching elements' attributes modified.</para>
 
-<para>The matching elements are specified by the match pattern in the
+<para>The matching elements are specified by the <glossterm>selection pattern</glossterm> in the
 <option>match</option> option. All matching elements are processed.
 If no elements match, the step will not change any elements.</para>
 

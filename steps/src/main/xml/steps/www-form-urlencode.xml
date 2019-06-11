@@ -29,7 +29,7 @@ The namespace name is ignored and no prefix or colon appears in the name.
 <para><impl>The order of the parameters
 is <glossterm>implementation-dependent</glossterm>.</impl></para>
 
-<para>The matched nodes are specified with the match pattern in the
+<para>The matched nodes are specified with the <glossterm>selection pattern</glossterm> in the
 <option>match</option> option. For each matching node, the encoded
 string is used in the output. Nodes that do not
 match are copied without change.</para>
