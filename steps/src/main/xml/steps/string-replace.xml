@@ -22,7 +22,7 @@ XSLTSelectionPattern.</para>
 <para>The value of the <option>replace</option> option <rfc2119>must</rfc2119> be an
 XPathExpression.</para>
 
-<para>The matched nodes are specified with the match pattern in the
+<para>The matched nodes are specified with the <glossterm>selection pattern</glossterm> in the
 <option>match</option> option.
 For each matching node, the XPath
 expression provided by the <option>replace</option> option is

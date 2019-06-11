@@ -48,7 +48,7 @@ parameters specified. <error code="C0036">It is a
 one that the processor understands or if the value or parameters are
 not appropriate for that algorithm.</error></para>
 
-<para>The matched nodes are specified with the match pattern in the
+<para>The matched nodes are specified with the <glossterm>selection pattern</glossterm> in the
 <option>match</option> option. For each matching node, the string
 value of the computed hash is used in the output (if more than one node
 matches, the <emphasis>same</emphasis> hash value is used in each match).

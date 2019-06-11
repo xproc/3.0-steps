@@ -7,8 +7,8 @@
 
 <para>The <code>p:add-attribute</code> step adds a single attribute to
 a set of matching elements. The input document specified on the
-<code>source</code> is processed for matches specified by the match
-pattern in the <option>match</option> option. For each of these
+  <code>source</code> is processed for matches specified by the 
+    <glossterm>selection pattern</glossterm> in the <option>match</option> option. For each of these
 matches, the attribute whose name is specified by the
 <option>attribute-name</option> option is set to the attribute value
 specified by the <option>attribute-value</option> option.
@@ -31,7 +31,7 @@ with the specified value.
 
 <para>The value of the <option>match</option> option
 <rfc2119>must</rfc2119> be an XSLTSelectionPattern. <error code="C0023">It
-is a <glossterm>dynamic error</glossterm> if the match pattern matches a node
+is a <glossterm>dynamic error</glossterm> if the <glossterm>selection pattern</glossterm> matches a node
 which is not an element.</error></para>
 
 <para>The value of the <option>attribute-value</option> option

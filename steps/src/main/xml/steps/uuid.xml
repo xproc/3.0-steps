@@ -34,7 +34,7 @@ the necessary inputs are made available for computing other versions,
 is <glossterm>implementation-defined</glossterm>.</impl>
 </para>
 
-<para>The matched nodes are specified with the match pattern in the
+<para>The matched nodes are specified with the <glossterm>selection pattern</glossterm> in the
 <option>match</option> option. For each matching node, the generated
 UUID is used in the output (if more than one node matches, the
 <emphasis>same</emphasis> UUID is used in each match). Nodes that do not

@@ -5,8 +5,7 @@
          xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="c.delete">
 <title>p:delete</title>
 
-<para>The <code>p:delete</code> step deletes items specified by a match
-pattern from the
+<para>The <code>p:delete</code> step deletes items specified by a <glossterm>selection pattern</glossterm> from the
 <code>source</code> input document and produces the resulting document,
 with the deleted items removed, on the <port>result</port> port.</para>
 
@@ -17,7 +16,7 @@ with the deleted items removed, on the <port>result</port> port.</para>
 </p:declare-step>
 
 <para>The value of the <option>match</option> option <rfc2119>must</rfc2119> be an
-XSLTSelectionPattern. A match pattern may match multiple items to be
+XSLTSelectionPattern. A <glossterm>selection pattern</glossterm> may match multiple items to be
 deleted.</para>
 
 <para>If an element is selected by the <option>match</option> option, the
