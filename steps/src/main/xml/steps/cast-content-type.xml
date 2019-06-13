@@ -19,7 +19,8 @@ of its input.</para>
 <error code="C0070">It is a <glossterm>dynamic
 error</glossterm> if the supplied <option>content-type</option> is not
 a valid media type of the form
-“<literal><replaceable>type</replaceable>/<replaceable>subtype</replaceable>+<replaceable>ext</replaceable></literal>”.</error>
+“<literal><replaceable>type</replaceable>/<replaceable>subtype</replaceable>+<replaceable>ext</replaceable></literal>”
+ where “<literal>+<replaceable>ext</replaceable></literal>” is optional.</error>
 <error code="C0071">It is a <glossterm>dynamic
 error</glossterm> if the <tag>p:cast-content-type</tag> step
 cannot perform the requested cast.</error>

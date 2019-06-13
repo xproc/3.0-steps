@@ -35,7 +35,8 @@
     will have this media type as part of its document properties. <error code="C0070">It is a <glossterm>dynamic
       error</glossterm> if the supplied <option>content-type</option> is not
       a valid media type of the form
-      “<literal><replaceable>type</replaceable>/<replaceable>subtype</replaceable>+<replaceable>ext</replaceable></literal>”.</error>
+      “<literal><replaceable>type</replaceable>/<replaceable>subtype</replaceable>+<replaceable>ext</replaceable></literal>” 
+      where “<literal>+<replaceable>ext</replaceable></literal>” is optional.</error>
   </para>
   <simplesect>
     <title>Document properties</title>
