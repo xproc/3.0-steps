@@ -818,7 +818,6 @@ VocabParamSet =
 VocabDirectory =
    element c:directory {
       attribute name { text },
-      attribute uri { xsd:anyURI },
       xmlbase.attr,
       file-info.attributes*,
       ((VocabFile|VocabDirectory|VocabOther)*)
