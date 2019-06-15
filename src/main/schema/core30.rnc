@@ -828,7 +828,6 @@ VocabDirectory =
 VocabFile =
    element c:file {
       attribute name { text },
-      attribute uri { xsd:anyURI },
       xmlbase.attr,
       file-info.attributes*,
       content-types.attr?,
@@ -840,7 +839,6 @@ VocabFile =
 VocabOther =
    element c:other {
       attribute name { text },
-      attribute uri { xsd:anyURI },
       xmlbase.attr,
       file-info.attributes*,
       empty
