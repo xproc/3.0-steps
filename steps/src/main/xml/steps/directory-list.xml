@@ -78,9 +78,9 @@ one representing a regular expressions as specified in <biblioref linkend="xpath
     intermediate directories:</para>
     <literallayout>&lt;c:directory xml:base="file:///home/jane/" name="jane">
   &lt;c:directory xml:base="a/" name="a">
-    &lt;c:directory xml:base="a/a/" name="a">
-      &lt;c:directory xml:base="a/a/b/" name="b">
-        &lt;c:file xml:base="a/a/b/file.txt" name="file.txt"/>
+    &lt;c:directory xml:base="a/" name="a">
+      &lt;c:directory xml:base="b/" name="b">
+        &lt;c:file xml:base="file.txt" name="file.txt"/>
       &lt;/c:directory>
     &lt;/c:directory>
   &lt;/c:directory>
