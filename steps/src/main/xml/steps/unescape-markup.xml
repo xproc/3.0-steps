@@ -6,9 +6,9 @@
 <title>p:unescape-markup</title>
 
 <para>The <tag>p:unescape-markup</tag> step takes the string value of
-the document element and parses the content as if it was a Unicode
+the document's child elements and parses the content as if it was a Unicode
 character stream containing serialized XML. The output consists of the
-same document element with children that result from the parse. This
+same elements with children that result from the parse. This
 is the reverse of the <tag>p:escape-markup</tag> step.</para>
 
 <p:declare-step type="p:unescape-markup">
