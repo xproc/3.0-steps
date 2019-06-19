@@ -1,0 +1,45 @@
+<section xmlns="http://docbook.org/ns/docbook" xmlns:p="http://www.w3.org/ns/xproc"
+  xmlns:e="http://www.w3.org/1999/XSL/Spec/ElementSyntax" xmlns:xi="http://www.w3.org/2001/XInclude"
+  xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="c.archive-manifest">
+
+  <title>p:archive-manifest</title>
+
+  <para>The <code>p:archive-manifest</code> creates an XML manifest file describing the contents of
+    the archive appearing on its <port>source</port> port.</para>
+
+  <p:declare-step type="p:archive-manifest">
+    <p:input port="source" primary="true" content-types="*/*" sequence="false"/>
+    <p:output port="result" primary="true" content-types="application/xml" sequence="false"/>
+    <p:option name="format" as="xs:QName" required="false" select="'zip'"/>
+    <p:option name="parameters" as="map(xs:Qname, item()*)" required="false"/>
+  </p:declare-step>
+
+  <para>The <code>p:archive-manifest</code> step inspects the archive appearing on its
+      <port>source</port> port and outputs a manifest describing the contents of the archive on its
+      <port>result</port> port. </para>
+
+  <para>The format of the archive can be specified using the <option>format</option> option.
+    Implementations <rfc2119>must</rfc2119> support the <biblioref linkend="zip"/> format, specified
+    with the value <code>zip</code>. <impl>It is <glossterm>implementation-defined</glossterm> what
+      other formats are supported.</impl></para>
+
+  <para>The <option>parameters</option> option can be used to supply parameters to control the
+    archive manifest generation. <impl>The semantics of the keys and the allowed values for these
+      keys are <glossterm>implementation-defined</glossterm>.</impl>
+    <error code="C0079">It is a <glossterm>dynamic error</glossterm> if the map
+        <option>parameters</option> contains an entry whose key is defined by the implementation and
+      whose value is not valid for that key.</error></para>
+  
+  <para>The generated archive has the format as described in <xref linkend="cv.archive-manifest"/>.
+    Implementations <rfc2119>must</rfc2119> supply an <tag>c:entry</tag> element and its
+      <code>name</code> attribute for every entry in the archive. Supplying additional information is
+      <glossterm>implementation-defined</glossterm>.</para>
+
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  
+  <simplesect>
+    <title>Document properties</title>
+    <para feature="archive-preserves-none">No document properties are preserved.</para>
+  </simplesect>
+
+</section>
