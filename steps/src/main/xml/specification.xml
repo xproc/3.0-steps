@@ -80,7 +80,9 @@ implemented.
     </para>
   </listitem>
   <listitem>
-    <para><type>XSLTSelectionPattern</type>: An XSLT pattern.
+    <para><type>XSLTSelectionPattern</type>:
+<termdef xml:id="dt-selection-pattern">A <firstterm>selection pattern</firstterm> is an
+XSLT selection pattern. FIXME:</termdef>
     </para>
   </listitem>
   <listitem>

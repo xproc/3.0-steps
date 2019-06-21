@@ -51,8 +51,9 @@
 
   <para>The generated manifest has the format as described in <xref linkend="cv.archive-manifest"/>.
     Implementations <rfc2119>must</rfc2119> supply an <tag>c:entry</tag> element and its
-      <code>name</code> attribute for every entry in the archive. Supplying additional information
-    is <glossterm>implementation-defined</glossterm>.</para>
+      <code>name</code> attribute for every entry in the archive. <impl>Additional information
+provided for entries in <tag>p:archive-manifest</tag>
+    is <glossterm>implementation-defined</glossterm>.</impl></para>
 
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 

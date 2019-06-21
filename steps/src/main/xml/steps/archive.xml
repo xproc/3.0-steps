@@ -26,8 +26,9 @@
   <para>The <code>p:archive</code> step can perform several different operations on archives. The
     most common one will likely be creating an archive, but it could also, depending on the archive
     format, provide services like update, freshen or even merge. The only format implementations
-      <rfc2119>must</rfc2119> support is <biblioref linkend="zip"/>. Support for other formats is
-      <glossterm>implementation-defined</glossterm>.</para>
+      <rfc2119>must</rfc2119> support is <biblioref linkend="zip"/>. <impl>The list of formats
+supported by the <tag>p:archive</tag> step is
+      <glossterm>implementation-defined</glossterm>.</impl></para>
 
   <para>The <code>p:archive</code> step has the following input ports:</para>
   <variablelist>
@@ -56,8 +57,8 @@
         <para>The <port>archive</port> port is used to provide the step with existing archive(s) for
           operations like update, freshen or merge. Handling of ZIP files supports modifying
           archives appearing on the <port>archive</port> port (<xref linkend="cv.archive-zips"/>).
-          Whether other archive formats and implementations support modifications of
-            <port>archive</port> inputs is <glossterm>implementation-defined</glossterm>. A,
+          <impl>The list of archive formats that can be modified by <tag>p:archive</tag> is
+            <glossterm>implementation-defined</glossterm>.</impl> A,
           currently hypothetical, archive merging implementation may accept more than one document
           on the <port>archive</port> port. <error code="C0081">It is a <glossterm>dynamic
               error</glossterm> if the content type of a document on the <port>archive</port> does
@@ -328,8 +329,9 @@
         documents for the given <code>format</code> and <code>command</code>.</error></para>
 
     <para>Implementations of other archive formats <rfc2119>should</rfc2119> use the same parameter
-      names if applicable. The value spaces for these parameters may be format-specific though. They
-      are <glossterm>implementation-defined</glossterm>.</para>
+      names if applicable. The value spaces for these parameters may be format-specific though.
+      <impl>The actual parameter names supported by <tag>p:archive</tag> for a particular format
+      are <glossterm>implementation-defined</glossterm>.</impl></para>
 
   </section>
 
