@@ -20,6 +20,10 @@ is the reverse of the <tag>p:escape-markup</tag> step.</para>
   <p:option name="charset" as="xs:string?"/>
 </p:declare-step>
 
+<para><error code="C0091">It is a <glossterm>dynamic error</glossterm> if
+the document on <port>source</port> port has more than one 
+top-level element.</error></para>
+
 <para>The value of the <option>namespace</option> option
 <rfc2119>must</rfc2119> be an <type>anyURI</type>. It
 <rfc2119>should</rfc2119> be absolute, but will not be
@@ -98,6 +102,6 @@ namespace, the following input:</para>
 
 <simplesect>
 <title>Document properties</title>
-<para feature="unescape-markup-preserves-none">No document properties are preserved.</para>
+  <para feature="unescape-markup-preserves-all">All document properties are preserved.</para>
 </simplesect>
 </section>
