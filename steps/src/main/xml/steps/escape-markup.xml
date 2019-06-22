@@ -13,6 +13,10 @@ serialized.</para>
   <p:option name="serialization" as="map(xs:QName,item()*)?"/>
 </p:declare-step>
 
+<para><error code="C0091">It is a <glossterm>dynamic error</glossterm> if
+the document on <port>source</port> port has more than one 
+top-level element.</error></para>
+
 <para>This step supports the standard serialization options as
 specified in <link linkend="xml-serialization-31"/>. These options
 control how the output markup is produced before it is escaped.
