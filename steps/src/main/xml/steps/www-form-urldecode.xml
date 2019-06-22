@@ -2,38 +2,29 @@
 <title>p:www-form-urldecode</title>
 
 <para>The <tag>p:www-form-urldecode</tag> step decodes a
-<literal>x-www-form-urlencoded</literal> string into an XML representation.</para>
+<literal>x-www-form-urlencoded</literal> string into a JSON representation.</para>
 
 <p:declare-step type="p:www-form-urldecode">
-  <p:output port="result" content-types="application/xml"/>
+  <p:output port="result" content-types="application/json"/>
   <p:option name="value" required="true" as="xs:string"/>
 </p:declare-step>
 
-<para>The <option>value</option> option is interpreted as a string of
-parameter values encoded using the
+<para>A JSON object of the form “<literal>map(xs:string, xs:string+)</literal>” will
+appear on <port>result</port> port. The <option>value</option> option is interpreted 
+as a string of parameter values encoded using the
 <literal>x-www-form-urlencoded</literal> algorithm. Each name/value
-pair is written in a <tag>c:param</tag> element.
-The entire set of parameters
-is written (as a <tag>c:param-set</tag>) on the <port>result</port>
-output port.</para>
+pair is represented in the JSON object as key/value entry.
+</para>
 
 <para><error code="C0037">It is a
 <glossterm>dynamic error</glossterm> if the <option>value</option> provided
 is not a properly
 <literal>x-www-form-urlencoded</literal> value.</error>
-<error code="C0061">It is a
-<glossterm>dynamic error</glossterm> if the name of any encoded parameter
-name is not a valid <type>xs:NCName</type>.</error> In other words, this
-step can only decode simple name/value pairs where the names do not contain
-colons or any characters that cannot be used in XML names.
 </para>
 
-<para>The order of the <tag>c:param</tag> elements in the result is the same
-as the order of the encoded parameters, reading from left to right.</para>
-
 <para>If any parameter name occurs more than once in the encoded string,
-the resulting parameter set will contain a <tag>c:param</tag> for
-each instance.</para>
+a sequence will be associated with the respective key. The order in the sequence
+retains the order of name/value pairs in the encoded string.</para>
 
 <simplesect>
 <title>Document properties</title>

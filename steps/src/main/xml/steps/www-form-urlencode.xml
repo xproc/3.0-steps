@@ -6,40 +6,20 @@
 <title>p:www-form-urlencode</title>
 
 <para>The <tag>p:www-form-urlencode</tag> step encodes a set of parameter
-values as a <literal>x-www-form-urlencoded</literal> string and
-injects it into the <port>source</port> document.</para>
+values as a <literal>x-www-form-urlencoded</literal> string.</para>
 
 <p:declare-step type="p:www-form-urlencode">
-  <p:input port="source" primary="true" content-types="xml html"/>
-  <p:output port="result" content-types="application/xml"/>
-  <p:option name="parameters" as="map(xs:QName,item()*)?"/>
-  <p:option name="match" required="true" as="xs:string" e:type="XSLTSelectionPattern"/>
+  <p:output port="result" content-types="text/plain"/>
+  <p:option name="parameters" required="true" as="map(xs:string,xs:untypedAtomic+)"/>
 </p:declare-step>
 
-<para>The value of the <option>match</option> option must be an
-XSLTSelectionPattern.</para>
-
-<para>The set of parameters is encoded as a single
-<literal>x-www-form-urlencoded</literal> string of name/value pairs.
-When parameters are encoded into name/value pairs,
-<emphasis>only</emphasis> the local name of each parameter is used.
-The namespace name is ignored and no prefix or colon appears in the name.
+<para>The map entries of <option>parameters</option> option are encoded as a single
+<literal>x-www-form-urlencoded</literal> string of name/value pairs. This
+string is returned on the <port>result</port> port as a text document.
 </para>
 
-<para><impl>The order of the parameters
-is <glossterm>implementation-dependent</glossterm>.</impl></para>
-
-<para>The matched nodes are specified with the <glossterm>selection pattern</glossterm> in the
-<option>match</option> option. For each matching node, the encoded
-string is used in the output. Nodes that do not
-match are copied without change.</para>
-
-<para>If the expression given in the <option>match</option> option
-matches an <emphasis>attribute</emphasis>, the encoded
-string is used as the new value of the attribute in the output.
-If the expression matches any other kind of node, the entire
-node (and <emphasis>not</emphasis> just its contents) is replaced by
-the encoded string.</para>
+<para>If more than one value is associated with a given key in <option>parameters</option>
+option, a name/value pair is created for each value.</para>
 
 <simplesect>
 <title>Document properties</title>
