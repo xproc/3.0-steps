@@ -12,7 +12,7 @@ matching elements.</para>
    <p:input port="source" primary="true" content-types="xml html"/>
    <p:output port="result" content-types="xml html"/>
    <p:option name="match" as="xs:string" select="'/*'" e:type="XSLTSelectionPattern"/>
-   <p:option name="attributes" required="true" as="map(xs:QName, xs:string)" /> 
+   <p:option name="attributes" required="true" as="map(xs:QName, xs:untypedAtomic)" /> 
 </p:declare-step>
 
  <para>The value of the <option>match</option> option <rfc2119>must</rfc2119> be an
@@ -22,8 +22,8 @@ matching elements.</para>
 
 <para>A new attribute is created for each entry in the map appearing
 on the <option>attributes</option> option. The attribute name is taken
-from the entry's key while the attribute value is taken from the entry's
-value.</para>
+from the entry's key while the attribute value is taken from the string value of
+the entry's value.</para>
 
 <para>If an attribute with the same name as one of the attributes to
 be created already exists, the value specified on the
