@@ -6,7 +6,7 @@
 <title>p:xquery</title>
 
 <para>The <tag>p:xquery</tag> step applies an
-<biblioref linkend="xquery10"/> query to the sequence of documents
+XQuery query to the sequence of documents
 provided on the <port>source</port> port.</para>
 
 <p:declare-step type="p:xquery">
@@ -63,22 +63,6 @@ is not available.</error> If the step does not specify a version, the
 implementation may use any version it has available and may use any means
 to determine what version to use, including, but not limited to,
 examining the version of the query.</para>
-
-<para>The result of the <tag>p:xquery</tag> step must be a sequence of
-documents. <error code="C0057">It is a <glossterm>dynamic
-error</glossterm> if the sequence that results from evaluating the XQuery contains
-items other than documents and elements.</error> Any elements that appear
-in the result sequence will be treated as documents with the element as their
-document element.</para>
-
-<para>For example:</para>
-<programlisting language="xml">
-&lt;c:query&gt;
-declare namespace atom="http://www.w3.org/2005/Atom";
-/atom:feed/atom:entry
-&lt;/c:query&gt;
-
-</programlisting>
 
 <para>The output of this step
 <rfc2119>may</rfc2119> include PSVI annotations.</para>
