@@ -137,7 +137,7 @@ steps is assumed; for background details, see
       environment variable. Implementations <rfc2119>should</rfc2119> include all available
       operating system environment variables.</para>
 
-  <para>The exact set of properties returned is <glossterm>implementation-defined</glossterm>.</para>
+  <para><impl>The exact set of properties returned is <glossterm>implementation-defined</glossterm>.</impl></para>
 
   <simplesect>
     <title>Document properties</title>
