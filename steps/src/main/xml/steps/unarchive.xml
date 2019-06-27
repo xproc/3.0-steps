@@ -2,7 +2,7 @@
   xmlns:e="http://www.w3.org/1999/XSL/Spec/ElementSyntax" xmlns:xi="http://www.w3.org/2001/XInclude"
   xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="c.unarchive">
 
-  <title>p:unarchive</title>
+  <title>p:unarchive</title> 
 
   <para>The <code>p:unarchive</code> step outputs on its <port>result</port> port specific entries
     in an archive (for instance from a zip file).</para>
