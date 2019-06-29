@@ -18,8 +18,8 @@ buildscript {
     classpath group: 'org.docbook', name: 'docbook-schemas', version: '5.1-1'
     classpath group: 'com.xmlcalabash', name: 'xmlcalabash1-print', version: '1.1.5'
     classpath group: 'com.xmlcalabash', name: 'xmlcalabash1-gradle', version: '1.3.5'
-    classpath group: 'com.xmlcalabash', name: 'xmlcalabash', version: '1.1.23-98'
-    classpath group: 'org.xmlresolver', name: 'xmlresolver', version: '0.13.2'
+    classpath group: 'com.xmlcalabash', name: 'xmlcalabash', version: '1.1.27-99'
+    classpath group: 'org.xmlresolver', name: 'xmlresolver', version: '1.0.1'
   }
 }
 
@@ -81,7 +81,7 @@ def getenv(String name) {
 }
 
 def deltaxml() {
-  def dxml = new File("deltaxml")
+  def dxml = file("deltaxml")
   if (dxml.exists() && dxml.isDirectory()) {
     return "diff"
   } else {
@@ -118,7 +118,7 @@ task xproc_schemas(dependsOn: [ "download_core30" ]) {
 
 task download_core30(type: Download) {
     src "$schemaBaseUri/core30.rng"
-    dest new File(buildDir, "core30.rng")
+    dest file("build/core30.rng")
 }
 download_core30.onlyIf { !file("$buildDir/core30.rng").exists() }
 
@@ -126,7 +126,7 @@ download_core30.onlyIf { !file("$buildDir/core30.rng").exists() }
     ["xproc", "xproc10", "xproc30"].each { base ->
         Task t = task "download_${base}_${ext}"(type: Download) {
             src "$schemaBaseUri/$base.$ext"
-            dest new File(buildDir, "$base.$ext")
+            dest file("build/$base.$ext")
         }
         t.onlyIf { ! file("$buildDir/$base.$ext").exists () }
         xproc_schemas.dependsOn t
@@ -139,7 +139,7 @@ download_core30.onlyIf { !file("$buildDir/core30.rng").exists() }
 
 task download_xproc_toc(type: Download) {
   src xprocTocUri
-  dest new File(buildDir, xprocToc)
+  dest file("build/$xprocToc")
 }
 download_xproc_toc.onlyIf { !file("$buildDir/$xprocToc").exists() }
 
@@ -184,7 +184,7 @@ task steps(dependsOn: [ "xproc_schemas", "spec_schemas",
   input("source", "steps/build/source.xml")
   output("result", "build/dist/steps/index.html")
 
-  param("schemaext.schema", new File("build/schema/dbspec.rng"))
+  param("schemaext.schema", file("build/schema/dbspec.rng"))
   param("travis", getenv("TRAVIS"))
   param("travis-commit", getenv("TRAVIS_COMMIT"))
   param("travis-build-number", getenv("TRAVIS_BUILD_NUMBER"))
@@ -193,10 +193,10 @@ task steps(dependsOn: [ "xproc_schemas", "spec_schemas",
   param("travis-branch", getenv("TRAVIS_BRANCH"))
   param("travis-tag", getenv("TRAVIS_TAG"))
 
-  option("style", new File("tools/xsl/xproc-specs.xsl"))
+  option("style", file("tools/xsl/xproc-specs.xsl"))
   option("diff", deltaxml())
   option("specid", "steps")
-  option("diffloc", new File("build/dist/steps/diff.html").getAbsolutePath())
+  //option("diffloc", file("build/dist/steps/diff.html"))
 
   pipeline "tools/xpl/formatspec.xpl"
 }
@@ -236,7 +236,7 @@ task step_validation(type: DocBookTask,
   input("source", "step-validation/build/source.xml")
   output("result", "build/dist/validation/index.html")
 
-  param("schemaext.schema", new File("build/schema/dbspec.rng"))
+  param("schemaext.schema", file("build/schema/dbspec.rng"))
   param("travis", getenv("TRAVIS"))
   param("travis-commit", getenv("TRAVIS_COMMIT"))
   param("travis-build-number", getenv("TRAVIS_BUILD_NUMBER"))
@@ -245,10 +245,10 @@ task step_validation(type: DocBookTask,
   param("travis-branch", getenv("TRAVIS_BRANCH"))
   param("travis-tag", getenv("TRAVIS_TAG"))
 
-  option("style", new File("tools/xsl/xproc-specs.xsl"))
+  option("style", file("tools/xsl/xproc-specs.xsl"))
   option("diff", deltaxml())
   option("specid", "validation")
-  option("diffloc", new File("build/dist/validation/diff.html").getAbsolutePath())
+  //option("diffloc", file("build/dist/validation/diff.html"))
 
   pipeline "tools/xpl/formatspec.xpl"
 }
@@ -288,7 +288,7 @@ task step_os(type: DocBookTask,
   input("source", "step-os/build/source.xml")
   output("result", "build/dist/os/index.html")
 
-  param("schemaext.schema", new File("build/schema/dbspec.rng"))
+  param("schemaext.schema", file("build/schema/dbspec.rng"))
   param("travis", getenv("TRAVIS"))
   param("travis-commit", getenv("TRAVIS_COMMIT"))
   param("travis-build-number", getenv("TRAVIS_BUILD_NUMBER"))
@@ -297,10 +297,10 @@ task step_os(type: DocBookTask,
   param("travis-branch", getenv("TRAVIS_BRANCH"))
   param("travis-tag", getenv("TRAVIS_TAG"))
 
-  option("style", new File("tools/xsl/xproc-specs.xsl"))
+  option("style", file("tools/xsl/xproc-specs.xsl"))
   option("diff", deltaxml())
   option("specid", "os")
-  option("diffloc", new File("build/dist/os/diff.html").getAbsolutePath())
+  //option("diffloc", file("build/dist/os/diff.html"))
 
   pipeline "tools/xpl/formatspec.xpl"
 }
@@ -340,7 +340,7 @@ task step_json(type: DocBookTask,
   input("source", "step-json/build/source.xml")
   output("result", "build/dist/json/index.html")
 
-  param("schemaext.schema", new File("build/schema/dbspec.rng"))
+  param("schemaext.schema", file("build/schema/dbspec.rng"))
   param("travis", getenv("TRAVIS"))
   param("travis-commit", getenv("TRAVIS_COMMIT"))
   param("travis-build-number", getenv("TRAVIS_BUILD_NUMBER"))
@@ -349,10 +349,10 @@ task step_json(type: DocBookTask,
   param("travis-branch", getenv("TRAVIS_BRANCH"))
   param("travis-tag", getenv("TRAVIS_TAG"))
 
-  option("style", new File("tools/xsl/xproc-specs.xsl"))
+  option("style", file("tools/xsl/xproc-specs.xsl"))
   option("diff", deltaxml())
   option("specid", "json")
-  option("diffloc", new File("build/dist/json/diff.html").getAbsolutePath())
+  //option("diffloc", file("build/dist/json/diff.html"))
 
   pipeline "tools/xpl/formatspec.xpl"
 }
@@ -392,7 +392,7 @@ task step_run(type: DocBookTask,
   input("source", "step-run/build/source.xml")
   output("result", "build/dist/run/index.html")
 
-  param("schemaext.schema", new File("build/schema/dbspec.rng"))
+  param("schemaext.schema", file("build/schema/dbspec.rng"))
   param("travis", getenv("TRAVIS"))
   param("travis-commit", getenv("TRAVIS_COMMIT"))
   param("travis-build-number", getenv("TRAVIS_BUILD_NUMBER"))
@@ -401,10 +401,10 @@ task step_run(type: DocBookTask,
   param("travis-branch", getenv("TRAVIS_BRANCH"))
   param("travis-tag", getenv("TRAVIS_TAG"))
 
-  option("style", new File("tools/xsl/xproc-specs.xsl"))
+  option("style", file("tools/xsl/xproc-specs.xsl"))
   option("diff", deltaxml())
   option("specid", "run")
-  option("diffloc", new File("build/dist/run/diff.html").getAbsolutePath())
+  //option("diffloc", file("build/dist/run/diff.html"))
 
   pipeline "tools/xpl/formatspec.xpl"
 }
@@ -444,7 +444,7 @@ task step_paged_media(type: DocBookTask,
   input("source", "step-paged-media/build/source.xml")
   output("result", "build/dist/paged-media/index.html")
 
-  param("schemaext.schema", new File("build/schema/dbspec.rng"))
+  param("schemaext.schema", file("build/schema/dbspec.rng"))
   param("travis", getenv("TRAVIS"))
   param("travis-commit", getenv("TRAVIS_COMMIT"))
   param("travis-build-number", getenv("TRAVIS_BUILD_NUMBER"))
@@ -453,10 +453,10 @@ task step_paged_media(type: DocBookTask,
   param("travis-branch", getenv("TRAVIS_BRANCH"))
   param("travis-tag", getenv("TRAVIS_TAG"))
 
-  option("style", new File("tools/xsl/xproc-specs.xsl"))
+  option("style", file("tools/xsl/xproc-specs.xsl"))
   option("diff", deltaxml())
   option("specid", "paged-media")
-  option("diffloc", new File("build/dist/paged-media/diff.html").getAbsolutePath())
+  //option("diffloc", file("build/dist/paged-media/diff.html"))
 
   pipeline "tools/xpl/formatspec.xpl"
 }
@@ -496,7 +496,7 @@ task step_file(type: DocBookTask,
   input("source", "step-file/build/source.xml")
   output("result", "build/dist/file/index.html")
 
-  param("schemaext.schema", new File("build/schema/dbspec.rng"))
+  param("schemaext.schema", file("build/schema/dbspec.rng"))
   param("travis", getenv("TRAVIS"))
   param("travis-commit", getenv("TRAVIS_COMMIT"))
   param("travis-build-number", getenv("TRAVIS_BUILD_NUMBER"))
@@ -505,10 +505,10 @@ task step_file(type: DocBookTask,
   param("travis-branch", getenv("TRAVIS_BRANCH"))
   param("travis-tag", getenv("TRAVIS_TAG"))
 
-  option("style", new File("tools/xsl/xproc-specs.xsl"))
+  option("style", file("tools/xsl/xproc-specs.xsl"))
   option("diff", deltaxml())
   option("specid", "file")
-  option("diffloc", new File("build/dist/file/diff.html").getAbsolutePath())
+  //option("diffloc", file("build/dist/file/diff.html"))
 
   pipeline "tools/xpl/formatspec.xpl"
 }
@@ -548,7 +548,7 @@ task step_text(type: DocBookTask,
   input("source", "step-text/build/source.xml")
   output("result", "build/dist/text/index.html")
 
-  param("schemaext.schema", new File("build/schema/dbspec.rng"))
+  param("schemaext.schema", file("build/schema/dbspec.rng"))
   param("travis", getenv("TRAVIS"))
   param("travis-commit", getenv("TRAVIS_COMMIT"))
   param("travis-build-number", getenv("TRAVIS_BUILD_NUMBER"))
@@ -557,10 +557,10 @@ task step_text(type: DocBookTask,
   param("travis-branch", getenv("TRAVIS_BRANCH"))
   param("travis-tag", getenv("TRAVIS_TAG"))
 
-  option("style", new File("tools/xsl/xproc-specs.xsl"))
+  option("style", file("tools/xsl/xproc-specs.xsl"))
   option("diff", deltaxml())
   option("specid", "text")
-  option("diffloc", new File("build/dist/text/diff.html").getAbsolutePath())
+  //option("diffloc", file("build/dist/text/diff.html"))
 
   pipeline "tools/xpl/formatspec.xpl"
 }
