@@ -8,10 +8,10 @@
   <p:declare-step type="p:text-join">
     <p:output port="source" primary="true" sequence="true" content-types="text"/>
     <p:output port="result" primary="true" sequence="false" content-types="text/plain"/>
-    <p:option name="separator" required="false" as="xs:string"/>
-    <p:option name="prefix" required="false" as="xs:string"/>
-    <p:option name="suffix" required="false" as="xs:string"/>
-    <p:option name="override-content-type" required="false" as="xs:string" />
+    <p:option name="separator" as="xs:string?"/>
+    <p:option name="prefix" as="xs:string?"/>
+    <p:option name="suffix" as="xs:string?"/>
+    <p:option name="override-content-type" as="xs:string?"/>
   </p:declare-step>
   
   <para>The <code>p:text-join</code> step concatenates the text documents appearing on its <port>source</port> port

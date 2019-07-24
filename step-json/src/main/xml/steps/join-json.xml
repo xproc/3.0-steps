@@ -14,7 +14,7 @@ If the sequence on port <code>source</code> is empty, the empty sequence is retu
 <p:declare-step type="p:join-json">
   <p:input port="source" sequence="true" content-types="json"> </p:input>
   <p:output port="result" content-types="application/json"/>
-  <p:option name="flatten-arrays" as="xs:boolean" select="false()" />
+  <p:option name="flatten-arrays" as="xs:boolean" select="false()"/>
 </p:declare-step>
 
 <para>If option <code>flatten-arrays</code> is <literal>false</literal>, a member in the array is created for each document in
