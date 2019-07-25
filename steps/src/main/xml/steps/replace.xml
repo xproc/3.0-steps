@@ -19,15 +19,18 @@ its primary input with the top-level node(s) of the
 <para>The value of the <option>match</option> option
 <rfc2119>must</rfc2119> be an XSLTSelectionPattern. <error code="C0023">It
 is a <glossterm>dynamic error</glossterm> if that pattern matches
-anything other than element, text, processing-instruction, or comment
-nodes. </error> Multiple matches are allowed, in which case multiple
+an attribute or a namespace nodes. </error> Multiple matches are allowed, in which case multiple
 copies of the <port>replacement</port> document will occur.</para>
 
 <para>Every node in the primary input matching the specified
-   pattern is replaced in the output by the top-level node(s)
+pattern is replaced in the output by the top-level node(s)
 of the <port>replacement</port> document. Only non-nested matches are
 replaced. That is, once a node is replaced, its descendants cannot
 be matched.</para>
+   
+<para>If the document node is matched and port <port>replacement</port> contains
+a text document, the entire document is replaced by the text node. What appears on port 
+<port>result</port> is a text document with the text node wrapped in a document node.</para>
 
 <simplesect>
 <title>Document properties</title>
