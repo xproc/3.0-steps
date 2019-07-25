@@ -30,7 +30,7 @@
 </authorgroup>
 
 <abstract>
-<para>This specification describes the <code>p:join-json</code> step
+<para>This specification describes the <code>p:json-join</code> step
 for
 <citetitle>XProc 3.0: An XML Pipeline Language</citetitle>.</para>
 </abstract>
@@ -51,7 +51,7 @@ An XML Pipeline Language</link> published by the W3C.</para>
 <title>Introduction</title>
 
 <para>This specification describes the
-<code>p:join-json</code> XProc step.
+<code>p:json-join</code> XProc step.
 A machine-readable description of
 these steps may be found in
 <link xlink:href="steps.xpl">steps.xpl</link>.
@@ -63,7 +63,7 @@ steps is assumed; for background details, see
 <biblioref linkend="xproc30-steps"/>.</para>
 </section>
 
-<xi:include href="steps/join-json.xml"/>
+<xi:include href="steps/json-join.xml"/>
 
 <section xmlns="http://docbook.org/ns/docbook" xml:id="errors">
 <title>Step Errors</title>
