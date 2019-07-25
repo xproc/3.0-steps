@@ -16,8 +16,8 @@ children.</para>
 
  <para>The value of the <option>match</option> option <rfc2119>must</rfc2119> be an
  XSLTSelectionPattern. <error code="C0023">It is a <glossterm>dynamic
- error</glossterm> if that pattern matches anything other than element
- nodes.</error></para>
+ error</glossterm> if that pattern matches anything other than the document node
+ or element nodes.</error></para>
 
 <para>Every element in the <port>source</port> document that matches
 the specified <option>match</option> pattern is replaced by its children,
