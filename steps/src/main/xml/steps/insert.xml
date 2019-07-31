@@ -15,7 +15,7 @@ port's document relative to the matching elements in the
    <p:input port="insertion" sequence="true" content-types="xml html"/>
    <p:output port="result" content-types="xml html"/>
    <p:option name="match" as="xs:string" select="'/*'" e:type="XSLTSelectionPattern"/>
-   <p:option name="position" required="true" as="xs:token" values="('first-child','last-child','before','after')"/>
+   <p:option name="position" as="xs:token" values="('first-child','last-child','before','after')" select="'after'"/>
 </p:declare-step>
 
 <para>The value of the <option>match</option> option
@@ -47,11 +47,11 @@ the following list:
 </itemizedlist>
 
 <para><error code="C0025">It is a <glossterm>dynamic error</glossterm>
-if the match pattern matches anything other than an element or a document
+if the <glossterm>selection pattern</glossterm> matches anything other than an element or a document
 node and the value of the <option>position</option> option is
 “<literal>first-child</literal>” or
 “<literal>last-child</literal>”.</error> <error code="C0024">It is a
-<glossterm>dynamic error</glossterm> if the match pattern matches a document
+<glossterm>dynamic error</glossterm> if the <glossterm>selection pattern</glossterm> matches a document
 node and the value of the <option>position</option> is “<literal>before</literal>” or
 “<literal>after</literal>”.</error></para>
 

@@ -5,23 +5,25 @@
          xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="c.delete">
 <title>p:delete</title>
 
-<para>The <code>p:delete</code> step deletes items specified by a match
-pattern from the
+<para>The <code>p:delete</code> step deletes items specified by a <glossterm>selection pattern</glossterm> from the
 <code>source</code> input document and produces the resulting document,
 with the deleted items removed, on the <port>result</port> port.</para>
 
 <p:declare-step type="p:delete">
    <p:input port="source" content-types="xml html"/>
-   <p:output port="result" content-types="xml html"/>
+   <p:output port="result" content-types="text xml html"/>
    <p:option name="match" required="true" as="xs:string" e:type="XSLTSelectionPattern"/>
 </p:declare-step>
 
 <para>The value of the <option>match</option> option <rfc2119>must</rfc2119> be an
-XSLTSelectionPattern. A match pattern may match multiple items to be
+XSLTSelectionPattern. A <glossterm>selection pattern</glossterm> may match multiple items to be
 deleted.</para>
 
 <para>If an element is selected by the <option>match</option> option, the
 entire subtree rooted at that element is deleted.</para>
+
+<para><error code="C0023">It is a <glossterm>dynamic error</glossterm> if the
+<option>match</option> option matches the document node.</error></para>
 
 <para>This step cannot be used to remove namespaces. <error code="C0062">It is a <glossterm>dynamic error</glossterm> if the
 <option>match</option> option matches a namespace node.</error>
@@ -31,6 +33,9 @@ of the element on which it occurred.</para>
 
 <simplesect>
 <title>Document properties</title>
-<para feature="delete-preserves-all">All document properties are preserved.</para>
+   <para feature="delete-preserves-partially">If the resulting document contains exactly one text node,
+      the <literal>content-type</literal> property is changed to <literal>text/plain</literal> and the 
+      <literal>serialization</literal> property is removed, while all other document properties are 
+      preserved. For other document types, all document properties are preserved.</para>
 </simplesect>
 </section>

@@ -131,11 +131,13 @@ steps is assumed; for background details, see
     </varlistentry>
   </variablelist>
 
-  <para>FIXME: the <tag>c:result</tag> element may contain zero or more
-  <tag>c:environment</tag> elements that identify the environment variables
-  available.</para>
+    <para>The <tag>c:result</tag> element can contain zero or more <tag>c:environment</tag> elements
+      that identify the environment variables available. These elements have a mandatory
+        <code>name</code> and <code>value</code> attribute, reflecting name and value of the
+      environment variable. Implementations <rfc2119>should</rfc2119> include all available
+      operating system environment variables.</para>
 
-  <para>The exact set of properties returned is implementation-dependent.</para>
+  <para><impl>The exact set of properties returned is <glossterm>implementation-defined</glossterm>.</impl></para>
 
   <simplesect>
     <title>Document properties</title>
@@ -159,16 +161,16 @@ from standard error.</para>
   <p:output port="exit-status"/>
   <p:option name="command" required="true" as="xs:string"/>
   <p:option name="args" select="''" as="xs:string"/>
-  <p:option name="cwd" as="xs:string"/>
+  <p:option name="cwd" as="xs:string?"/>
   <p:option name="source-is-xml" select="true()" as="xs:boolean"/>
   <p:option name="result-is-xml" select="true()" as="xs:boolean"/>
   <p:option name="wrap-result-lines" select="false()" as="xs:boolean"/>
   <p:option name="errors-is-xml" select="false()" as="xs:boolean"/>
   <p:option name="wrap-error-lines" select="false()" as="xs:boolean"/>
-  <p:option name="path-separator" as="xs:string"/>
-  <p:option name="failure-threshold" as="xs:integer"/>
+  <p:option name="path-separator" as="xs:string?"/>
+  <p:option name="failure-threshold" as="xs:integer?"/>
   <p:option name="arg-separator" select="' '" as="xs:string"/>
-  <p:option name="serialization" as="map(xs:string,xs:anyAtomicValue)"/>
+  <p:option name="serialization" as="map(xs:QName,item()*)?"/>
 </p:declare-step>
 
 <para>The values of the <option>command</option>, <option>args</option>,

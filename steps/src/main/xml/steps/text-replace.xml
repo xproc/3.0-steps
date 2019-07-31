@@ -11,7 +11,7 @@
     <p:output port="result" primary="true" sequence="false" content-types="text"/>
     <p:option name="pattern" required="true" as="xs:string"/>
     <p:option name="replacement" required="true" as="xs:string"/>
-    <p:option name="flags" required="false" as="xs:string"/>
+    <p:option name="flags" as="xs:string?"/>
   </p:declare-step>
 
   <para>The <code>p:text-replace</code> step replaces all occurrences of substrings in the text document appearing on
