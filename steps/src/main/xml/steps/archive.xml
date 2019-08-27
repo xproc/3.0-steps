@@ -14,7 +14,7 @@
     <p:input port="source" primary="true" content-types="any" sequence="true"/>
     <p:input port="manifest" content-types="application/xml" sequence="true"/>
     <p:input port="archive" content-types="any" sequence="true"/>
-    <p:output port="result" primary="true" content-types="application/*" sequence="false"/>
+    <p:output port="result" primary="true" content-types="any" sequence="false"/>
     <p:output port="report" content-types="application/xml" sequence="false"/>
     <p:option name="format" as="xs:QName" select="'zip'"/>
     <p:option name="relative-to" as="xs:anyURI?"/>
