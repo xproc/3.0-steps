@@ -8,7 +8,7 @@
     the archive appearing on its <port>source</port> port.</para>
 
   <p:declare-step type="p:archive-manifest">
-    <p:input port="source" primary="true" content-types="*/*" sequence="false"/>
+    <p:input port="source" primary="true" content-types="any" sequence="false"/>
     <p:output port="result" primary="true" content-types="application/xml" sequence="false"/>
     <p:option name="format" as="xs:QName?"/>
     <p:option name="parameters" as="map(xs:Qname, item()*)?"/>
