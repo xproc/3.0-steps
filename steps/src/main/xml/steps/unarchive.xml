@@ -8,8 +8,8 @@
     in an archive (for instance from a zip file).</para>
 
   <p:declare-step type="p:unarchive">
-    <p:input port="source" primary="true" content-types="*/*" sequence="false"/>
-    <p:output port="result" primary="true" content-types="*/*" sequence="true"/>
+    <p:input port="source" primary="true" content-types="any" sequence="false"/>
+    <p:output port="result" primary="true" content-types="any" sequence="true"/>
     <p:option name="include-filter" as="xs:string*" e:type="RegularExpression"/>
     <p:option name="exclude-filter" as="xs:string*" e:type="RegularExpression"/>
     <p:option name="format" as="xs:QName?"/>
