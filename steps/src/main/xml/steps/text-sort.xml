@@ -13,7 +13,6 @@
     <p:option name="order" as="xs:string" select="'ascending'" values="('ascending', 'descending')"/>
     <p:option name="case-order" as="xs:string?" values="('upper-first', 'lower-first')"/>
     <p:option name="lang" as="xs:language?"/>
-    <p:option name="data-type" as="xs:string?" values="('text', 'number')"/>
     <p:option name="collation" as="xs:string"
       select="'https://www.w3.org/2005/xpath-functions/collation/codepoint'"/>
     <p:option name="stable" as="xs:boolean" select="true()"/>
@@ -26,12 +25,11 @@
     <listitem>
       <para>The <option>sort-key</option> is used to obtain a sort key for each of the lines in the document
        appearing on <port>source</port>. The <code>context item</code> is the line as an instance of <code>xs:string</code>,
-       the <code>context position</code> is the number of the line in the document of <port>source</port>, the
+       the <code>context position</code> is the number of the line in the document on port <port>source</port>, the
        <code>context size</code> is the number of lines in this document. <error code="C0098">It is a 
        <glossterm>dynamic error</glossterm> if a dynamic XPath error occurred while applying sort-key to a line.</error>
        <error code="C0099">It is a <glossterm>dynamic error</glossterm> if the result of applying <code>sort-key</code>
-       to a given line (and possibly also applying the conversion indicated by <option>data-type</option>) results 
-       in a sequence with more than one item.</error>
+       to a given line results in a sequence with more than one item.</error>
       </para>
     </listitem>
     <listitem>
@@ -49,14 +47,7 @@
         default depends on the processing environment. Its value must be a valid language code (e.g.
         <code>en-EN</code>).</para>
     </listitem>
-    <listitem>
-      <para>The <option>data-type</option> option defines whether the lines are to be collated alphabetically or
-        numerically. Its value <rfc2119>must</rfc2119> be one of <code>text</code> or <code>number</code>. If present,
-        the sort key obtained by evaluating <option>sort-key</option> on the respective line is forced into an instance
-        of <code>xs:string</code> or <code>xs:double</code>. <error code="C0097">It is a <glossterm>dynamic error</glossterm>
-        if the sort key can not be forced into the type indicated by <option>data-type</option>.</error></para>
-    </listitem>
-    <listitem>
+     <listitem>
       <para>The <option>collation</option> option identifies how strings are to be compared with each other. Its value
         must be a valid collation URI. The only collation XProc processors <rfc2119>must</rfc2119> support is the
         Unicode Codepoint Collation <link xlink:href="https://www.w3.org/2005/xpath-functions/collation/codepoint/"
