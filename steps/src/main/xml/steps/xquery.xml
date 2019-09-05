@@ -60,16 +60,17 @@ which XQuery version(s) is/are supported.</impl></para>
 <para>The name/value pairs in option <option>parameters</option> are used to set the query's
 external variables.</para>
   
-<para><error code="C0101">It is a <glossterm>dynamic error</glossterm> if XQuery version
-<literal>1.0</literal> is used and a document appearing on <port>source</port> port is not an XML document, 
-an HTML document, or a Text document.</error> <error code="C0102">It is a <glossterm>dynamic error</glossterm>
-if XQuery version <literal>1.0</literal> is used and any key in option <option>parameters</option> is 
-associated to a value that is not an instance of the XQuery 1.0 and XPath 2.0 data model, e.g. with a map, 
-an array, or a function.</error></para>
+<para><error code="C0101">It is a <glossterm>dynamic error</glossterm> if a document
+appearing on port <port>source</port> cannot be represented in the XDM version associated with
+  the chosen XQuery version, e.g. when a JSON document contains a map and XDM 2.0 is used.</error> 
+  <error code="C0102">It is a <glossterm>dynamic error</glossterm> if any key in option 
+    <option>parameters</option> is associated to a value that cannot be represented in 
+    the XDM version associated with the chosen XQuery version, e.g. with a map, an array, 
+    or a function when XDM 2.0 is used.</error></para>
 
 <para><error code="C0103">It is a <glossterm>dynamic error</glossterm> if any error occurs during
-    XQuery's static analysis phase.</error> <error code="C0104">It is a <glossterm>dynamic error</glossterm>
-    if any error occurs during XQuery's dynamic evaluation phase.</error></para>
+    XQuery’s static analysis phase.</error> <error code="C0104">It is a <glossterm>dynamic error</glossterm>
+    if any error occurs during XQuery’s dynamic evaluation phase.</error></para>
       
 <para>The output of this step
 <rfc2119>may</rfc2119> include PSVI annotations.</para>
