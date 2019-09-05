@@ -57,7 +57,7 @@ to determine what version to use, including, but not limited to,
 examining the version of the query.<impl>It is <glossterm>implementation defined</glossterm>
 which XQuery version(s) is/are supported.</impl></para>
 
-<para>The name/value pairs in option <option>parameters</option> are used to set the query's
+<para>The name/value pairs in option <option>parameters</option> are used to set the query’s
 external variables.</para>
   
 <para><error code="C0101">It is a <glossterm>dynamic error</glossterm> if a document
