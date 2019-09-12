@@ -61,19 +61,6 @@ these steps may be found in
 <link xlink:href="steps.xpl">steps.xpl</link>.
 </para>
   
-  <note role="editorial">
-      <para><tag>p:validate</tag> is not included yet. We should discuss <link
-          xlink:href="https://github.com/xproc/1.0-specification/issues/135#issuecomment-83043122">Norm’s
-          proposal</link> and decide whether we want to include such a step. In addition, an idea was floating that such
-        a generic step might also look at the <code>xml-model</code> processing instructions that might be prepended to
-        a document. What makes it problematic might be that these PIs are missing after parsing the document, unless an
-        extra effort is made to re-attach them to the document node after parsing. This could be a document property
-          <code>models</code> that holds a <code>c:models</code> document with an XML representation of the
-          <code>xml-model</code> PIs, but all kinds of document loading mechanisms (<tag>p:load</tag>,
-          <tag>p:document</tag>, <tag>p:http-request</tag>) would need to be extended to process these prepended
-          <code>xml-model</code> PIs when loading a document.</para>
-  </note>
-
 <para>Familiarity with the
 general nature of <biblioref linkend="xproc30"/>
 steps is assumed; for background details, see
@@ -98,14 +85,10 @@ steps is assumed; for background details, see
     </note>
     <para>If no such error is raised, each step generates at least one validation report document on its
         <port>report</port> port. Unless another serialization format is requested, the mandatory report document
-        <rfc2119>should</rfc2119> be valid with respect to the <biblioref linkend="xvrl"/> schema. There may be multiple
+        <rfc2119>must</rfc2119> be an <biblioref linkend="xvrl"/> document. There may be multiple
       report documents on the <port>report</port> port, including other vocabularies such as SVRL. If a step performs
-      multiple validations, as may be the case for <code>p:validate</code>, all individual XVRL reports
+      multiple validations on a single document, all individual XVRL reports
         <rfc2119>should</rfc2119> be consolidated into a single XVRL report by the step.</para>
-    <note role="editorial">
-      <para>Should the XVRL spec be built using the XProc infrastructure? I added a preliminary biblioref that points
-      to <uri>http://spec.xproc.org/xvrl/</uri></para>
-    </note>
     <note role="editorial">
       <para>Should we allow also text and json content types for the report port? Only as an additional alternative,
       or instead of the XML report?</para>
@@ -247,6 +230,14 @@ processing to the <port>source</port> document.</para>
 if the <option>assert-valid</option> option is <literal>true</literal>
 and any Schematron assertions fail or reports succeed.</error></para>
 
+    <note xml:id="note-assert-valid_schematron">
+      <para>A Schematron validation with <literal>assert-valid="true"</literal> will fail if any validation message is
+        produced by <tag>sch:assert</tag> or <tag>sch:report</tag>, even if the severity level of the failed assertion or
+        the successful report is below a certain threshold, for example if there is only an <literal>info</literal>
+        message. (The severity is conventionally conveyed by the <literal>@role</literal> attribute on <tag>sch:assert</tag> or 
+        <tag>sch:report</tag>.) </para>
+    </note>
+    
 <para>The value of the <option>phase</option> option identifies the
 Schematron validation phase with which validation begins.</para>
 
@@ -254,18 +245,26 @@ Schematron validation phase with which validation begins.</para>
 correspond to Schematron external variables, to parameters that influence
 code generation, or to parameters that influence SVRL to XVRL conversion.</para>
 
-    <para>There are multiple Schematron implementations. An XProc processor that implements this step <rfc2119>should</rfc2119>
-      at least support the <biblioref linkend="schematron-skeleton"/> implementation.</para>
-    <para><impl>How the Schematron implementation is selected is
-    <glossterm>implementation-defined</glossterm>.</impl> A processor might select an implementation based on the schema’s 
-      <code role="attribute">queryBinding</code> attribute and/or provide configuration options.</para>
+    <para>There are multiple Schematron implementations. <impl>How the Schematron implementation is selected is
+          <glossterm>implementation-defined</glossterm>.</impl> A processor might select an implementation based on the
+      schema’s <code role="attribute">queryBinding</code> attribute and/or provide configuration options. In addition,
+      the special parameter map entry <literal>c:implementation</literal> (value: QName) may be used to select a
+      Schematron implementation that the processor supports. <impl>The list of supported Schematron implementations and
+        their associated values is <glossterm>implementation-defined</glossterm>.</impl> If a requested implementation
+      is not available, the processor may throw an error or select another implementation.</para>
     
     <para>The <option>parameters</option> map may contain two special entries, <literal>c:compile</literal> and
-        <literal>c:xvrl</literal>, both are maps. If a code-generating implementation such as Skeleton is used, the entries of
-      the <literal>c:compile</literal> map, for example <literal>allow-foreign</literal>, will be passed to the code
-      generator.</para>
-    <para>The SVRL to XVRL conversion can be influenced by the entries of the <literal>c:xvrl</literal> map. <impl>Which parameters
-the SVRL to XVRL conversion supports is <glossterm>implementation-defined</glossterm>.</impl></para>
+        <literal>c:xvrl</literal>, both are maps. If a code-generating implementation such as <biblioref
+        linkend="schematron-skeleton"/> is used, the entries of the <literal>c:compile</literal> map, for example
+        <literal>allow-foreign</literal>, will be passed to the code generator. 
+      <impl>Which parameters the 
+        <literal>c:compile</literal> map supports for a given Schematron implementation is
+          <glossterm>implementation-defined</glossterm>.</impl></para>
+    <para>If the Schematron implementation produces SVRL natively, the SVRL to XVRL conversion can be influenced by the
+      entries of the <literal>c:xvrl</literal> map. The same map, with potentially another set of allowed keys and
+      values, can be used to influence XVRL generation from another reporting language. 
+      <impl>Which parameters this conversion from native reporting format to XVRL supports is
+          <glossterm>implementation-defined</glossterm>.</impl></para>
     <para>All other parameters of the <option>parameters</option> option will be passed to the generated code if applicable,
       or to a hypothetical native Schematron validator that does without code generation.</para>
 
