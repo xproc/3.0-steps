@@ -219,7 +219,7 @@ processing to the <port>source</port> document.</para>
 <p:declare-step type="p:validate-with-schematron">
   <p:input port="source" primary="true" content-types="xml html"/>
   <p:input port="schema" content-types="xml"/>
-  <p:output port="result" primary="true" content-types="application/xml"/>
+  <p:output port="result" primary="true" content-types="xml html"/>
   <p:output port="report" sequence="true" content-types="application/xml json"/>
   <p:option name="parameters" as="map(xs:QName,item()*)?"/>
   <p:option name="phase" select="'#DEFAULT'" as="xs:string"/>
