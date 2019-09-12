@@ -21,7 +21,7 @@ error</glossterm> if the pattern matches anything other than element,
 attribute or processing instruction nodes.</error></para>
 
 <para>Each element, attribute, or processing-instruction in the input
-matched by the match pattern specified in the <option>match</option>
+matched by the <glossterm>selection pattern</glossterm> specified in the <option>match</option>
 option is renamed in the output to the name specified by the
 <option>new-name</option> option.</para>
 

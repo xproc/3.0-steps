@@ -2,8 +2,8 @@
 <title>p:escape-markup</title>
 
 <para>The <code>p:escape-markup</code> step applies XML serialization to the
-children of the document element and replaces those children with their
-serialization. The outcome is a single element with text content that
+children of the all elements that are children of the document node and 
+replaces those children with their serialization. The outcome is a list of elements with text content that
 represents the "escaped" syntax of the children as they were
 serialized.</para>
 
@@ -12,6 +12,10 @@ serialized.</para>
   <p:output port="result" content-types="xml html"/>
   <p:option name="serialization" as="map(xs:QName,item()*)?"/>
 </p:declare-step>
+
+<para><error code="C0091">It is a <glossterm>dynamic error</glossterm> if
+the document on <port>source</port> port has more than one 
+top-level element.</error></para>
 
 <para>This step supports the standard serialization options as
 specified in <link linkend="xml-serialization-31"/>. These options
@@ -38,6 +42,6 @@ XML declaration in the escaped result.</para>
 
 <simplesect>
 <title>Document properties</title>
-<para feature="escape-markup-preserves-none">No document properties are preserved.</para>
+<para feature="escape-markup-preserves-all">All document properties are preserved.</para>
 </simplesect>
 </section>

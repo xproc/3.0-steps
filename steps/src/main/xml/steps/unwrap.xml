@@ -10,14 +10,14 @@ children.</para>
 
 <p:declare-step type="p:unwrap">
    <p:input port="source" content-types="xml html"/>
-   <p:output port="result" content-types="application/xml"/>
+   <p:output port="result" content-types="application/xml text/plain"/>
    <p:option name="match" as="xs:string" select="'/*'" e:type="XSLTSelectionPattern"/>
 </p:declare-step>
 
  <para>The value of the <option>match</option> option <rfc2119>must</rfc2119> be an
  XSLTSelectionPattern. <error code="C0023">It is a <glossterm>dynamic
- error</glossterm> if that pattern matches anything other than element
- nodes.</error></para>
+ error</glossterm> if that pattern matches anything other than the document node
+ or element nodes.</error></para>
 
 <para>Every element in the <port>source</port> document that matches
 the specified <option>match</option> pattern is replaced by its children,
@@ -32,7 +32,9 @@ ones.</para>
 </note>
 
 <para>This step produces a single document; if the document element is
-unwrapped, the result might not be well-formed XML.</para>
+unwrapped, the result might not be well-formed XML. If the step produces a
+document node with a single text child, the result will have content type 
+“<literal>text/plain</literal>”.</para>
 
 <simplesect>
 <title>Document properties</title>

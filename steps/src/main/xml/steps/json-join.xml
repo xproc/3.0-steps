@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xmlns="http://docbook.org/ns/docbook"
+         xmlns:e="http://www.w3.org/1999/XSL/Spec/ElementSyntax"
+         xmlns:p="http://www.w3.org/ns/xproc"
+         xmlns:xi="http://www.w3.org/2001/XInclude"
+         xmlns:xlink="http://www.w3.org/1999/xlink"
+         xml:id="c.json-join"
+         version="5.0-extension w3c-xproc">
+<title>p:json-join</title>
+
+<para>The <code>p:json-join</code> step joins a sequence of JSON
+documents into a single JSON document (an array). If the sequence on
+port <code>source</code> is empty, the empty sequence is returned on
+port <code>result</code>.</para>
+
+<p:declare-step type="p:json-join">
+  <p:input port="source" sequence="true" content-types="json"> </p:input>
+  <p:output port="result" content-types="application/json"/>
+  <p:option name="flatten-to-depth" as="xs:string?" select="'0'"/>
+</p:declare-step>
+
+<para>The option <option>flatten-to-depth</option> controls whether and to which
+depth members of an array appearing on port <port>source</port> are flattened.
+The <option>flatten-to-depth</option> option may contain either the 
+string “<literal>unbounded</literal>” or a string that may be cast to a non-negative integer. 
+An integer value of <literal>0</literal>, which is the default, means that no 
+flattening takes place, so the array appearing on port <port>source</port> will
+be contained as an array in the resulting array. An integer value of <literal>1</literal>
+means that an array on port <port>source</port> is flattened, i.e. the members
+of that array will appear as individual members in the resulting array. Any value greater
+than <literal>1</literal> means that the flattening is applied recursively to arrays in
+arrays up to the given depth. A value of “<literal>unbounded</literal>” means that all
+arrays in arrays will be flattened. As a consequence, the resulting array appearing on
+port <port>result</port> will not have any arrays as members.</para>
+</section>

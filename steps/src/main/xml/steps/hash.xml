@@ -9,12 +9,12 @@
 for some value and injects it into the <port>source</port> document.</para>
 
 <p:declare-step type="p:hash">
-  <p:input port="source" primary="true" content-types="any"/>
-  <p:output port="result" content-types="application/xml"/>
+  <p:input port="source" primary="true" content-types="xml html"/>
+  <p:output port="result" content-types="text xml html"/>
   <p:option name="parameters" as="map(xs:QName,item()*)?"/>
   <p:option name="value" required="true" as="xs:string"/>
   <p:option name="algorithm" required="true" as="xs:QName"/>
-  <p:option name="match" as="xs:string" select="'/*'" e:type="XSLTSelectionPattern"/>
+  <p:option name="match" as="xs:string" select="'/*/node()'" e:type="XSLTSelectionPattern"/>
   <p:option name="version" as="xs:string?"/>
 </p:declare-step>
 
@@ -48,7 +48,7 @@ parameters specified. <error code="C0036">It is a
 one that the processor understands or if the value or parameters are
 not appropriate for that algorithm.</error></para>
 
-<para>The matched nodes are specified with the match pattern in the
+<para>The matched nodes are specified with the <glossterm>selection pattern</glossterm> in the
 <option>match</option> option. For each matching node, the string
 value of the computed hash is used in the output (if more than one node
 matches, the <emphasis>same</emphasis> hash value is used in each match).
@@ -61,12 +61,19 @@ value of the attribute in the output.
 If the attribute is named “<tag class="attribute">xml:base</tag>”, the base URI
 of the element <rfc2119>must</rfc2119> also be amended accordingly.</para>
 
+<para>If the document node is matched, the entire document is replaced by a text node
+with the hash. What appears on port <port>result</port> is a text document with the
+text node wrapped in a document node.</para>
+
 <para>If the expression matches any
 other kind of node, the entire node (and <emphasis>not</emphasis> just
-its contents) is replaced by the hash.</para>
+  its contents) is replaced by the hash.</para>
 
-<simplesect>
-<title>Document properties</title>
-<para feature="hash-preserves-all">All document properties are preserved.</para>
-</simplesect>
+  <simplesect>
+    <title>Document properties</title>
+    <para feature="hash-preserves-partially">If the resulting document contains exactly one text node,
+      the <literal>content-type</literal> property is changed to <literal>text/plain</literal> and the 
+      <literal>serialization</literal> property is removed, while all other document properties are 
+      preserved. For other document types, all document properties are preserved.</para>
+  </simplesect>
 </section>
