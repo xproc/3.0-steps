@@ -4,8 +4,8 @@
 
   <title>p:compress</title>
 
-  <para>The <code>p:compress</code> step serializes the document appearing on its
-      <code>source</code> port and outputs a compressed version of this on its <port>result</port>
+  <para>The <tag>p:compress</tag> step serializes the document appearing on its
+      <port>source</port> port and outputs a compressed version of this on its <port>result</port>
     port.</para>
 
   <p:declare-step type="p:compress">
@@ -16,11 +16,11 @@
     <p:option name="parameters" as="map(xs:Qname, item()*)?"/>
   </p:declare-step>
 
-  <para>The <code>p:compress</code> step first serializes the document appearing on its
-      <code>source</code>. It then compresses the outcome of this serialization and outputs the
-    result on its <code>result</code> port.</para>
+  <para>The <tag>p:compress</tag> step first serializes the document appearing on its
+      <port>source</port>. It then compresses the outcome of this serialization and outputs the
+    result on its <port>result</port> port.</para>
 
-  <para>The <code>p:compress</code> step has the following options:</para>
+  <para>The <tag>p:compress</tag> step has the following options:</para>
   <variablelist>
     <varlistentry>
       <term><option>format</option></term> 
