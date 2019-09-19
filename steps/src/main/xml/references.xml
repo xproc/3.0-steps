@@ -26,6 +26,7 @@
     <bibliomixed xml:id="bib.uuid"/>
     <bibliomixed xml:id="bib.sha"/>
     <bibliomixed xml:id="zip"/>
+    <bibliomixed xml:id="gzip"/>
   </bibliolist>
 </section>
 <section xml:id="informative-references">
