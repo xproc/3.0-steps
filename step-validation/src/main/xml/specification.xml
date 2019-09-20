@@ -54,8 +54,7 @@ An XML Pipeline Language</link> published by the W3C.</para>
 
 <para>This specification describes the <code>p:validate-with-relax-ng</code>,
 <code>p:validate-with-schematron</code>, <code>p:validate-with-xml-schema</code>,
-<code>p:validate-with-nvdl</code>, and the generic <code>p:validate</code>
-steps. Each is independently optional.
+and <code>p:validate-with-nvdl</code> steps. Each is independently optional.
 A machine-readable description of
 these steps may be found in
 <link xlink:href="steps.xpl">steps.xpl</link>.
@@ -85,7 +84,7 @@ steps is assumed; for background details, see
     </note>
     <para>If no such error is raised, each step generates at least one validation report document on its
         <port>report</port> port. Unless another serialization format is requested, the mandatory report document
-        <rfc2119>must</rfc2119> be an <biblioref linkend="xvrl"/> document. There may be multiple
+        <rfc2119>should</rfc2119> be an <biblioref linkend="xvrl"/> document. There may be multiple
       report documents on the <port>report</port> port, including other vocabularies such as SVRL. If a step performs
       multiple validations on a single document, all individual XVRL reports
         <rfc2119>should</rfc2119> be consolidated into a single XVRL report by the step.</para>
@@ -260,7 +259,7 @@ code generation, or to parameters that influence SVRL to XVRL conversion.</para>
       <impl>Which parameters the 
         <literal>c:compile</literal> map supports for a given Schematron implementation is
           <glossterm>implementation-defined</glossterm>.</impl></para>
-    <para>If the Schematron implementation produces SVRL natively, the SVRL to XVRL conversion can be influenced by the
+    <para>If the Schematron implementation produces SVRL by default, the SVRL to XVRL conversion can be influenced by the
       entries of the <literal>c:xvrl</literal> map. The same map, with potentially another set of allowed keys and
       values, can be used to influence XVRL generation from another reporting language. 
       <impl>Which parameters this conversion from native reporting format to XVRL supports is
