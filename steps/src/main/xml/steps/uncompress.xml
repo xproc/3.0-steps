@@ -25,7 +25,8 @@
             <glossterm>implementation-defined</glossterm> what other formats are supported.</impl>
         <error code="C0200">It is a <glossterm>dynamic error</glossterm> if the compression format
           does not match the format as specified in the <option>format</option>
-        option.</error></para>
+          option.</error> <error code="C0202">It is a <glossterm>dynamic error</glossterm> if the compression
+            format cannot be understood, determined and/or processed.</error></para>
     </listitem>
     <listitem>
       <para>If no <option>format</option> option is specified or its value is the empty sequence,
