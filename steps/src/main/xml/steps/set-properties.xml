@@ -23,7 +23,7 @@ adjusted property values.</para>
 
 <para feature="p-set-properties-merge">If the <option>merge</option>
 option is true, then the supplied properties are added to the existing
-properties overwriting already existing values for a given key. 
+properties, overwriting already existing values for a given key. 
 If it is false, the document’s properties are replaced by
 the new set.</para>
 
