@@ -187,6 +187,7 @@ linkend="rfc2119"/>.</para>
 <xi:include href="steps/load.xml"/>
 <xi:include href="steps/json-join.xml"/>
 <xi:include href="steps/make-absolute-uris.xml"/>
+<xi:include href="steps/namespace-delete.xml" />
 <xi:include href="steps/namespace-rename.xml"/>
 <xi:include href="steps/pack.xml"/>
 <xi:include href="steps/rename.xml"/>
