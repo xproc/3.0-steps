@@ -2,7 +2,7 @@
       xmlns:cs="http://www.w3.org/XML/XProc/2006/04/components#" 
       xmlns:e="http://www.w3.org/1999/XSL/Spec/ElementSyntax" 
       xmlns:p="http://www.w3.org/ns/xproc" xmlns:xi="http://www.w3.org/2001/XInclude" 
-      xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="c.sink">
+      xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="c.namespace-delete">
 <title>p:namespace-delete</title>
 
 <para>The <tag>p:namespace-delete</tag> step deletes all of the namespaces identified by the specified 
