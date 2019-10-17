@@ -85,7 +85,24 @@
       <xsl:call-template name="doAttr"/>
     </xsl:for-each>
 
-    <code>/&gt;</code>
+    <xsl:choose>
+      <xsl:when test="self::p:input and p:*">
+        <xsl:if test="count(p:*) gt 1 or not(p:empty)">
+          <xsl:message terminate="yes">Only p:empty is supported as a default!</xsl:message>
+        </xsl:if>
+        <code>&gt;</code>
+        <br/>
+        <xsl:text>&#160;&#160;&#160;&#160;&#160;</xsl:text>
+        <xsl:text>&#160;&#160;&#160;&#160;&#160;</xsl:text>
+        <code>&lt;p:empty/&gt;</code>
+        <br/>
+        <xsl:text>&#160;&#160;&#160;&#160;&#160;</xsl:text>
+        <code>&lt;/p:input&gt;</code>
+      </xsl:when>
+      <xsl:otherwise>
+        <code>/&gt;</code>
+      </xsl:otherwise>
+    </xsl:choose>
 
     <xsl:if test="self::p:option">
       <xsl:variable name="lengths" as="xs:integer+">
