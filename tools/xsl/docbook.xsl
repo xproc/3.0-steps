@@ -20,8 +20,6 @@
 
 <xsl:param name="toc.section.depth">3</xsl:param>
 
-<xsl:param name="docbook.css" select="'css/base.css'"/>
-
 <xsl:param name="publication.root.uri"
 	   select="if (/processing-instruction(publication-root))
                    then xs:string(processing-instruction(publication-root))
