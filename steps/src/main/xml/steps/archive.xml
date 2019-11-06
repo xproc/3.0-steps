@@ -126,6 +126,14 @@
         <para>The <option>relative-to</option> option is used in creating a manifest when no
           manifest is provided on the <port>manifest</port> port. See <xref
             linkend="cv.archive-manifest"/>.</para>
+        <para>The value provided for the <option>relative-to</option> option will before use always
+          be normalized using the <function>p:urify()</function> function. After this normalization
+          its value <rfc2119>must</rfc2119> be an absolute URI. <error code="D0064">It is a
+              <glossterm>dynamic error</glossterm> if the <option>relative-to</option> option is
+            present and its value is not a valid <type>xs:anyURI</type>. </error>
+          <error code="D0074">It is a <glossterm>dynamic error</glossterm> to provide a value for
+            the <option>relative-to</option> option that, after normalization by the
+              <function>p:urify()</function> function, is not an absolute URI.</error></para>
       </listitem>
     </varlistentry>
   </variablelist>
@@ -177,29 +185,34 @@
             <rfc2119>must</rfc2119> be specified as a relative path.</para>
       </listitem>
       <listitem>
-        <para>The <code>href</code> attribute is interpreted as follows:</para>
+        <para>The <code>href</code> attribute will before use always be normalized by the
+            <function>p:urify()</function> function. It is interpreted as follows:</para>
         <itemizedlist>
           <listitem>
             <para><error code="D0064">It is a <glossterm>dynamic error</glossterm> if the
-                  <option>c:entry/@href</option> attribute in a <code>p:archive</code> step manifest
-                is present and its value is not a valid <type>xs:anyURI</type>.</error></para>
+                  <code>c:entry/@href</code> attribute in a <code>p:archive</code> step manifest is
+                present and its value is not a valid <type>xs:anyURI</type>.</error>
+              <error code="D0074">It is a <glossterm>dynamic error</glossterm> to provide a value
+                for the <code>c:entry/@href</code> attribute in a <code>p:archive</code> step
+                manifest that, after normalization by the <function>p:urify()</function> function, is
+                not an absolute URI.</error></para>
           </listitem>
           <listitem>
             <para>The <code>p:archive</code> step checks the documents appearing on its
                 <port>source</port> port for any documents with exactly the same base URI as the
-              contents of the <code>href</code> attribute. If any such document is found, this is
-              used as entry for the archive. To store these documents in the archive they must be
-              serialized. The <code>serialization</code> document property can be used to provide
-              serialization properties.</para>
+              value of the normalized <code>href</code> attribute. If any such document is found,
+              this is used as entry for the archive. To store these documents in the archive they
+              must be serialized. The <code>serialization</code> document property can be used to
+              provide serialization properties.</para>
           </listitem>
           <listitem>
-            <para>If the above doesn't apply, the value of the <code>href</code> attribute is
-              interpreted as a URI and the document is loaded from this location. <error
-                code="D0011">It is a <glossterm>dynamic error</glossterm> if the resource referenced
-                by the <option>href</option> option does not exist, cannot be accessed or is not a
-                file</error> If the <option>href</option> option is relative, it is made absolute
-              against the base URI of the manifest. These documents are stored in the archive "as
-              is". No parsing/serialization takes place.</para>
+            <para>If the above doesn't apply, the value of the normalized <code>href</code>
+              attribute is interpreted as a URI and the document is loaded from this location.
+                <error code="D0011">It is a <glossterm>dynamic error</glossterm> if the resource
+                referenced by the <option>href</option> option does not exist, cannot be accessed or
+                is not a file.</error> If the <option>href</option> option is relative, it is made
+              absolute against the base URI of the manifest. These documents are stored in the
+              archive "as is". No parsing/serialization takes place.</para>
           </listitem>
 
         </itemizedlist>
@@ -234,13 +247,11 @@
     <para>The option <option>relative-to</option> can be used to derive the entry’s <tag
         role="attribute">name</tag> attribute from the <port>source</port> document’s
         <code>base-uri</code> property, which in turn will be used for the entry’s <tag
-        role="attribute">href</tag> attribute. Both the URI that is given in
-        <option>relative-to</option> and the value of the <code>base-uri</code> property should be
-      normalized with respect to slash deduplication, parent path elimination, and drive letter case
-      folding. The step will remove the leading (normalized) <option>relative-to</option> option
-      value from the <port>source</port> document’s (normalized) base URI. If there is no match, the
-      manifest entry’s <tag role="attribute">name</tag> attribute will consist of the path part of
-      the <port>source</port> document’s base URI, without any leading slashes.</para>
+        role="attribute">href</tag> attribute. The step will remove the leading (normalized)
+        <option>relative-to</option> option's value from the <port>source</port> document’s
+      (normalized) base URI. If there is no match, the manifest entry’s <tag role="attribute"
+        >name</tag> attribute will consist of the path part of the <port>source</port> document’s
+      base URI, without any leading protocol specifier and slashes.</para>
   </section>
 
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
