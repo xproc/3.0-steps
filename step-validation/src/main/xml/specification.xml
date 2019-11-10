@@ -85,18 +85,18 @@ steps is assumed; for background details, see
         <literal>info</literal> or <literal>warning</literal> in <code>sch:report/@role</code>.</para>
     </note>
     <para>If no such error is raised, each step generates at least one validation report document on its
-        <port>report</port> port. Unless another format is requested, the mandatory report document
+        <port>report</port> port. Unless another format is requested, the mandatory report document for all steps
+      except <tag>p:validate-with-schematron</tag>
         <rfc2119>should</rfc2119> be an <biblioref linkend="xvrl"/> document. A report format may be requested
     by the <option>report-format</option> option. <impl>The supported values for the <option>report-format</option>
     option are <glossterm>implementation-defined</glossterm>. A processor <rfc2119>should</rfc2119> at least support
-    the value “<literal>XVRL</literal>”. It may return a different format if the requested format cannot be provided.</impl></para>
-    <note role="editorial"><para>On 2019-11-09 we said that <option>report-format</option> is entirely
-    <glossterm>implementation-defined</glossterm>. But in the interest of avoiding verbosity, I suggest that
-    the XML validation steps assume a default value of “<literal>XVRL</literal>”, trusting that we’ll be able
-    to produce XVRL from <tag>c:errors</tag> and SVRL.</para></note>
-    <para>If a step performs
-      multiple validations on a single document, all individual XVRL reports
-        need to be consolidated into a single XVRL report by the step.</para>
+    the value “<literal>xvrl</literal>” for the XML validation steps and “<literal>svrl</literal>” for
+      <tag>p:validate-with-schematron</tag>.</impl>
+    </para>
+    <para><error code="C0117">It is a <glossterm>dynamic error</glossterm> if a <option>report-format</option> option 
+      was specified that the processor does not support.</error></para>
+    <para>If a step performs multiple validations on a single document (for example, embedded Schematron validations 
+      in a Relax NG schema), all individual XVRL reports need to be consolidated into a single XVRL report by the step.</para>
     <para>Each of the validation steps has a <option>parameters</option> option. <impl>The parameters supported by the
 validation steps and their semantics are
         <glossterm>implementation-defined</glossterm>, and they can be different for each validation step.</impl> A special key in the
@@ -108,8 +108,7 @@ validation steps and their semantics are
       will be passed as parameters to the XVRL generation process. XProc implementations that implement any of the XML validation steps
         <rfc2119>should</rfc2119> support the basic parameters that are defined in the <biblioref linkend="xvrl"/>
       specification, <literal>xvrl:default-severity</literal>, <literal>xvrl:language</literal>, 
-      <literal>xvrl:category-vocabulary</literal>, <literal>xvrl:map-to-severity</literal>, and 
-      <literal>xvrl:xpath-notation</literal>.</para>
+      <literal>xvrl:map-to-severity</literal>, and <literal>xvrl:xpath-notation</literal>.</para>
   </section>
 
   <section xml:id="c.validate-with-nvdl">
@@ -125,7 +124,7 @@ validation steps and their semantics are
       <p:output port="result" primary="true" content-types="xml html"/>
       <p:output port="report" content-types="application/xml json"/>
       <p:option name="assert-valid" select="true()" as="xs:boolean"/>
-      <p:option name="report-format" select="'XVRL'" as="xs:string"/>
+      <p:option name="report-format" select="'xvrl'" as="xs:string"/>
       <p:option name="parameters" as="map(xs:QName,item()*)?"/>
     </p:declare-step>
 
@@ -171,7 +170,7 @@ validation steps and their semantics are
   <p:option name="dtd-attribute-values" select="false()" as="xs:boolean"/>
   <p:option name="dtd-id-idref-warnings" select="false()" as="xs:boolean"/>
   <p:option name="assert-valid" select="true()" as="xs:boolean"/>
-  <p:option name="report-format" select="'XVRL'" as="xs:string"/>
+  <p:option name="report-format" select="'xvrl'" as="xs:string"/>
   <p:option name="parameters" as="map(xs:QName,item()*)?"/>
 </p:declare-step>
 
@@ -231,7 +230,7 @@ processing to the <port>source</port> document.</para>
   <p:option name="parameters" as="map(xs:QName,item()*)?"/>
   <p:option name="phase" select="'#DEFAULT'" as="xs:string"/>
   <p:option name="assert-valid" select="true()" as="xs:boolean"/>
-  <p:option name="report-format" select="'XVRL'" as="xs:string"/>
+  <p:option name="report-format" select="'svrl'" as="xs:string"/>
 </p:declare-step>
 
 <para><error code="C0054">It is a <glossterm>dynamic error</glossterm>
@@ -313,7 +312,7 @@ validity assessment to the <port>source</port> input.</para>
   <p:option name="parameters" as="map(xs:QName,item()*)?"/>
   <p:option name="mode" select="'strict'" as="xs:token" values="('strict','lax')"/>
   <p:option name="version" as="xs:string?"/>
-  <p:option name="report-format" select="'XVRL'" as="xs:string"/>
+  <p:option name="report-format" select="'xvrl'" as="xs:string"/>
 </p:declare-step>
 
 <para>The values of the <option>use-location-hints</option>,
