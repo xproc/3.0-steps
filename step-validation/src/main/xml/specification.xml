@@ -174,8 +174,7 @@ validation steps and their semantics are
   <p:option name="parameters" as="map(xs:QName,item()*)?"/>
 </p:declare-step>
 
-<para>The values of the <option>dtd-attribute-values</option> and
-<option>dtd-id-idref-warnings</option> options
+<para>The values of the <option>dtd-attribute-values</option> and <option>dtd-id-idref-warnings</option> options
 <rfc2119>must</rfc2119> be booleans.</para>
 
 <para>If the <port>schema</port> document has an XML media type, then
