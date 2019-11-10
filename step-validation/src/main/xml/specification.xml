@@ -12,7 +12,7 @@
 <info>
 <title>XProc 3.0: validation steps</title>
 <!-- defaults to date formatted <pubdate>2014-12-18</pubdate> -->
-<copyright><year>2018</year><holder>@@FIXME:</holder></copyright>
+<copyright><year>2019</year><holder>@@FIXME:</holder></copyright>
 
 <bibliorelation type="isformatof" xlink:href="specification.xml">XML</bibliorelation>
 <authorgroup>
@@ -59,6 +59,8 @@ A machine-readable description of
 these steps may be found in
 <link xlink:href="steps.xpl">steps.xpl</link>.
 </para>
+  <para>Steps for validating non-XML documents, such as JSON, might be added in a future revision
+  of this specification.</para>
   
 <para>Familiarity with the
 general nature of <biblioref linkend="xproc30"/>
@@ -83,26 +85,31 @@ steps is assumed; for background details, see
         <literal>info</literal> or <literal>warning</literal> in <code>sch:report/@role</code>.</para>
     </note>
     <para>If no such error is raised, each step generates at least one validation report document on its
-        <port>report</port> port. Unless another serialization format is requested, the mandatory report document
-        <rfc2119>should</rfc2119> be an <biblioref linkend="xvrl"/> document. There may be multiple
-      report documents on the <port>report</port> port, including other vocabularies such as SVRL. If a step performs
+        <port>report</port> port. Unless another format is requested, the mandatory report document
+        <rfc2119>should</rfc2119> be an <biblioref linkend="xvrl"/> document. A report format may be requested
+    by the <option>report-format</option> option. <impl>The supported values for the <option>report-format</option>
+    option are <glossterm>implementation-defined</glossterm>. A processor <rfc2119>should</rfc2119> at least support
+    the value “<literal>XVRL</literal>”. It may return a different format if the requested format cannot be provided.</impl></para>
+    <note role="editorial"><para>On 2019-11-09 we said that <option>report-format</option> is entirely
+    <glossterm>implementation-defined</glossterm>. But in the interest of avoiding verbosity, I suggest that
+    the XML validation steps assume a default value of “<literal>XVRL</literal>”, trusting that we’ll be able
+    to produce XVRL from <tag>c:errors</tag> and SVRL.</para></note>
+    <para>If a step performs
       multiple validations on a single document, all individual XVRL reports
-        <rfc2119>should</rfc2119> be consolidated into a single XVRL report by the step.</para>
-    <note role="editorial">
-      <para>Should we allow also text and json content types for the report port? Only as an additional alternative,
-      or instead of the XML report?</para>
-      <para>Should we add a parameter to <code>p:cast-content-type</code> that allows to convert between XML and JSON
-      XVRL serialization formats (once JSON serialization is specified for XVRL)?</para>
-    </note>
+        need to be consolidated into a single XVRL report by the step.</para>
     <para>Each of the validation steps has a <option>parameters</option> option. <impl>The parameters supported by the
 validation steps and their semantics are
-        <glossterm>implementation-defined</glossterm>, and they can be different for each validation step.</impl> Keys in the
-        <literal>c</literal> namespace, <uri type="namespace">http://www.w3.org/ns/xproc-step</uri>, namely
-        <literal>c:compile</literal> and <literal>c:xvrl</literal>, hold maps themselves that control schema compilation and XVRL
-      generation, respectively. Schema compilation is, for example, the process of converting a Schematron schema into an XSLT
-      stylesheet. For the <literal>c:xvrl</literal> map, XProc implementations that implement any of the validation steps
-        <rfc2119>should</rfc2119> also support the basic parameters that are defined in the <biblioref linkend="xvrl"/>
-      specification, <literal>format</literal> and <literal>severity</literal>.</para>
+        <glossterm>implementation-defined</glossterm>, and they can be different for each validation step.</impl> A special key in the
+        <literal>c</literal> namespace, <uri type="namespace">http://www.w3.org/ns/xproc-step</uri>, called
+        <literal>c:compile</literal>, can hold a map itself that controls schema compilation. 
+      Schema compilation is, for example, the process of converting a Schematron schema into an XSLT
+      stylesheet. The <literal>c:compile</literal> map will be used as parameters for the compilation process.</para>
+    <para>Map entries in the <literal>xvrl</literal> namespace, <uri type="namespace">http://www.xproc.org/ns/xvrl</uri> 
+      will be passed as parameters to the XVRL generation process. XProc implementations that implement any of the XML validation steps
+        <rfc2119>should</rfc2119> support the basic parameters that are defined in the <biblioref linkend="xvrl"/>
+      specification, <literal>xvrl:default-severity</literal>, <literal>xvrl:language</literal>, 
+      <literal>xvrl:category-vocabulary</literal>, <literal>xvrl:map-to-severity</literal>, and 
+      <literal>xvrl:xpath-notation</literal>.</para>
   </section>
 
   <section xml:id="c.validate-with-nvdl">
@@ -116,8 +123,9 @@ validation steps and their semantics are
       <p:input port="nvdl" content-types="xml"/>
       <p:input port="schemas" sequence="true" content-types="text xml"/>
       <p:output port="result" primary="true" content-types="xml html"/>
-      <p:output port="report" sequence="true" content-types="application/xml json"/>
+      <p:output port="report" content-types="application/xml json"/>
       <p:option name="assert-valid" select="true()" as="xs:boolean"/>
+      <p:option name="report-format" select="'XVRL'" as="xs:string"/>
       <p:option name="parameters" as="map(xs:QName,item()*)?"/>
     </p:declare-step>
 
@@ -159,10 +167,11 @@ validation to the <port>source</port> document.</para>
   <p:input port="source" primary="true"  content-types="xml html"/>
   <p:input port="schema" content-types="text xml"/>
   <p:output port="result" primary="true" content-types="xml html"/>
-  <p:output port="report" sequence="true" content-types="application/xml json"/>
+  <p:output port="report" content-types="application/xml json"/>
   <p:option name="dtd-attribute-values" select="false()" as="xs:boolean"/>
   <p:option name="dtd-id-idref-warnings" select="false()" as="xs:boolean"/>
   <p:option name="assert-valid" select="true()" as="xs:boolean"/>
+  <p:option name="report-format" select="'XVRL'" as="xs:string"/>
   <p:option name="parameters" as="map(xs:QName,item()*)?"/>
 </p:declare-step>
 
@@ -223,6 +232,7 @@ processing to the <port>source</port> document.</para>
   <p:option name="parameters" as="map(xs:QName,item()*)?"/>
   <p:option name="phase" select="'#DEFAULT'" as="xs:string"/>
   <p:option name="assert-valid" select="true()" as="xs:boolean"/>
+  <p:option name="report-format" select="'XVRL'" as="xs:string"/>
 </p:declare-step>
 
 <para><error code="C0054">It is a <glossterm>dynamic error</glossterm>
@@ -304,6 +314,7 @@ validity assessment to the <port>source</port> input.</para>
   <p:option name="parameters" as="map(xs:QName,item()*)?"/>
   <p:option name="mode" select="'strict'" as="xs:token" values="('strict','lax')"/>
   <p:option name="version" as="xs:string?"/>
+  <p:option name="report-format" select="'XVRL'" as="xs:string"/>
 </p:declare-step>
 
 <para>The values of the <option>use-location-hints</option>,
