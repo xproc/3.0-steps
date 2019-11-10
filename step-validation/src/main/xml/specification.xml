@@ -159,9 +159,8 @@ validation steps and their semantics are
   <section xml:id="c.validate-with-relax-ng">
 <title>Validate with RELAX NG</title>
 
-<para>The <tag>p:validate-with-relax-ng</tag> step applies
-<biblioref linkend="iso19757-2"/>
-validation to the <port>source</port> document.</para>
+<para>The <tag>p:validate-with-relax-ng</tag> step applies <biblioref linkend="iso19757-2"/> validation 
+  to the <port>source</port> document.</para>
 
 <p:declare-step type="p:validate-with-relax-ng">
   <p:input port="source" primary="true"  content-types="xml html"/>
