@@ -32,5 +32,20 @@ if [ "$GIT_PUB_REPO" != "" ]; then
         git push -fq origin gh-pages > /dev/null
 
         echo -e "Published specification to gh-pages.\n"
+
+        if [ "$TRAVIS_REPO_SLUG" == "xproc/3.0-steps" ]; then
+            # Force a build of the 3.0-grammar repo
+            # in case the steps have updated grammars.
+            cd $HOME
+            git clone --quiet --branch=master \
+                https://${GH_TOKEN}@github.com/xproc/3.0-grammar grammar \
+                > /dev/null
+            cd grammar
+            echo "Grammar for steps from build $TRAVIS_BUILD_NUMBER" \
+                 > src/step-build.txt
+            git add --verbose -f .
+            git commit -m "Steps build $TRAVIS_BUILD_NUMBER"
+            #git push -fq origin master > /dev/null
+        fi
     fi
 fi
