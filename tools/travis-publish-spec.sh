@@ -45,7 +45,7 @@ if [ "$GIT_PUB_REPO" != "" ]; then
                  > src/step-build.txt
             git add --verbose -f .
             git commit -m "Steps build $TRAVIS_BUILD_NUMBER"
-            #git push -fq origin master > /dev/null
+            git push -fq origin master > /dev/null
         fi
     fi
 fi
