@@ -132,9 +132,10 @@ validation steps and their semantics are
     <para>The <port>source</port> document is validated using the namespace dispatching rules contained in the 
       <port>nvdl</port> document.</para>
 
-    <para>The dispatching rules may contain URI references that point to the actual schemas to be used. As long as these schemas
-      are accessible, it is not necessary to pass anything on the schemas port. However, if one or more schemas are provided on
-      the <port>schemas</port> port, then these schemas should be used in validation.</para>
+    <para>The dispatching rules may contain URI references that point to the actual schemas to be
+      used. As long as these schemas are accessible, it is not necessary to pass anything on the
+      schemas port. However, if one or more schemas are provided on the <port>schemas</port> port,
+      then these schemas should be used in validation.</para>
 
     <para><error code="C0053">It is a <glossterm>dynamic error</glossterm> if the <option>assert-valid</option> option is
           <literal>true</literal> and the input document is not valid.</error></para>
