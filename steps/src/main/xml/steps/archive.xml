@@ -50,12 +50,12 @@
       <listitem>
         <para>The <port>manifest</port> port can receive a manifest document that tells the step how
           to construct the archive. If no manifest document is provided on this port, a default
-          manifest is constructed automatically. See <xref linkend="cv.archive-manifest"/>. 
-          <error code="C0100">It is a <glossterm>dynamic error</glossterm> if the document on port
-          <port>manifest</port> does not conform to the given schema.</error>
+          manifest is constructed automatically. See <xref linkend="cv.archive-manifest"/>. <error
+            code="C0100">It is a <glossterm>dynamic error</glossterm> if the document on port
+              <port>manifest</port> does not conform to the given schema.</error>
         </para>
-        <para><error code="C0112">It is a <glossterm>dynamic error</glossterm> if more than one document
-        appears on the port <port>manifest</port>.</error></para>
+        <para><error code="C0112">It is a <glossterm>dynamic error</glossterm> if more than one
+            document appears on the port <port>manifest</port>.</error></para>
         <para>The default input for this port is the empty sequence.</para>
       </listitem>
     </varlistentry>
@@ -69,8 +69,8 @@
               <glossterm>implementation-defined</glossterm>.</impl> For instance an implementation
           that supports archive merging may accept more than one document on the
             <port>archive</port> port. <error code="C0081">It is a <glossterm>dynamic
-              error</glossterm> if the format of the archive does not match the format as specified 
-              in <option>format</option> option.</error></para>
+              error</glossterm> if the format of the archive does not match the format as specified
+            in <option>format</option> option.</error></para>
         <para>The default input for this port is the empty sequence.</para>
       </listitem>
     </varlistentry>
@@ -124,22 +124,25 @@
       <term><option>relative-to</option></term>
       <listitem>
         <para>The <option>relative-to</option> option is used in creating a manifest when no
-          manifest is provided on the <port>manifest</port> port. See <xref
-            linkend="cv.archive-manifest"/>.</para>
+          manifest is provided on the <port>manifest</port> port. <error code="D0064">It is a
+              <glossterm>dynamic error</glossterm> if the option is not a valid URI according to
+              <biblioref linkend="rfc3986"/>.</error> If the option is relative, it is made absolute
+          against the base URI of the element on which it is specified (<tag>p:with-option</tag> or
+          the step in case of a syntactic shortcut value).</para>
       </listitem>
     </varlistentry>
   </variablelist>
-  
+
   <para>The format of the archive is determined as follows:</para>
   <itemizedlist>
     <listitem>
       <para>If the <option>format</option> option is specified, this determines the format of the
         archive. Implementations <rfc2119>must</rfc2119> support the <biblioref linkend="zip"/>
         format, specified with the value <code>zip</code>. <impl>It is
-          <glossterm>implementation-defined</glossterm> what other formats are
-          supported.</impl> <error code="C0081">It is a <glossterm>dynamic error</glossterm> if the format of the
-            archive does not match the format as specified in the <option>format</option>
-            option.</error></para>
+            <glossterm>implementation-defined</glossterm> what other formats are supported.</impl>
+        <error code="C0081">It is a <glossterm>dynamic error</glossterm> if the format of the
+          archive does not match the format as specified in the <option>format</option>
+          option.</error></para>
     </listitem>
     <listitem>
       <para>If no <option>format</option> option is specified or if its value is the empty sequence,
@@ -150,9 +153,9 @@
         in <biblioref linkend="zip"/> format. </para>
     </listitem>
   </itemizedlist>
-  
+
   <para><error code="C0085">It is a <glossterm>dynamic error</glossterm> if the format of the
-    archive cannot be understood, determined and/or processed.</error></para>
+      archive cannot be understood, determined and/or processed.</error></para>
 
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
@@ -177,29 +180,25 @@
             <rfc2119>must</rfc2119> be specified as a relative path.</para>
       </listitem>
       <listitem>
-        <para>The <code>href</code> attribute is interpreted as follows:</para>
+        <para>The <code>href</code> attribute must be a valid URI according to
+          <biblioref linkend="rfc3986"/>. If its value is relative, it is made absolute
+          against the base URI of the manifest. Its is interpreted as follows:</para>
         <itemizedlist>
-          <listitem>
-            <para><error code="D0064">It is a <glossterm>dynamic error</glossterm> if the
-                  <option>c:entry/@href</option> attribute in a <code>p:archive</code> step manifest
-                is present and its value is not a valid <type>xs:anyURI</type>.</error></para>
-          </listitem>
           <listitem>
             <para>The <code>p:archive</code> step checks the documents appearing on its
                 <port>source</port> port for any documents with exactly the same base URI as the
-              contents of the <code>href</code> attribute. If any such document is found, this is
-              used as entry for the archive. To store these documents in the archive they must be
-              serialized. The <code>serialization</code> document property can be used to provide
-              serialization properties.</para>
+              value of the (made absolute) <code>href</code> attribute. If any such document is found,
+              this is used as entry for the archive. To store these documents in the archive they
+              must be serialized. The <code>serialization</code> document property can be used to
+              provide serialization properties.</para>
           </listitem>
           <listitem>
-            <para>If the above doesn't apply, the value of the <code>href</code> attribute is
-              interpreted as a URI and the document is loaded from this location. <error
-                code="D0011">It is a <glossterm>dynamic error</glossterm> if the resource referenced
-                by the <option>href</option> option does not exist, cannot be accessed or is not a
-                file</error> If the <option>href</option> option is relative, it is made absolute
-              against the base URI of the manifest. These documents are stored in the archive "as
-              is". No parsing/serialization takes place.</para>
+            <para>If the above doesn't apply, the value of the (made absolute) <code>href</code>
+              attribute is interpreted as a URI and the document is loaded from this location.
+                <error code="D0011">It is a <glossterm>dynamic error</glossterm> if the resource
+                referenced by the <option>href</option> option does not exist, cannot be accessed or
+                is not a file.</error> These documents are stored in the archive "as is". No
+              parsing/serialization takes place.</para>
           </listitem>
 
         </itemizedlist>
@@ -230,17 +229,19 @@
     <para>If no manifest entry is provided for a document appearing on the <port>source</port> port,
       the step will manufacture a manifest entry from the document’s <code>base-uri</code> property.
       If no document arrives on the <port>manifest</port> port, it will create a complete manifest
-      document.</para>
-    <para>The option <option>relative-to</option> can be used to derive the entry’s <tag
+      document. The option <option>relative-to</option> can be used to derive the entry’s <tag
         role="attribute">name</tag> attribute from the <port>source</port> document’s
         <code>base-uri</code> property, which in turn will be used for the entry’s <tag
-        role="attribute">href</tag> attribute. Both the URI that is given in
-        <option>relative-to</option> and the value of the <code>base-uri</code> property should be
-      normalized with respect to slash deduplication, parent path elimination, and drive letter case
-      folding. The step will remove the leading (normalized) <option>relative-to</option> option
-      value from the <port>source</port> document’s (normalized) base URI. If there is no match, the
-      manifest entry’s <tag role="attribute">name</tag> attribute will consist of the path part of
-      the <port>source</port> document’s base URI, without any leading slashes.</para>
+        role="attribute">href</tag> attribute. First the step will make the value of the
+        <option>relative-to</option> absolute as specified above. Then it will remove the leading
+        <option>relative-to</option> option's value from the <port>source</port> document’s base
+      URI. If there is no match, the manifest entry’s <tag role="attribute">name</tag> attribute
+      will consist of the path part of the <port>source</port> document’s base URI, without any
+      leading protocol specifier and slashes.</para>
+    
+    <para>
+      <error code="C0118">It is a <glossterm>dynamic error</glossterm> if an archive manifest is
+        invalid according to the specification.</error></para>
   </section>
 
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
@@ -270,7 +271,7 @@
                   specified, zero or exactly one document in ZIP format can appear on the
                     <port>archive</port> port. If there is no document on the <port>archive</port>
                   port, an empty ZIP archive is assumed.</para>
-                <para>The contents of the manifest (either provided or (partially) constructed, see
+                <para>The contents of the manifest (either provided or automatically constructed, see
                     <xref linkend="cv.archive-manifest"/>) is held against the entries in the ZIP
                   file provided on the <port>archive</port> port: </para>
                 <itemizedlist>
@@ -288,6 +289,9 @@
                       done.</para>
                   </listitem>
                 </itemizedlist>
+                <para>If the archive that is updated contains entries that are not mentioned in the
+                  manifest, these entries are moved to the end of the archive. In other words:
+                  entries in the manifest come first.</para>
               </listitem>
             </varlistentry>
             <varlistentry>
