@@ -99,7 +99,7 @@ task make_etc() {
 }
 
 [ "steps", "step-file", "step-os", "step-paged-media",
-  "step-run", "step-text", "step-validation" ].each { spec ->
+  "step-run", "step-text", "step-rdf", "step-validation" ].each { spec ->
     Task t = task "copy_${spec}_build"(dependsOn: [ "buildspecs" ], type: Copy) {
         from "$spec/build/"
         exclude "xinclude.xml", "examples/**", "graphics/**", "glossary.xml"
@@ -529,6 +529,56 @@ task step_text_src(dependsOn: ["step-text:source"], type: Copy) {
 task step_text_xpl(dependsOn: ["step-text:library"], type: Copy) {
   from "step-text/build/"
   into "build/dist/text/"
+  include "library.xml"
+  rename ("library.xml", "steps.xpl")
+}
+
+// ======================================================================
+// step-rdf
+
+task step_rdf(type: DocBookTask,
+               dependsOn: [ "download_xproc_toc",
+                            "steps", "xproc_schemas", "spec_schemas",
+                            "step-rdf:specification",
+                            "step_rdf_assets",
+                            "step_rdf_src", "step_rdf_xpl" ]) {
+  inputs.files fileTree(dir: "tools/xsl/")
+  inputs.files fileTree(dir: "tools/xpl/")
+  inputs.file "build/xproc_toc.xml"
+  input("source", "step-rdf/build/source.xml")
+  output("result", "build/dist/rdf/index.html")
+
+  param("schemaext.schema", file("build/schema/dbspec.rng"))
+  param("travis", getenv("TRAVIS"))
+  param("travis-commit", getenv("TRAVIS_COMMIT"))
+  param("travis-build-number", getenv("TRAVIS_BUILD_NUMBER"))
+  param("travis-user", getenv("TRAVIS_USER"))
+  param("travis-repo", getenv("TRAVIS_REPO"))
+  param("travis-branch", getenv("TRAVIS_BRANCH"))
+  param("travis-tag", getenv("TRAVIS_TAG"))
+
+  option("style", file("tools/xsl/xproc-specs.xsl"))
+  option("diff", deltaxml())
+
+  pipeline "tools/xpl/formatspec.xpl"
+}
+buildspecs.dependsOn "step_rdf"
+
+task step_rdf_assets(type: Copy) {
+  from "src/main/resources"
+  into "build/dist/rdf/"
+}
+
+task step_rdf_src(dependsOn: ["step-rdf:source"], type: Copy) {
+  from "step-rdf/build/"
+  into "build/dist/rdf/"
+  include "source.xml"
+  rename ("source.xml", "specification.xml")
+}
+
+task step_rdf_xpl(dependsOn: ["step-rdf:library"], type: Copy) {
+  from "step-rdf/build/"
+  into "build/dist/rdf/"
   include "library.xml"
   rename ("library.xml", "steps.xpl")
 }
