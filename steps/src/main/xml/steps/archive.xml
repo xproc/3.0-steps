@@ -7,7 +7,7 @@
   <para>The <code>p:archive</code> step outputs on its <port>result</port> port an archive (usually
     binary) document, for instance a ZIP file. A specification of the contents of the archive may be
     specified in a manifest XML document on the <port>manifest</port> port. The step produces a
-    report on the <port>report</port> port, which contains the manifest, amended with additional
+    report on the <port>report</port>  port, which contains the manifest, amended with additional
     information about the archiving.</para>
 
   <p:declare-step type="p:archive">
