@@ -51,19 +51,19 @@
       whose value is not valid for that key.</error></para>
 
   <para>The <option>relative-to</option> option, when present, is used in creating the value of the
-    manifest's <code>c:entry/@href</code> attribute.</para>
-  <para>The value provided for the <option>relative-to</option> option will before use always be
-    normalized using the <function>p:urify()</function> function. After this normalization its value
-      <rfc2119>must</rfc2119> be an absolute URI. </para>
-  <para></para>
+    manifest's <code>c:entry/@href</code> attribute. <error code="D0064">It is a <glossterm>dynamic
+        error</glossterm> if the option is not a valid URI according to <biblioref linkend="rfc3986"
+      />.</error> If the option is relative, it is made absolute against the base URI of the element
+    on which it is specified (<tag>p:with-option</tag> or the step in case of a syntactic shortcut
+    value).</para>
 
   <para>The generated manifest has the format as described in <xref linkend="cv.archive-manifest"/>.
     Implementations <rfc2119>must</rfc2119> supply an <tag>c:entry</tag> element and its
       <code>name</code> attribute for every entry in the archive. The value of the generated
-    manifest's <code>c:entry/@href</code> attribute will de determined the same as a base URI
-    of an unarchived document by <xref linkend="c.unarchive"/>. <impl>Additional information
-      provided for entries in <tag>p:archive-manifest</tag> is
-        <glossterm>implementation-defined</glossterm>.</impl></para>
+    manifest's <code>c:entry/@href</code> attribute will de determined the same as a base URI of an
+    unarchived document by <xref linkend="c.unarchive"/>. <impl>Additional information provided for
+      entries in <tag>p:archive-manifest</tag> is
+      <glossterm>implementation-defined</glossterm>.</impl></para>
 
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 

@@ -2,7 +2,7 @@
   xmlns:e="http://www.w3.org/1999/XSL/Spec/ElementSyntax" xmlns:xi="http://www.w3.org/2001/XInclude"
   xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="c.unarchive">
 
-  <title>p:unarchive</title> 
+  <title>p:unarchive</title>
 
   <para>The <code>p:unarchive</code> step outputs on its <port>result</port> port specific entries
     in an archive (for instance from a zip file).</para>
@@ -17,8 +17,9 @@
     <p:option name="relative-to" as="xs:anyURI?"/>
   </p:declare-step>
 
-  <para>The meaning and interpretation of the <code>p:unarchive</code> step's options is as follows:</para>
-  
+  <para>The meaning and interpretation of the <code>p:unarchive</code> step's options is as
+    follows:</para>
+
   <itemizedlist>
     <listitem>
       <para>The format of the archive is determined as follows:</para>
@@ -91,14 +92,14 @@
     </listitem>
     <listitem>
       <para>The <option>relative-to</option> option, when present, is used in creating the base URI
-        of the unarchived documents.</para>
-      <para>The value provided for the <option>relative-to</option> option will before use always be
-        normalized using the <function>p:urify()</function> function. After this normalization its
-        value <rfc2119>must</rfc2119> be an absolute URI. </para>
-
+        of the unarchived documents. <error code="D0064">It is a <glossterm>dynamic
+            error</glossterm> if the option is not a valid URI according to <biblioref
+            linkend="rfc3986"/>.</error> If the option is relative, it is made absolute against the
+        base URI of the element on which it is specified (<tag>p:with-option</tag> or the step in
+        case of a syntactic shortcut value).</para>
     </listitem>
   </itemizedlist>
-  
+
   <para>The base URI of an unarchived document appearing on the <port>result</port> port is: </para>
   <itemizedlist>
     <listitem>
@@ -107,23 +108,25 @@
     </listitem>
     <listitem>
       <para>If the <option>relative-to</option> option is <emphasis>not</emphasis> present: The
-        value of the  base URI of the archive appended with the relative path of this document as it
+        value of the base URI of the archive appended with the relative path of this document as it
         was in the archive</para>
     </listitem>
   </itemizedlist>
-  
-  <para>For instance, the base URI of an unarchived file called <code>xyz.xml</code> that resided
-    in the <code>specs</code> subdirectory in an archive with base URI <code>file:///a/b/c.zip</code> will become:
-  </para>
-   <itemizedlist>
-     <listitem>
-       <para>With the <option>relative-to</option> option set to <code>file:///x/y/z</code>: <code>file:///x/y/z/specs/xyz.xml</code></para>
-     </listitem>
-     <listitem>
-       <para>Without a <option>relative-to</option> option set: <code>file:///a/b/c.zip/specs/xyz.xml</code></para>
-     </listitem>
-   </itemizedlist> 
-  
+
+  <para>For instance, the base URI of an unarchived file called <code>xyz.xml</code> that resided in
+    the <code>specs</code> subdirectory in an archive with base URI <code>file:///a/b/c.zip</code>
+    will become: </para>
+  <itemizedlist>
+    <listitem>
+      <para>With the <option>relative-to</option> option set to <code>file:///x/y/z</code>:
+          <code>file:///x/y/z/specs/xyz.xml</code></para>
+    </listitem>
+    <listitem>
+      <para>Without a <option>relative-to</option> option set:
+          <code>file:///a/b/c.zip/specs/xyz.xml</code></para>
+    </listitem>
+  </itemizedlist>
+
   <simplesect>
     <title>Document properties</title>
     <para feature="archive-preserves-none">No document properties are preserved.</para>
