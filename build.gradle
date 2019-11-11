@@ -98,15 +98,15 @@ task make_etc() {
     // nop
 }
 
-[ "steps", "step-file", "step-os", "step-paged-media",
-  "step-run", "step-text", "step-rdf", "step-validation" ].each { spec ->
-    Task t = task "copy_${spec}_build"(dependsOn: [ "buildspecs" ], type: Copy) {
-        from "$spec/build/"
-        exclude "xinclude.xml", "examples/**", "graphics/**", "glossary.xml"
-        into "$buildDir/dist/etc/$spec/"
-        doFirst { mkdir "$buildDir/dist/etc/$spec" }
-    }
-    make_etc.dependsOn t
+["steps", "step-file", "step-os", "step-paged-media",
+ "step-run", "step-text", "step-rdf", "step-validation" ].each { spec ->
+  Task t = task "copy_${spec}_build"(dependsOn: [ "buildspecs" ], type: Copy) {
+    from "$spec/build/"
+    exclude "xinclude.xml", "examples/**", "graphics/**", "glossary.xml"
+    into "$buildDir/dist/etc/$spec/"
+    doFirst { mkdir "$buildDir/dist/etc/$spec" }
+  }
+  make_etc.dependsOn t
 }
 
 // ======================================================================
