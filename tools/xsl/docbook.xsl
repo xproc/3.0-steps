@@ -315,8 +315,10 @@
 
   <xsl:apply-templates select="." mode="m:toc"/>
 
-  <xsl:apply-templates/>
-  <xsl:call-template name="t:process-footnotes"/>
+  <article class="{local-name(.)}">
+    <xsl:apply-templates/>
+    <xsl:call-template name="t:process-footnotes"/>
+  </article>
 
   <xsl:if test="$js-navigation">
     <div id="jsnavbar" class="navbar">&#160;</div>
@@ -391,8 +393,10 @@
 
   <hr/>
 
-  <xsl:apply-templates/>
-  <xsl:call-template name="t:process-footnotes"/>
+  <article class="{local-name(.)}">
+    <xsl:apply-templates/>
+    <xsl:call-template name="t:process-footnotes"/>
+  </article>
 </xsl:template>
 
 <xsl:template match="db:specification/db:info/db:title"
