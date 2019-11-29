@@ -51,11 +51,11 @@
       whose value is not valid for that key.</error></para>
 
   <para>The <option>relative-to</option> option, when present, is used in creating the value of the
-    manifest's <code>c:entry/@href</code> attribute. <error code="D0064">It is a <glossterm>dynamic
-        error</glossterm> if the option is not a valid URI according to <biblioref linkend="rfc3986"
-      />.</error> If the option is relative, it is made absolute against the base URI of the element
-    on which it is specified (<tag>p:with-option</tag> or the step in case of a syntactic shortcut
-    value).</para>
+    manifest's <code>c:entry/@href</code> attribute. If the option is relative, it is made absolute 
+    against the base URI of the element on which it is specified (<tag>p:with-option</tag> or the step 
+    in case of a syntactic shortcut value). <error code="D0064">It is a <glossterm>dynamic 
+      error</glossterm> if the base URI is not both absolute and valid according to <biblioref
+        linkend="rfc3986"/>.</error></para>
 
   <para>The generated manifest has the format as described in <xref linkend="cv.archive-manifest"/>.
     Implementations <rfc2119>must</rfc2119> supply an <tag>c:entry</tag> element and its
