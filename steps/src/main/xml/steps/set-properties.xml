@@ -12,7 +12,7 @@ properties on the source document.</para>
    <p:input port="source" content-types="any"/>
    <p:output port="result" content-types="any"/>
    <p:option name="properties" required="true" as="map(xs:QName,item()*)"/>
-   <p:option name="merge" select="false()" as="xs:boolean"/>
+   <p:option name="merge" select="true()" as="xs:boolean"/>
 </p:declare-step>
 
  <para>The document properties of the document
@@ -23,13 +23,25 @@ adjusted property values.</para>
 
 <para feature="p-set-properties-merge">If the <option>merge</option>
 option is true, then the supplied properties are added to the existing
-properties. If it is false, the document’s properties are replaced by
+properties, overwriting already existing values for a given key. 
+If it is false, the document’s properties are replaced by
 the new set.</para>
+
+<para><error code="D0070">It is a <glossterm>dynamic error</glossterm> if a value is 
+assigned to the <code>serialization</code> document property that cannot be converted 
+into <code>map(xs:QName, item()*)</code> according
+to the rules in section “QName handling” of <biblioref linkend="xproc30"/>.</error></para>
 
 <para><error code="C0069">It is a <glossterm>dynamic
 error</glossterm> if the <option>properties</option> map contains
 a key equal to the string “<literal>content-type</literal>”.</error>
 </para>
+
+<para>If the <option>properties</option> map contains a key equal to the string
+“<literal>base-uri</literal>” the associated value is taken as the new base URI of
+   the resulting document. <error code="D0064">It is a <glossterm>dynamic 
+   error</glossterm> if the base URI is not both absolute and valid according 
+      to <biblioref linkend="rfc3986"/>.</error></para>
 
 <simplesect>
 <title>Document properties</title>

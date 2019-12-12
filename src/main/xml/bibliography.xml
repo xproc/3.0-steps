@@ -349,4 +349,7 @@ P. Koopman. June 2002.
   
   <bibliomixed xml:id="zip"><abbrev>ZIP</abbrev>
     <citetitle xlink:href="https://pkware.cachefly.net/webdocs/casestudies/APPNOTE.TXT">.ZIP File Format Specification</citetitle>.</bibliomixed>
+  
+  <bibliomixed xml:id="gzip"><abbrev>GZIP</abbrev>
+    <citetitle xlink:href="https://tools.ietf.org/html/rfc1952">GZIP file format specification version 4.3</citetitle>.</bibliomixed>
 </bibliography>

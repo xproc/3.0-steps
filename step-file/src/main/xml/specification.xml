@@ -11,7 +11,14 @@
 <info>
 <title>XProc 3.0: file steps</title>
 <!-- defaults to date formatted <pubdate>2014-12-18</pubdate> -->
-<copyright><year>2018</year><holder>@@FIXME:</holder></copyright>
+<copyright><year>2018</year><year>2019</year>
+<holder>the Contributors to the XProc 3.0 Standard Step Library
+specifications</holder>
+</copyright>
+
+<bibliomisc role="github-repo">xproc/3.0-steps</bibliomisc>
+<bibliomisc role="w3c-cg"
+            xlink:href="https://www.w3.org/community/xproc-next/">XProc Next</bibliomisc>
 
 <bibliorelation type="isformatof" xlink:href="specification.xml">XML</bibliorelation>
 <authorgroup>
@@ -35,15 +42,24 @@ for
 <citetitle>XProc 3.0: An XML Pipeline Language</citetitle>.</para>
 </abstract>
 
-<legalnotice role="status">
-
-<para><emphasis>This section describes the status of this document at
-the time of its publication. Other documents may supersede this
-document.</emphasis></para>
-
-<para>This document is derived from
-<link xlink:href="https://www.w3.org/TR/2010/REC-xproc-20100511/">XProc:
-An XML Pipeline Language</link> published by the W3C.</para>
+<legalnotice xml:id="sotd" role="status">
+  <para>This specification was published by the
+  <link xlink:href="https://www.w3.org/community/xproc-next/">XProc
+  Next Community Group</link>. It is not a W3C Standard nor is it on
+  the W3C Standards Track. Please note that under the
+  <link xlink:href="https://www.w3.org/community/about/agreements/cla/">W3C
+  Community Contributor License Agreement (CLA)</link> there is a limited
+  opt-out and other conditions apply. Learn more about <link
+  xlink:href="https://www.w3.org/community/">W3C Community and Business
+  Groups</link>.
+  </para>
+  
+  <para>If you wish to make comments regarding this document, please
+  send them to
+  <link xlink:href="mailto:xproc-dev@w3.org">xproc-dev@w3.org</link>.
+  (<link xlink:href="mailto:xproc-dev-request@w3.org?subject=subscribe">subscribe</link>,
+  <link xlink:href="https://lists.w3.org/Archives/Public/xproc-dev/">archives</link>).
+  </para>
 </legalnotice>
 </info>
 
@@ -62,7 +78,212 @@ steps is assumed; for background details, see
 <biblioref linkend="xproc30-steps"/>.</para>
 </section>
 
-<section xml:id="c.file-copy">
+  <section xml:id="c.directory-list">
+    <title>p:directory-list</title>
+    
+    <para>The <code>p:directory-list</code> step produces a list of the contents
+      of a specified directory.</para>
+    
+    <p:declare-step type="p:directory-list">
+      <p:output port="result" content-type="application/xml"/>
+      <p:option name="path" required="true" as="xs:anyURI"/>
+      <p:option name="detailed" as="xs:boolean" select="false()"/>
+      <p:option name="max-depth" as="xs:string?" select="'1'"/>
+      <p:option name="include-filter" as="xs:string*"/>
+      <p:option name="exclude-filter" as="xs:string*"/>
+    </p:declare-step>
+    
+    <para><impl>Conformant processors <rfc2119>must</rfc2119> support directory paths whose
+      scheme is <code>file</code>. It is
+      <glossterm>implementation-defined</glossterm> what other schemes are
+      supported by <tag>p:directory-list</tag>, and what the interpretation
+      of 'directory', 'file' and 'contents' is for those schemes.</impl>
+      <error code="C0090">It is a <glossterm>dynamic error</glossterm> if an
+        implementation does not support directory listing for a specified scheme.</error>
+    </para>
+    
+    <para>If <option>path</option> is relative, it is made absolute against the 
+      base URI of the element on which it is specified 
+      (<tag>p:with-option</tag> or <tag>p:directory-list</tag> in the case of a 
+      syntactic shortcut value). <error code="C0017">It is a
+        <glossterm>dynamic error</glossterm> if the absolute path does not
+        identify a directory.</error> <error code="C0012">It is a
+          <glossterm>dynamic error</glossterm> if the contents of the directory
+          path are not available to the step due to access restrictions in the
+          environment in which the pipeline is run.</error></para>
+    
+    <para>If the <option>detailed</option> option is true, the pipeline
+      author is requesting additional information about the matching entries,
+      see <xref linkend="dir-list-details"/>.</para>
+    
+    <para>The <option>max-depth</option> option may contain either the string “<literal>unbounded</literal>” or a string
+      that may be cast to a non-negative integer. An integer value of <literal>0</literal> means that only information
+      about the directory that is given in the <option>path</option> option is returned. A <option>max-depth</option> of
+      <literal>1</literal>, which is the default, will effect that also information about the top-level directory’s
+      immediate children will be included. For larger values of <option>max-depth</option>, also the content of
+      directories will be considered recursively up to the maximum depth, and it will be included as children of the
+      corresponding <tag>c:directory</tag> elements.</para>
+    
+    <para>If present, the value of the <option>include-filter</option> or
+      <option>exclude-filter</option> option <rfc2119>must</rfc2119> be a sequence of strings, each
+      one representing a regular expressions as specified in <biblioref linkend="xpath31-functions"/>,
+      section 7.61 “<literal>Regular Expression Syntax</literal>”.</para>
+    
+    <para>The regular expressions will be matched against an item’s file system path relative to the top-level path that was
+      given in the <option>path</option> option. If the item is a directory, a trailing slash will be appended.</para>
+    <para>Examples: A file <literal>file.txt</literal> in the directory specified by <option>path</option> will remain
+      <literal>file.txt</literal>, a relative path <literal>dir1/file.txt</literal> will remain
+      <literal>dir1/file.txt</literal>, while a relative path <literal>dir1/dir2</literal> will become
+      <literal>dir1/dir2/</literal> if <literal>dir2</literal> is a directory.</para>
+    <para>Regular expressions that match <literal>a/a/b/file.txt</literal> are, for example,
+      <literal>^/(\w+/){2,3}.+\.txt$</literal>, <literal>a/a/b/</literal>, or <literal>/file\.[^/]+$</literal>.</para>
+    
+    <para>If any <option>include-filter</option> pattern matches the slash-augmented relative path, the entry is included in the output. 
+      If a directory’s path matches the inclusion regex, the directory’s content will not automatically be included, too.
+      They need to match, the regular expression, too. So the filter regex <literal>^dir/</literal> will match the directory
+      content but <literal>^dir/$</literal> won’t, and as a consequence the directory’s content will not be included in the result.</para>
+    <para>If a relative path is matched by an include filter,
+      all its ancestor directories starting from the initial directory (but not their content if not included explicitly) 
+      will be included, too.</para>
+    <example xml:id="ex.c.directory-list">
+      <title>Sample Directory List Output for a Single File</title>
+      <para>For a file <literal>a/a/b/file.txt</literal> below the initial directory 
+        <literal>/home/jane</literal>, this output will be produced, omitting content that might be present in the 
+        intermediate directories:</para>
+      <literallayout>&lt;c:directory xml:base="file:///home/jane/" name="jane">
+  &lt;c:directory xml:base="a/" name="a">
+    &lt;c:directory xml:base="a/" name="a">
+      &lt;c:directory xml:base="b/" name="b">
+        &lt;c:file xml:base="file.txt" name="file.txt"/>
+      &lt;/c:directory>
+    &lt;/c:directory>
+  &lt;/c:directory>
+&lt;/c:directory></literallayout>
+    </example>
+    <para>If the <option>exclude-filter</option> pattern matches the slash-augmented relative path, the entry (and all of
+      its content in case of a directory) is excluded in the output.</para>
+    <para>If both options are
+      provided, the include filter is processed first, then the exclude
+      filter. As a result, an item is included if it matches (at least) one
+      of the <option>include-filter</option> values and none of the
+      <option>exclude-filter</option> values.</para>
+    <para>If no <option>include-filter</option> is given, that is, if <option>include-filter</option> is an empty
+      sequence, any item will be included in the result (unless it is excluded by <option>exclude-filter</option>).</para>
+    
+    <note>
+      <para>There is no way to specify a list of values using attribute value
+        templates. If the option shortcut syntax is used to provide the
+        <option>include-filter</option> or <option>exclude-filter</option> option,
+        it will consist of a single regular expression. To specify a list of
+        regular expressions, you must use the  <tag>p:with-option</tag>
+        syntax.
+      </para>
+    </note>
+    
+    <para xml:id="cv.directory">The result document produced for the specified directory path has a <tag>c:directory</tag>
+      document element whose base URI, attached as an <tag role="attribute">xml:base</tag> attribute, is the absolute
+      directory path (expressed as a URI that ends in a slash) and whose <tag class="attribute">name</tag> attribute
+      (without a trailing slash) is the last segment of the directory path. The same base URI is attached as the 
+      resulting document’s base-uri property and, accordingly, as its document node’s base URI.</para>
+    
+    <e:rng-pattern name="VocabDirectory"/>
+    
+    <para>Its contents are determined as follows, based on the entries in the directory identified by the directory path.
+      For each entry in the directory and subject to the rules that are imposed by the <option>max-depth</option>,
+      <option>include-filter</option>, and <option>exclude-filter</option> options, a <tag>c:file</tag>, a
+      <tag>c:directory</tag>, or a <tag>c:other</tag> element is produced, as follows: </para>
+    
+    <itemizedlist>
+      <listitem>
+        <para>A <tag>c:directory</tag> is produced for each subdirectory not determined to be special. Depending on the
+          values of the three options, it may contain child elements for the directory’s content.</para>
+      </listitem>
+      <listitem>
+        <para xml:id="cv.file">A <tag>c:file</tag> is produced for each file
+          not determined to be special.</para>
+        <e:rng-pattern name="VocabFile"/>
+      </listitem>
+      <listitem>
+        <para xml:id="cv.other"><impl>Any file or directory determined to be
+          special by the <tag>p:directory-list</tag> step may be output using a
+          <tag>c:other</tag> element but the criteria for marking a file as
+          special are <glossterm>implementation-defined</glossterm>.</impl>
+        </para>
+        <e:rng-pattern name="VocabOther"/>
+      </listitem>
+    </itemizedlist>
+    
+    <para>Each of the elements <tag>c:file</tag>, <tag>c:directory</tag>,
+      and <tag>c:other</tag> has a <code>name</code> attribute, whose
+      value is a relative IRI reference, giving the (local) file or
+      directory name.</para>
+    
+    <para>Each of these element also contains the corresponding resource’s URI in an <tag role="attribute">xml:base</tag>
+      attribute, which may be a relative URI for any but the top-level <tag>c:directory</tag> element. In the case of
+      <tag>c:directory</tag>, it must end in a trailing slash. This way, users will always be able to compute the
+      absolute URI for any of these elements by applying <code>fn:base-uri()</code> to it.</para>
+    
+    <section xml:id="dir-list-details">
+      <title>Directory list details</title>
+      
+      <para>If <option>detailed</option> is false, then only the
+        <tag class="attribute">name</tag> and <tag class="attribute">xml:base</tag> attributes are expected on
+        <tag>c:file</tag>, <tag>c:directory</tag>, or <tag>c:other</tag>
+        elements.</para>
+      
+      <para>If <option>detailed</option> is true, then the pipeline author
+        is expecting additional details about each entry. The following attributes
+        <rfc2119>should</rfc2119> be provided by the implementation:</para>
+      
+      <variablelist>
+        <varlistentry><term><tag class="attribute">content-type</tag></term>
+          <listitem>
+            <para>The <tag role="attribute">content-type</tag> attribute contains
+              the content type of the respective file. The value “<literal>application/octet-stream</literal>”
+              will be used if the processor is not able to identify another content type.</para>
+          </listitem>
+        </varlistentry>
+        <varlistentry><term><tag class="attribute">readable</tag></term>
+          <listitem><para>“<code>true</code>” if the entry is readable.</para>
+          </listitem>
+        </varlistentry>
+        <varlistentry><term><tag class="attribute">writable</tag></term>
+          <listitem><para>“<code>true</code>” if the entry is writable.</para>
+          </listitem>
+        </varlistentry>
+        <varlistentry><term><tag class="attribute">hidden</tag></term>
+          <listitem><para>“<code>true</code>” if the entry is hidden.</para>
+          </listitem>
+        </varlistentry>
+        <varlistentry><term><tag class="attribute">last-modified</tag></term>
+          <listitem><para>The last modification time of the entry, expressed as a lexical
+            <code>xs:dateTime</code> in UTC.</para>
+          </listitem>
+        </varlistentry>
+        <varlistentry><term><tag class="attribute">size</tag></term>
+          <listitem><para>The size of the entry in bytes.</para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+      
+      <para><impl>The precise meaning of these properties are
+        <glossterm>implementation-defined</glossterm> and may vary according
+        to the URI scheme of the <option>path</option>.</impl>
+        If the value of an attribute is “<code>false</code>” or if it has no
+        meaningful value, the attribute may be omitted.</para>
+      
+      <para><impl>Any other attributes on
+        <tag>c:file</tag>, <tag>c:directory</tag>, or <tag>c:other</tag>
+        are <glossterm>implementation-defined</glossterm>.</impl></para>
+    </section>
+    
+    <simplesect>
+      <title>Document properties</title>
+      <para feature="directory-list-preserves-none">No document properties are preserved.</para>
+    </simplesect>
+  </section>
+  
+  <section xml:id="c.file-copy">
   <title>p:file-copy</title>
 
   <para>The <code>p:file-copy</code> step copies a file.</para>
@@ -150,7 +371,7 @@ steps is assumed; for background details, see
             <option>href</option> option does not exist, cannot be accessed or is not a file or directory.</error></para>
     </listitem>
     <listitem>
-      <para><error code="XXXXX">It is a <glossterm>dynamic error</glossterm> if an attempt is made to delete a non-empty
+      <para><error code="C0113">It is a <glossterm>dynamic error</glossterm> if an attempt is made to delete a non-empty
       directory and the <option>recursive</option> option was set to <code>false</code>.</error></para>
     </listitem>
   </itemizedlist>
@@ -298,7 +519,7 @@ steps is assumed; for background details, see
     raised:</para>
   <itemizedlist>
     <listitem>
-      <para><error code="XXXX">It is a <glossterm>dynamic error</glossterm> if the directory referenced by the
+      <para><error code="C0114">It is a <glossterm>dynamic error</glossterm> if the directory referenced by the
             <option>href</option> option cannot be created.</error></para>
     </listitem>
   </itemizedlist>
@@ -350,7 +571,7 @@ steps is assumed; for background details, see
         directory.</error></para>
     </listitem>
     <listitem>
-      <para><error code="XXXXX">It is a <glossterm>dynamic error</glossterm> if the resource referenced by the
+      <para><error code="C0115">It is a <glossterm>dynamic error</glossterm> if the resource referenced by the
         <option>target</option> option is an existing file or other file system object.</error></para>
     </listitem>
     <listitem>
@@ -371,14 +592,6 @@ steps is assumed; for background details, see
   <title>p:file-create-tempfile</title>
  
   <para>The <code>p:file-create-tempfile</code> step creates a temporary file.</para>
-
-  <note role="editorial">
-    <title>Editorial Note</title>
-    <para>TBD: This is an almost direct port from EXProc. Details might still change.</para>
-    <para>Check the error codes. ANd is the name ok? <tag>p:file-create-tempfile</tag> sounds better to me?</para>
-    <para>I added the option to leave out the <option>href</option> option and have the tempfile created in the system's
-      temp directory. Ok?</para>
-  </note>
 
   <p:declare-step type="p:file-create-tempfile">
     <p:output port="result" primary="true" content-types="application/xml"/>
@@ -423,7 +636,7 @@ steps is assumed; for background details, see
             <option>href</option> option does not exist, cannot be accessed or is not a directory.</error></para>
     </listitem>
     <listitem>
-      <para><error code="XXXXX">It is a <glossterm>dynamic error</glossterm> if the temporary file could not be
+      <para><error code="C0116">It is a <glossterm>dynamic error</glossterm> if the temporary file could not be
           created.</error></para>
     </listitem>
   </itemizedlist>
@@ -449,7 +662,7 @@ timestamp of a file.</para>
   </p:declare-step>
 
 <para>The <tag>p:file-touch</tag> step updates the modification
-timestamp of the fiel specified in the <option>href</option>
+timestamp of the file specified in the <option>href</option>
 option.</para>
 
 <para><error code="D0064">It is a <glossterm>dynamic error</glossterm>
@@ -488,7 +701,7 @@ or exists and cannot be accessed.</error></para>
 <section xmlns="http://docbook.org/ns/docbook" xml:id="errors">
 <title>Step Errors</title>
 
-<para>This step can raise
+<para>These steps can raise
 <glossterm baseform="dynamic-error">dynamic errors</glossterm>.
 </para>
 
@@ -506,7 +719,7 @@ upwards until either a <tag>p:try</tag> is encountered or the entire
 pipeline fails. In other words, outside of a <tag>p:try</tag>, step
 failure causes the entire pipeline to fail.</para>
 
-<para>The following errors can be raised by this step:</para>
+<para>The following specific errors can be raised by these steps:</para>
 
 <?step-error-list level="none"?>
 
@@ -519,6 +732,7 @@ failure causes the entire pipeline to fail.</para>
 <bibliolist>
 <bibliomixed xml:id="xproc30"/>
 <bibliomixed xml:id="xproc30-steps"/>
+<bibliomixed xml:id="xpath31-functions"/>
 </bibliolist>
 </appendix>
 

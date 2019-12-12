@@ -8,25 +8,54 @@
          version="5.0-extension w3c-xproc">
 <title>p:json-join</title>
 
-<para>The <code>p:json-join</code> step joins a sequence of JSON
-documents into a single JSON document (an array). If the sequence on
+<para>The <code>p:json-join</code> step joins the sequence of documents on port <port>source</port>
+into a single JSON document (an array) appearing on port <port>result</port>. If the sequence on
 port <code>source</code> is empty, the empty sequence is returned on
 port <code>result</code>.</para>
 
 <p:declare-step type="p:json-join">
-  <p:input port="source" sequence="true" content-types="json"> </p:input>
+  <p:input port="source" sequence="true" content-types="any"> </p:input>
   <p:output port="result" content-types="application/json"/>
-  <p:option name="flatten-arrays" as="xs:boolean" select="false()"/>
+  <p:option name="flatten-to-depth" as="xs:string?" select="'0'"/>
 </p:declare-step>
 
-<para>If option <code>flatten-arrays</code> is
-<literal>false</literal>, a member in the array is created for each
-document in the sequence appearing on port<code>source</code>.
-Therefore the produced array with have the same number of members as
-the number of documents appearing on port <code>source</code>. However
-if <code>flatten-arrays</code> is <literal>true</literal>, for each
-member of an array appearing at the top level of a JSON document on
-port <code>source</code> a new member in the resulting array will be
-created.</para>
+<para>The step inspects the documents on port <port>source</port> in turn to create the
+  resulting array:</para>
+<itemizedlist>
+  <listitem>
+    <para>If the document under inspection is a JSON document representing an array, the array is copied 
+     to the resulting array according to the setting of option <option>flatten-to-depth</option>.</para>
+  </listitem>
+  <listitem>
+    <para>For every other type of JSON document, for XML documents, HTML documents, or text
+    documents, their XDM representation is appended to the resulting array.</para>
+  </listitem>
+  <listitem>
+    <para><impl>It is <glossterm>implementation defined</glossterm> if <code>p:json-join</code> is
+      able to process document types not mentioned yet, i.e. types of binary documents.</impl> If a processor
+      supports a given type of documents, an entry is created as described above. <error code="C0111">
+        It is a <glossterm>dynamic error</glossterm> if a document of an unsupported document type appears on 
+        port <port>source</port> of <code>p:json-join</code>.</error>
+    </para>  </listitem>
+</itemizedlist>
+  
+<para>The option <option>flatten-to-depth</option> controls whether and to which
+depth members of an array appearing on port <port>source</port> are flattened.
+The <option>flatten-to-depth</option> option may contain either the 
+string “<literal>unbounded</literal>” or a string that may be cast to a non-negative integer. 
+An integer value of <literal>0</literal>, which is the default, means that no 
+flattening takes place, so the array appearing on port <port>source</port> will
+be contained as an array in the resulting array. An integer value of <literal>1</literal>
+means that an array on port <port>source</port> is flattened, i.e. the members
+of that array will appear as individual members in the resulting array. Any value greater
+than <literal>1</literal> means that the flattening is applied recursively to arrays in
+arrays up to the given depth. A value of “<literal>unbounded</literal>” means that all
+arrays in arrays will be flattened. As a consequence, the resulting array appearing on
+port <port>result</port> will not have any arrays as members.</para>
 
+
+<simplesect>
+  <title>Document properties</title>
+  <para feature="json-join-preserves-none">No document properties are preserved.</para>
+</simplesect>
 </section>
