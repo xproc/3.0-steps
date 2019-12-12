@@ -48,7 +48,9 @@ a key equal to the string “<literal>content-type</literal>”.</error>
 <para feature="set-properties-preserves-some">If <option>merge</option> is
 true, document properties not overridden by settings in the <option>properties</option>
 map are  preserved, otherwise the resulting document has the properties specified in
-the <option>properties</option> map.
+the <option>properties</option> map. This means that if <option>merge</option> is false, 
+properties not included in the <option>properties</option> map, with the exception of
+<literal>content-type</literal>, will be effectively removed from the document.
 </para>
 </simplesect>
 </section>
