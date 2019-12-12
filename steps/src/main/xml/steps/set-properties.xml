@@ -45,14 +45,11 @@ a key equal to the string “<literal>content-type</literal>”.</error>
 
 <simplesect>
 <title>Document properties</title>
-<para feature="set-properties-preserves-some">If <option>merge</option> is
-true, document properties not overridden by settings in the <option>properties</option>
-map are  preserved, otherwise the resulting document has the properties specified in
-the <option>properties</option> map. This means that if <option>merge</option> is false, 
-properties not included in the <option>properties</option> map, with the exception of
-<literal>content-type</literal>, will be removed from the document. More specifically,
-if <option>merge</option> is false and if <literal>base-uri</literal> is omitted in
-the <option>property</option> map option, the resulting document will not have a base URI.
+<para feature="set-properties-preserves-some">If <option>merge</option> is true, document 
+properties not overridden by settings in the <option>properties</option> map are preserved, 
+otherwise the resulting document has only the <literal>content-type</literal> property and the
+properties specified in the <option>properties</option> map. In particular, if <option>merge</option> 
+is false, the <literal>base-uri</literal> property will not be preserved.
 </para>
 </simplesect>
 </section>
