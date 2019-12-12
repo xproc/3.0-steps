@@ -50,7 +50,9 @@ true, document properties not overridden by settings in the <option>properties</
 map are  preserved, otherwise the resulting document has the properties specified in
 the <option>properties</option> map. This means that if <option>merge</option> is false, 
 properties not included in the <option>properties</option> map, with the exception of
-<literal>content-type</literal>, will be removed from the document.
+<literal>content-type</literal>, will be removed from the document. More specifically,
+if <option>merge</option> is false and if <literal>base-uri</literal> is omitted in
+the <option>property</option> map option, the resulting document will not have a base URI.
 </para>
 </simplesect>
 </section>
