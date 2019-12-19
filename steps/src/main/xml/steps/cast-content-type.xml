@@ -6,7 +6,9 @@
    <title>p:cast-content-type</title>
    
    <para>The <tag>p:cast-content-type</tag> step creates a new document by 
-      changing the media type of its input.</para>
+      changing the media type of its input. If the value of <option>content-type</option>
+   option and the current media type of the document on <port>source</port> port are
+   the same, this document will appear unchanged on <port>result</port> port.</para>
    
    <p:declare-step type="p:cast-content-type">
       <p:input port="source" content-types="*/*"/>
@@ -53,7 +55,8 @@
                   is <glossterm>implementation–defined</glossterm>.</impl>
                If the input document is an XML representation of JSON as defined in
                <biblioref linkend="xpath31-functions"/>,
-               implementations <rfc2119>must</rfc2119> use <function>fn:xml-to-json</function>
+               implementations <rfc2119>must</rfc2119> produce the same result as 
+               <literal>fn:parse-json(fn:xml-to-json())</literal>
                by default. If the input document has a <tag>c:param-set</tag> document element,
                a map <rfc2119>must</rfc2119> be returned that represents the document's 
                <tag>c:param</tag> elements. The serialization property is removed.
@@ -94,7 +97,7 @@
       <title>Casting from an HTML media type</title>
       <itemizedlist>
          <listitem>
-            <para>Casting from an HTML media type to a XML media type changes
+            <para>Casting from an HTML media type to an XML media type changes
                “<literal>content-type</literal>” document property and removes any
                serialization property. </para>
          </listitem>
@@ -160,7 +163,7 @@
                   a well-formed XML document</error>. The serialization property is removed.</para>
          </listitem>
          <listitem>
-            <para>Casting from a text media type to an HTML media type parsed the text value
+            <para>Casting from a text media type to an HTML media type parses the text value
                of the document on <port>source</port> port into an XPath data model document that 
                contains a tree of elements, attributes, and other nodes. <impl>The precise way in which 
                   text documents are parsed into the XPath data model is 
