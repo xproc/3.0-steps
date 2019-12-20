@@ -114,7 +114,10 @@
     </listitem>
   </itemizedlist>
   
-  <para><error code="D0064">It is a <glossterm>dynamic
+  <para><error code="C0120">It is a <glossterm>dynamic error</glossterm> if the 
+    <option>relative-to</option> option is not present and the document on the 
+    <port>source</port> port does not have a base URI.</error>
+    <error code="D0064">It is a <glossterm>dynamic
     error</glossterm> if the option is not a valid URI according to <biblioref linkend="rfc3986"/>.</error></para>
   
   <para>For instance, the base URI of an unarchived file called <code>xyz.xml</code> that resided in
