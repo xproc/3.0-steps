@@ -29,10 +29,7 @@
             the archive. Implementations <rfc2119>must</rfc2119> support the <biblioref
               linkend="zip"/> format, specified with the value <code>zip</code>. <impl>It is
                 <glossterm>implementation-defined</glossterm> what other formats are
-              supported.</impl>
-            <error code="C0081">It is a <glossterm>dynamic error</glossterm> if the format of the
-              archive does not match the format as specified in the <option>format</option>
-              option.</error></para>
+              supported.</impl></para>
         </listitem>
         <listitem>
           <para>If no <option>format</option> option is specified or if its value is the empty
@@ -42,6 +39,9 @@
                 <glossterm>implementation-defined</glossterm> how the step determines the archive's
               format.</impl> Implementations <rfc2119>should</rfc2119> recognize archives in
               <biblioref linkend="zip"/> format. </para>
+        </listitem>
+        <listitem><para><error code="C0085">It is a <glossterm>dynamic error</glossterm> if the format of the archive 
+          does not match the specified format, cannot be understood, determined and/or processed.</error></para>
         </listitem>
       </itemizedlist>
     </listitem>
