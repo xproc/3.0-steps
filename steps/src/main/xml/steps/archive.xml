@@ -68,9 +68,7 @@
             <impl>The list of archive formats that can be modified by <tag>p:archive</tag> is
               <glossterm>implementation-defined</glossterm>.</impl> For instance an implementation
           that supports archive merging may accept more than one document on the
-            <port>archive</port> port. <error code="C0081">It is a <glossterm>dynamic
-              error</glossterm> if the format of the archive does not match the format as specified
-            in <option>format</option> option.</error></para>
+            <port>archive</port> port.</para>
         <para>The default input for this port is the empty sequence.</para>
       </listitem>
     </varlistentry>
@@ -154,8 +152,8 @@
     </listitem>
   </itemizedlist>
 
-  <para><error code="C0085">It is a <glossterm>dynamic error</glossterm> if the format of the
-      archive cannot be understood, determined and/or processed.</error></para>
+  <para><error code="C0085">It is a <glossterm>dynamic error</glossterm> if the format of the archive 
+    does not match the specified format, cannot be understood, determined and/or processed.</error></para>
 
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
