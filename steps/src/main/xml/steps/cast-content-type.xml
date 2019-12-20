@@ -6,7 +6,7 @@
    <title>p:cast-content-type</title>
    
    <para>The <tag>p:cast-content-type</tag> step creates a new document by 
-      changing the media type of its input. If the value of <option>content-type</option>
+      changing the media type of its input. If the value of the <option>content-type</option>
    option and the current media type of the document on <port>source</port> port are
    the same, this document will appear unchanged on <port>result</port> port.</para>
    
