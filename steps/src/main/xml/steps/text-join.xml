@@ -40,6 +40,11 @@
       <glossterm>dynamic error</glossterm> if the value of option <option>overwrite-content-type</option> 
       is not a text media type.</error>
   </para>
+
+  <para>Concatenating text documents does not require identifying individual
+lines in each document, consequently no special end-of-line handling is
+performed.</para>
+
   <simplesect>
     <title>Document properties</title>
     <para feature="load-preserves-none">No document properties are preserved.</para>
