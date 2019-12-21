@@ -59,7 +59,10 @@
     Implementations <rfc2119>must</rfc2119> supply an <tag>c:entry</tag> element and its
       <code>name</code> attribute for every entry in the archive. The value of the generated
     manifest's <code>c:entry/@href</code> attribute will be determined in the same way as a base URI
-    of an unarchived document by <xref linkend="c.unarchive"/>. <impl>Additional information
+    of an unarchived document by <xref linkend="c.unarchive"/>. 
+    <error code="C0120">It is a <glossterm>dynamic error</glossterm> if the 
+      <option>relative-to</option> option is not present and the document on the 
+      <port>source</port> port does not have a base URI.</error><impl>Additional information
       provided for entries in <tag>p:archive-manifest</tag> is
         <glossterm>implementation-defined</glossterm>.</impl></para>
 
