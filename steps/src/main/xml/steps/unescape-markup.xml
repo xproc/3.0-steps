@@ -5,46 +5,45 @@
          xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="c.unescape-markup">
 <title>p:unescape-markup</title>
 
-<para>The <tag>p:unescape-markup</tag> step takes the string value of
-the document element and parses the content as if it was a Unicode
-character stream containing serialized XML. The output consists of the
-same document element with children that result from the parse. This
+<para>The <code>p:unescape-markup</code> step parses the text document
+it receives and returns an XML or HTML document. In other words, it
+transforms the <emphasis>text</emphasis>
+“<code>&amp;lt;tag/&amp;gt;</code>” into the <emphasis>tag</emphasis>
+“<code>&lt;tag/&gt;</code>”. This
 is the reverse of the <tag>p:escape-markup</tag> step.</para>
 
 <p:declare-step type="p:unescape-markup">
-  <p:input port="source" content-types="xml html"/>
+  <p:input port="source" content-types="text"/>
   <p:output port="result" content-types="xml html"/>
   <p:option name="namespace" as="xs:anyURI?"/>
+  <p:option name="wrapper" as="xs:QName?"/>
   <p:option name="content-type" as="xs:string" select="'application/xml'"/>
   <p:option name="encoding" as="xs:string?"/>
   <p:option name="charset" as="xs:string?"/>
 </p:declare-step>
 
-<para><error code="C0091">It is a <glossterm>dynamic error</glossterm> if
-the document on <port>source</port> port has more than one 
-top-level element.</error></para>
-
-<para>The value of the <option>namespace</option> option
+<para>The <option>namespace</option> option specifies a default
+namespace. Elements that are in no namespace in the parsed content
+will be placed into this namespace unless there is an in-scope
+namespace declaration that specifies a different namespace (or
+explicitly undeclares the default namespace). If specified,
+the value of the <option>namespace</option> option
 <rfc2119>must</rfc2119> be an <type>anyURI</type>. It
 <rfc2119>should</rfc2119> be absolute, but will not be
 resolved.</para>
 
-<para>When the string value is parsed, the original document element
-is preserved so that the result will be well-formed XML even if the
+<para>If a <option>wrapper</option> is provided, the resulting parsed
+content will appear as the children of an element with that name. This
+allows the step to return a well-formed XML document even if the
 content consists of multiple, sibling elements.</para>
 
-<para>The <option>namespace</option> option specifies a default
-namespace. Elements that are in no namespace in the unescaped content
-will be placed into this namespace unless there is an in-scope namespace
-declaration that specifies a different namespace (or explicitly undeclares
-the default namespace).</para>
-
 <para>The <option>content-type</option> option <rfc2119>may</rfc2119>
-be used to specify an alternate content type for the string value. An
+be used to specify an alternate content type for the text. An
 implementation <rfc2119>may</rfc2119> use a different parser to
 produce XML content depending on the specified content-type. For
 example, an implementation might provide an HTML to XHTML parser (e.g.
-<biblioref linkend="tidy"/> or <biblioref linkend="tagsoup"/>) for the
+<biblioref linkend="Validator.nu"/>,
+<biblioref linkend="tidy"/>, or <biblioref linkend="tagsoup"/>) for the
 content type '<literal>text/html</literal>'.</para>
 
 <para>All implementations <rfc2119>must</rfc2119> support the content
@@ -83,22 +82,27 @@ the character set is not specified or if the specified
 character set is not supported by the implementation.</error>
 </para>
 
-<para>The octet-stream that results from decoding the
-text <rfc2119>must</rfc2119> be interpreted using the character encoding named by
-the value of the <option>charset</option> option
-to produce a sequence of Unicode characters to parse.</para>
+<para>The octet-stream that results from decoding the text
+<rfc2119>must</rfc2119> be interpreted using the character encoding
+named by the value of the <option>charset</option> option to produce a
+sequence of Unicode characters to parse.</para>
 
 <para>If no <option>encoding</option> is specified, the character set
 is ignored, irrespective of where it was specified.</para>
 
 <para>For example, with the 'namespace' option set to the XHTML
-namespace, the following input:</para>
+namespace and the wrapper “<code>description</code>” provided, the
+following input:</para>
 
-<programlisting language="xml"><xi:include href="../../../../build/examples/parse.input.ex.txt" parse="text"/></programlisting>
+<programlisting language="xml"><![CDATA[&lt;p>This is a chunk.&lt;/p>
+&lt;p>This is a another chunk.&lt;/p>]]></programlisting>
 
 <para>would produce:</para>
 
-<programlisting language="xml"><xi:include href="../../../../build/examples/parse.output.ex.txt" parse="text"/></programlisting>
+<programlisting language="xml"><![CDATA[<description>
+<p xmlns="http://www.w3.org/1999/xhtml">This is a chunk.</p>
+<p xmlns="http://www.w3.org/1999/xhtml">This is a another chunk.</p>
+</description>]]></programlisting>
 
 <simplesect>
 <title>Document properties</title>

@@ -322,6 +322,11 @@ Project</citetitle>. SourceForge project.
 John Cowan.
 </bibliomixed>
 
+<bibliomixed xml:id="Validator.nu"><abbrev>Validator.nu</abbrev>
+<citetitle xlink:href="https://about.validator.nu/htmlparser/">The Validator.nu HTML Parser</citetitle>.
+Henri Sivonen.
+</bibliomixed>
+
 <bibliomixed xml:id="bib.uuid"><abbrev>UUID</abbrev>
 <citetitle xlink:href="http://www.itu.int/ITU-T/studygroups/com17/oid.html">ITU
 X.667: Information technology - Open Systems Interconnection -
