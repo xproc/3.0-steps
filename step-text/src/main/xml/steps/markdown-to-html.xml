@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<section xml:id="c.markdown-to-html" xmlns:p="http://www.w3.org/ns/xproc" xmlns:xlink="http://www.w3.org/1999/xlink"
-  xmlns="http://docbook.org/ns/docbook">
-  <title>p:markdown-to-html</title>
+<section xml:id="c.markdown-to-html"
+         xmlns:p="http://www.w3.org/ns/xproc"
+         xmlns:xlink="http://www.w3.org/1999/xlink"
+         xmlns="http://docbook.org/ns/docbook">
+<title>p:markdown-to-html</title>
 
-  <para>The <code>p:markdown-to-html</code> step converts a text document in Markdown to XHTML.</para>
+<para>The <code>p:markdown-to-html</code> step converts a text document in Markdown to XHTML.</para>
 
-  <p:declare-step type="p:markdown-to-html">
-    <p:input port="source" primary="true" sequence="false" content-types="text/*"/>
-    <p:output port="result" primary="true" sequence="false" content-types="application/xhtml+xml"/>
-    <p:option name="parameters" as="map(xs:QName, item()*)?"/>
-  </p:declare-step>
+<p:declare-step type="p:markdown-to-html">
+  <p:input port="source" primary="true" content-types="text"/>
+  <p:output port="result" primary="true" content-types="html"/>
+  <p:option name="parameters" as="map(xs:QName, item()*)?"/>
+</p:declare-step>
 
-  <para>The <tag>p:markdown-to-html</tag> step expects on its <port>source</port> port a text document 
-    in Markdown syntax (TBD: REF TO MARKDOWN SPEC?) and converts this into XHTML. The result is returned 
-    on its <port>result</port> port.</para>
-  
-  <para>TBD</para>
+<para>The <tag>p:markdown-to-html</tag> step transforms a text document containing
+Markdown, for example <biblioref linkend="commonmark"/>, into HTML.
+<impl>The flavor(s) of Markdown supported and the parameters allowed are
+<glossterm>implementation-defined</glossterm>.</impl>.</para>
 
-  <simplesect>
-    <title>Document properties</title>
-    <para feature="load-preserves-none">No document properties are preserved.</para>
-  </simplesect>
+<simplesect>
+  <title>Document properties</title>
+  <para feature="load-preserves-none">No document properties are preserved.</para>
+</simplesect>
 </section>

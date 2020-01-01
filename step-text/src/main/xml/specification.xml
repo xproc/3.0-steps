@@ -94,6 +94,7 @@ specifications</holder>
   <appendix xml:id="references">
     <title>References</title>
     <bibliolist>
+      <bibliomixed xml:id="commonmark"/>
       <bibliomixed xml:id="xproc30"/>
       <bibliomixed xml:id="xproc30-steps"/>
     </bibliolist>

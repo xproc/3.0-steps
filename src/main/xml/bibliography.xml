@@ -352,4 +352,10 @@ P. Koopman. June 2002.
   
   <bibliomixed xml:id="gzip"><abbrev>GZIP</abbrev>
     <citetitle xlink:href="https://tools.ietf.org/html/rfc1952">GZIP file format specification version 4.3</citetitle>.</bibliomixed>
+
+<bibliomixed xml:id="commonmark"><abbrev>CommonMark</abbrev>
+<citetitle xlink:href="https://spec.commonmark.org/current/">CommonMark Spec</citetitle>.
+John MacFarlane. 6 April 2019.
+</bibliomixed>
+
 </bibliography>
