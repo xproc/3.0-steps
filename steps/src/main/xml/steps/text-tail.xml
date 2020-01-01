@@ -34,6 +34,6 @@ newline (&amp;#10;).</para>
   
   <simplesect>
     <title>Document properties</title>
-    <para feature="add-attribute-preserves-all">All document properties are preserved.</para>
+    <para feature="text-tail-preserves-all">All document properties are preserved.</para>
   </simplesect>
 </section>

@@ -70,7 +70,7 @@
 
   <simplesect>
     <title>Document properties</title>
-    <para feature="archive-preserves-none">No document properties are preserved.</para>
+    <para feature="archive-manifest-preserves-none">No document properties are preserved.
+The manifest has no <property>base-uri</property>.</para>
   </simplesect>
-
 </section>

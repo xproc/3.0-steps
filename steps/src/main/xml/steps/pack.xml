@@ -35,6 +35,8 @@ this step does not attempt to distinguish which one.</para>
 
 <simplesect>
 <title>Document properties</title>
-<para feature="pack-preserves-none">No document properties are preserved.</para>
+<para feature="pack-preserves-none">No document properties are preserved.
+The result documents do not have a <property>base-uri</property> property.
+</para>
 </simplesect>
 </section>

@@ -243,6 +243,10 @@
   <xsl:call-template name="t:inline-monoseq"/>
 </xsl:template>
 
+<xsl:template match="db:property">
+  <xsl:call-template name="t:inline-monoseq"/>
+</xsl:template>
+
 <xsl:template match="db:tag[@class='attribute']" priority="10">
   <xsl:apply-imports/>
 </xsl:template>

@@ -38,6 +38,6 @@ document node with a single text child, the result will have content type
 
 <simplesect>
 <title>Document properties</title>
-<para feature="unwrap-preserves-none">No document properties are preserved.</para>
+<para feature="unwrap-preserves-all">All document properties are preserved.</para>
 </simplesect>
 </section>
