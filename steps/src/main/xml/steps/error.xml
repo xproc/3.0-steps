@@ -54,6 +54,7 @@ element in the pipeline.</para>
 
 <simplesect>
 <title>Document properties</title>
-<para feature="error-preserves-none">No document properties are preserved.</para>
+<para feature="error-preserves-none">No document properties are preserved but
+that’s irrelevant as no document is ever produced.</para>
 </simplesect>
 </section>

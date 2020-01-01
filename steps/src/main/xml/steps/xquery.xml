@@ -194,6 +194,10 @@ validation before using XQuery:</para>
 
 <section>
 <title>Document properties</title>
-<para feature="xquery-preserves-none">No document properties are preserved.</para>
+<para feature="xquery-preserves-none">No document properties are preserved.
+The <property>base-uri</property> property of each document will
+reflect the base URI specified by the query. If the query does not
+establish a base URI, the document will not have one.
+</para>
 </section>
 </section>

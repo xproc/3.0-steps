@@ -63,7 +63,7 @@ as the source.</para>
 <simplesect>
 <title>Document properties</title>
 <para feature="insert-preserves-all">All document properties on the
-<port>source</port> port are preserved. No document properties on the
-<port>insertion</port> port are preserved.</para>
+<port>source</port> port are preserved. The document properties on the
+<port>insertion</port> port are not preserved or present in the result document.</para>
 </simplesect>
 </section>

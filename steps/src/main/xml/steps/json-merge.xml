@@ -59,6 +59,8 @@ port <port>result</port>.</para>
     </para>
   <simplesect>
     <title>Document properties</title>
-    <para feature="json-merge-preserves-none">No document properties are preserved.</para>
+    <para feature="json-merge-preserves-none">No document properties are preserved.
+The merged document has no <property>base-uri</property>.
+</para>
   </simplesect>
 </section>

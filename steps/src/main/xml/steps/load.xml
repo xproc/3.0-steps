@@ -163,8 +163,9 @@ are <glossterm>implementation-defined</glossterm>.
 
 <simplesect>
 <title>Document properties</title>
-<para feature="load-preserves-none">No document properties are preserved.
-The properties specified in <option>document-properties</option> are applied.
+<para>The properties specified in <option>document-properties</option> are applied.
+If the properties do not specify a <property>base-uri</property>, the 
+<property>base-uri</property> property will reflect the base URI of the loaded document.
 </para>
 </simplesect>
 </section>

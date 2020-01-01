@@ -24,6 +24,8 @@ between that line and a following line that contains no characters.)
 
   <simplesect>
     <title>Document properties</title>
-    <para feature="count-preserves-none">No document properties are preserved.</para>
+    <para feature="text-count-preserves-none">No document properties are preserved.
+The count document does not have a <property>base-uri</property> property.
+</para>
   </simplesect>
 </section>

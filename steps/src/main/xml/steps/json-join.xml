@@ -56,6 +56,8 @@ port <port>result</port> will not have any arrays as members. </para>
 
 <simplesect>
   <title>Document properties</title>
-  <para feature="json-join-preserves-none">No document properties are preserved.</para>
+  <para feature="json-join-preserves-none">No document properties are preserved.
+The joined document has no <property>base-uri</property>.
+</para>
 </simplesect>
 </section>

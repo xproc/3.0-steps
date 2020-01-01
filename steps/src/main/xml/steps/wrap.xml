@@ -56,6 +56,6 @@ instruction nodes.</para>
 
 <simplesect>
 <title>Document properties</title>
-<para feature="wrap-preserves-none">No document properties are preserved.</para>
+<para feature="wrap-preserves-all">All document properties are preserved.</para>
 </simplesect>
 </section>

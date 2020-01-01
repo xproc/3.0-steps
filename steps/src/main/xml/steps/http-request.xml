@@ -199,6 +199,9 @@ of the step or protocol.</error>
 
 <simplesect>
 <title>Document properties</title>
-<para feature="http-request-preserves-none">No document properties are preserved.</para>
+<para feature="http-request-preserves-none">No document properties are preserved.
+The <property>base-uri</property> property of the document(s) produced will reflect
+the base URI of the retrieved document(s).
+</para>
 </simplesect>
 </section>

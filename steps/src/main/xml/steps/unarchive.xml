@@ -136,6 +136,9 @@
   
   <simplesect>
     <title>Document properties</title>
-    <para feature="archive-preserves-none">No document properties are preserved.</para>
+    <para feature="unarchive-preserves-none">No document properties are preserved.
+The <property>base-uri</property> property of each unarchived document is reflective of
+the base URI of the document.
+</para>
   </simplesect>
 </section>

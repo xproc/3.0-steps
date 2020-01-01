@@ -136,6 +136,11 @@
   </section>
   <simplesect>
     <title>Document properties</title>
-    <para feature="xslt-preserves-none">No document properties are preserved.</para>
+    <para feature="xslt-preserves-none">No document properties are
+    preserved. The <property>base-uri</property> property of each
+    document will reflect the base URI specified by the tranformation.
+    If the transformation does not establish a base URI, the document
+    will not have one.
+</para>
   </simplesect>
 </section>
