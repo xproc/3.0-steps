@@ -9,7 +9,7 @@ string representation of the number of documents in the
 sequence.</para>
 
 <p:declare-step type="p:count">
-   <p:input port="source" content-types="*/*" sequence="true"/>
+   <p:input port="source" content-types="any" sequence="true"/>
    <p:output port="result" content-types="application/xml"/>
    <p:option name="limit" as="xs:integer" select="0"/>
 </p:declare-step>

@@ -12,7 +12,7 @@
 
   <p:declare-step type="p:archive">
     <p:input port="source" primary="true" content-types="any" sequence="true"/>
-    <p:input port="manifest" content-types="application/xml" sequence="true">
+    <p:input port="manifest" content-types="xml" sequence="true">
       <p:empty/>
     </p:input>
     <p:input port="archive" content-types="any" sequence="true">
