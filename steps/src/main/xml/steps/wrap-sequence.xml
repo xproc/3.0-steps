@@ -40,7 +40,8 @@ Whenever
 two or more sequentially adjacent documents have the same “group
 adjacent” value, they are wrapped together in a single wrapper
 element.
-</para>
+Two “group adjacent” values are the same if the
+standard XPath function <code>deep-equal()</code> returns true for them.</para>
 
 <simplesect>
 <title>Document properties</title>
