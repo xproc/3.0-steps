@@ -144,6 +144,10 @@ document that contains a tree of elements, attributes, and other nodes.</para>
 XPath data model is <glossterm>implementation-defined</glossterm>.</impl>
 </para>
 
+<para><error code="D0078">It is a <glossterm>dynamic error</glossterm>
+if the loaded document cannot be represented as an HTML document in
+the XPath data model.</error></para>
+
 <para><impl>HTML parameters are <glossterm>implementation-defined</glossterm>.
 </impl></para>
 </section>
