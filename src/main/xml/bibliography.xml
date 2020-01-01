@@ -5,6 +5,11 @@
 
 <!-- This is the master bibliography -->
 
+<bibliomixed xml:id="CSS"><abbrev>CSS</abbrev>
+<citetitle xlink:href="https://www.w3.org/TR/css-2018/">CSS Snapshot 2018</citetitle>.
+Tab Atkins Jr., Elika J. Etemad, and Florial Rivoal editors.
+W3C Note 22 January 2019.</bibliomixed>
+
 <bibliomixed xml:id="use-cases"><abbrev>XProc V2.0 Requirements</abbrev>
 <citetitle xlink:href="http://www.w3.org/TR/xproc-v2-req/">XProc V2.0
 Requirements</citetitle>.
