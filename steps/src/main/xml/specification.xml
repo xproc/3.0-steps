@@ -99,11 +99,10 @@ implemented.
     conformant Expression per <biblioref linkend="xpath31"/>.
     </para>
   </listitem>
-  <listitem>
+  <listitem xml:id="dt-selection-pattern">
     <para><type>XSLTSelectionPattern</type>:
-<termdef xml:id="dt-selection-pattern">A <firstterm>selection pattern</firstterm> is an
-XSLT selection pattern. FIXME:</termdef>
-    </para>
+    As a string per <biblioref linkend="xslt30"/> conforming to an XSLT
+    <emphasis>selection pattern</emphasis>.</para>
   </listitem>
   <listitem>
     <para><type>XPathSequenceType</type>: An XPath
