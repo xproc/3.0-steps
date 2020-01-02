@@ -8,10 +8,10 @@
 equality.</para>
 
 <p:declare-step type="p:compare">
-   <p:input port="source" primary="true" content-types="*/*"/>
-   <p:input port="alternate" content-types="*/*"/>
+   <p:input port="source" primary="true" content-types="any"/>
+   <p:input port="alternate" content-types="any"/>
    <p:output port="result" content-types="application/xml"/>
-   <p:output port="differences" content-types="*/*" sequence="true"/>
+   <p:output port="differences" content-types="any" sequence="true"/>
    <p:option name="parameters" as="map(xs:QName,item()*)?"/>
    <p:option name="method" as="xs:QName?"/>
    <p:option name="fail-if-not-equal" as="xs:boolean" select="false()"/>
@@ -50,6 +50,7 @@ summary of the differences between the two documents may appear on the
 
 <simplesect>
 <title>Document properties</title>
-<para feature="compare-preserves-none">No document properties are preserved.</para>
+<para feature="compare-preserves-none">No document properties are preserved.
+The comparison document has no <property>base-uri</property>.</para>
 </simplesect>
 </section>

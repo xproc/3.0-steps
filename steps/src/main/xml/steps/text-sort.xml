@@ -51,7 +51,7 @@
       <para>The <option>collation</option> option identifies how strings are to be compared with each other. Its value
         must be a valid collation URI. The only collation XProc processors <rfc2119>must</rfc2119> support is the
         Unicode Codepoint Collation <link xlink:href="https://www.w3.org/2005/xpath-functions/collation/codepoint/"
-            ><code>https://www.w3.org/2005/xpath-functions/collation/codepoint</code></link>. This is also its default.
+            ><code>http://www.w3.org/2005/xpath-functions/collation/codepoint</code></link>. This is also its default.
         <impl>Support for other collations is <glossterm>implementation-defined</glossterm>.</impl></para>
     </listitem>
     <listitem>
@@ -61,13 +61,19 @@
   </itemizedlist>
 
   <para>Lines are identified as described in <link xlink:href="https://www.w3.org/TR/xml/#sec-line-ends">XML, 2.11
-      End-of-Line Handling</link>.</para>
+      End-of-Line Handling</link>.
+For the purpose of identifying lines, if the very last character in the text
+document is a newline (&amp;#10;), that newline is ignored. (It is not a separator
+between that line and a following line that contains no characters.)
+All lines returned by <tag>p:text-sort</tag> are terminated with a single
+newline (&amp;#10;).</para>
+
   <para>The sort process performed by this step is the same as described in 
     <link xlink:href="https://www.w3.org/TR/xslt-30/#xsl-sort">The xsl:sort Element</link>. Options <option>lang</option>
     and <option>case-order</option> are only taken into consideration if no value is selected for option
     <option>collation</option>.</para>
   <simplesect>
     <title>Document properties</title>
-    <para feature="add-attribute-preserves-all">All document properties are preserved.</para>
+    <para feature="text-sort-preserves-all">All document properties are preserved.</para>
   </simplesect>
 </section>

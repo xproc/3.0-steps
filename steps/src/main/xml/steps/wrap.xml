@@ -47,7 +47,8 @@ adjacent matching nodes in a single wrapper element. The specified
 XPath expression is evaluated for each matching node with that node
 as the XPath context node. Whenever two or more adjacent matching nodes
 have the same “group adjacent” value, they are wrapped together in
-a single wrapper element.</para>
+a single wrapper element. Two “group adjacent” values are the same if the
+standard XPath function <code>deep-equal()</code> returns true for them.</para>
 
 <para>Two matching nodes are considered adjacent if and only if they
 are siblings and either there are no nodes between them or all
@@ -56,6 +57,6 @@ instruction nodes.</para>
 
 <simplesect>
 <title>Document properties</title>
-<para feature="wrap-preserves-none">No document properties are preserved.</para>
+<para feature="wrap-preserves-all">All document properties are preserved.</para>
 </simplesect>
 </section>

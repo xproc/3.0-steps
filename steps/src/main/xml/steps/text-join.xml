@@ -6,8 +6,8 @@
   <para>The <code>p:text-join</code> step concatenates text documents.</para>
   
   <p:declare-step type="p:text-join">
-    <p:output port="source" primary="true" sequence="true" content-types="text"/>
-    <p:output port="result" primary="true" sequence="false" content-types="text"/>
+    <p:input port="source" sequence="true" content-types="text"/>
+    <p:output port="result" content-types="text"/>
     <p:option name="separator" as="xs:string?"/>
     <p:option name="prefix" as="xs:string?"/>
     <p:option name="suffix" as="xs:string?"/>
@@ -37,11 +37,18 @@
       a valid media type of the form
       “<literal><replaceable>type</replaceable>/<replaceable>subtype</replaceable>+<replaceable>ext</replaceable></literal>” 
       where “<literal>+<replaceable>ext</replaceable></literal>” is optional.</error> <error code="C0001">It is a
-      <glossterm>dynamic error</glossterm> if the value of option <option>overwrite-content-type</option> 
+        <glossterm>dynamic error</glossterm> if the value of option <option>override-content-type</option> 
       is not a text media type.</error>
   </para>
+
+  <para>Concatenating text documents does not require identifying individual
+lines in each document, consequently no special end-of-line handling is
+performed.</para>
+
   <simplesect>
     <title>Document properties</title>
-    <para feature="load-preserves-none">No document properties are preserved.</para>
+    <para feature="text-join-preserves-none">No document properties are preserved.
+The joined document has no <property>base-uri</property> property.
+</para>
   </simplesect>
 </section>

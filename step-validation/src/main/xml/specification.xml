@@ -12,7 +12,14 @@
 <info>
 <title>XProc 3.0: validation steps</title>
 <!-- defaults to date formatted <pubdate>2014-12-18</pubdate> -->
-<copyright><year>2019</year><holder>@@FIXME:</holder></copyright>
+<copyright><year>2018</year><year>2019</year><year>2020</year>
+<holder>the Contributors to the XProc 3.0 Standard Step Library
+specifications</holder>
+</copyright>
+
+<bibliomisc role="github-repo">xproc/3.0-steps</bibliomisc>
+<bibliomisc role="w3c-cg"
+            xlink:href="https://www.w3.org/community/xproc-next/">XProc Next</bibliomisc>
 
 <bibliorelation type="isformatof" xlink:href="specification.xml">XML</bibliorelation>
 <authorgroup>
@@ -37,15 +44,28 @@ step for
 <citetitle>XProc 3.0: An XML Pipeline Language</citetitle>.</para>
 </abstract>
 
-<legalnotice role="status">
+<legalnotice xml:id="sotd" role="status">
+  <para>This specification was published by the
+  <link xlink:href="https://www.w3.org/community/xproc-next/">XProc
+  Next Community Group</link>. It is not a W3C Standard nor is it on
+  the W3C Standards Track. Please note that under the
+  <link xlink:href="https://www.w3.org/community/about/agreements/cla/">W3C
+  Community Contributor License Agreement (CLA)</link> there is a limited
+  opt-out and other conditions apply. Learn more about <link
+  xlink:href="https://www.w3.org/community/">W3C Community and Business
+  Groups</link>.
+  </para>
+  
+  <para>If you wish to make comments regarding this document, please
+  send them to
+  <link xlink:href="mailto:xproc-dev@w3.org">xproc-dev@w3.org</link>.
+  (<link xlink:href="mailto:xproc-dev-request@w3.org?subject=subscribe">subscribe</link>,
+  <link xlink:href="https://lists.w3.org/Archives/Public/xproc-dev/">archives</link>).
+  </para>
 
-<para><emphasis>This section describes the status of this document at
-the time of its publication. Other documents may supersede this
-document.</emphasis></para>
-
-<para>This document is derived from
-<link xlink:href="https://www.w3.org/TR/2010/REC-xproc-20100511/">XProc:
-An XML Pipeline Language</link> published by the W3C.</para>
+  <para>This document is derived from
+  <link xlink:href="https://www.w3.org/TR/2010/REC-xproc-20100511/">XProc:
+  An XML Pipeline Language</link> published by the W3C.</para>
 </legalnotice>
 </info>
 
@@ -122,7 +142,7 @@ validation steps and their semantics are
       <p:input port="nvdl" content-types="xml"/>
       <p:input port="schemas" sequence="true" content-types="text xml"/>
       <p:output port="result" primary="true" content-types="xml html"/>
-      <p:output port="report" content-types="application/xml json"/>
+      <p:output port="report" sequence="true" content-types="xml json"/>
       <p:option name="assert-valid" select="true()" as="xs:boolean"/>
       <p:option name="report-format" select="'xvrl'" as="xs:string"/>
       <p:option name="parameters" as="map(xs:QName,item()*)?"/>
@@ -166,7 +186,7 @@ validation steps and their semantics are
   <p:input port="source" primary="true"  content-types="xml html"/>
   <p:input port="schema" content-types="text xml"/>
   <p:output port="result" primary="true" content-types="xml html"/>
-  <p:output port="report" content-types="application/xml json"/>
+  <p:output port="report" sequence="true" content-types="xml json"/>
   <p:option name="dtd-attribute-values" select="false()" as="xs:boolean"/>
   <p:option name="dtd-id-idref-warnings" select="false()" as="xs:boolean"/>
   <p:option name="assert-valid" select="true()" as="xs:boolean"/>
@@ -226,7 +246,7 @@ processing to the <port>source</port> document.</para>
   <p:input port="source" primary="true" content-types="xml html"/>
   <p:input port="schema" content-types="xml"/>
   <p:output port="result" primary="true" content-types="xml html"/>
-  <p:output port="report" sequence="true" content-types="application/xml json"/>
+  <p:output port="report" sequence="true" content-types="xml json"/>
   <p:option name="parameters" as="map(xs:QName,item()*)?"/>
   <p:option name="phase" select="'#DEFAULT'" as="xs:string"/>
   <p:option name="assert-valid" select="true()" as="xs:boolean"/>
@@ -305,7 +325,7 @@ validity assessment to the <port>source</port> input.</para>
   <p:input port="source" primary="true"  content-types="xml html"/>
   <p:input port="schema" sequence="true" content-types="xml"/>
   <p:output port="result" primary="true" content-types="xml html"/>
-  <p:output port="report" sequence="true" content-types="application/xml json"/>
+  <p:output port="report" sequence="true" content-types="xml json"/>
   <p:option name="use-location-hints" select="false()" as="xs:boolean"/>
   <p:option name="try-namespaces" select="false()" as="xs:boolean"/>
   <p:option name="assert-valid" select="true()" as="xs:boolean"/>

@@ -9,7 +9,7 @@ string representation of the number of documents in the
 sequence.</para>
 
 <p:declare-step type="p:count">
-   <p:input port="source" content-types="*/*" sequence="true"/>
+   <p:input port="source" content-types="any" sequence="true"/>
    <p:output port="result" content-types="application/xml"/>
    <p:option name="limit" as="xs:integer" select="0"/>
 </p:declare-step>
@@ -23,6 +23,7 @@ continue.</para>
 
 <simplesect>
 <title>Document properties</title>
-<para feature="count-preserves-none">No document properties are preserved.</para>
+<para feature="count-preserves-none">No document properties are preserved.
+The count document has no <property>base-uri</property>.</para>
 </simplesect>
 </section>

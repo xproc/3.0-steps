@@ -26,6 +26,10 @@
       xlink:href="https://www.w3.org/TR/xpath-functions-31/#func-replace"><function>fn:replace</function></link>
     function.</para>
 
+  <para>Replacing strings in text documents does not require identifying individual
+lines in each document, consequently no special end-of-line handling is
+performed.</para>
+
   <simplesect>
     <title>Document properties</title>
     <para feature="add-attribute-preserves-all">All document properties are preserved.</para>

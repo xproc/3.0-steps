@@ -12,7 +12,7 @@
     <p:output port="result" primary="true" content-types="any" sequence="false"/>
     <p:option name="format" as="xs:QName" select="'gzip'"/>
     <p:option name="serialization" as="map(xs:QName,item()*)?"/>
-    <p:option name="parameters" as="map(xs:Qname, item()*)?"/>
+    <p:option name="parameters" as="map(xs:QName, item()*)?"/>
   </p:declare-step>
 
   <para>The <tag>p:compress</tag> step first serializes the document appearing on its

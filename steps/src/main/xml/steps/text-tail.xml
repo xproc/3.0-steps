@@ -28,10 +28,12 @@
   </itemizedlist>
   
   <para>Lines are identified as described in <link xlink:href="https://www.w3.org/TR/xml/#sec-line-ends">XML, 2.11
-    End-of-Line Handling</link>.</para>
+    End-of-Line Handling</link>.
+All lines returned by <tag>p:text-tail</tag> are terminated with a single
+newline (&amp;#10;).</para>
   
   <simplesect>
     <title>Document properties</title>
-    <para feature="add-attribute-preserves-all">All document properties are preserved.</para>
+    <para feature="text-tail-preserves-all">All document properties are preserved.</para>
   </simplesect>
 </section>

@@ -15,8 +15,8 @@ the method, resource, and other request properties as well as possibly
 including an entity body (content) for the request.</para>
 
 <p:declare-step type="p:http-request">
-  <p:input port="source" content-types="*/*"/>
-  <p:output port="result" sequence="true" content-types="*/*"/>
+  <p:input port="source" content-types="any"/>
+  <p:output port="result" sequence="true" content-types="any"/>
   <p:option name="serialization" as="map(xs:QName,item()*)?"/>
 </p:declare-step>
 
@@ -199,6 +199,9 @@ of the step or protocol.</error>
 
 <simplesect>
 <title>Document properties</title>
-<para feature="http-request-preserves-none">No document properties are preserved.</para>
+<para feature="http-request-preserves-none">No document properties are preserved.
+The <property>base-uri</property> property of the document(s) produced will reflect
+the base URI of the retrieved document(s).
+</para>
 </simplesect>
 </section>

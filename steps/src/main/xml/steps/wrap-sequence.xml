@@ -40,10 +40,13 @@ Whenever
 two or more sequentially adjacent documents have the same “group
 adjacent” value, they are wrapped together in a single wrapper
 element.
-</para>
+Two “group adjacent” values are the same if the
+standard XPath function <code>deep-equal()</code> returns true for them.</para>
 
 <simplesect>
 <title>Document properties</title>
-<para feature="wrap-sequence-preserves-none">No document properties are preserved.</para>
+<para feature="wrap-sequence-preserves-none">No document properties are preserved.
+The document produced has no <property>base-uri</property> property.
+</para>
 </simplesect>
 </section>

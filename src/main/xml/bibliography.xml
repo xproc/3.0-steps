@@ -5,6 +5,11 @@
 
 <!-- This is the master bibliography -->
 
+<bibliomixed xml:id="CSS"><abbrev>CSS</abbrev>
+<citetitle xlink:href="https://www.w3.org/TR/css-2018/">CSS Snapshot 2018</citetitle>.
+Tab Atkins Jr., Elika J. Etemad, and Florial Rivoal editors.
+W3C Note 22 January 2019.</bibliomixed>
+
 <bibliomixed xml:id="use-cases"><abbrev>XProc V2.0 Requirements</abbrev>
 <citetitle xlink:href="http://www.w3.org/TR/xproc-v2-req/">XProc V2.0
 Requirements</citetitle>.
@@ -93,10 +98,7 @@ editors. W3C Recommendation 16 August 2006.</bibliomixed>
 Version 1.0</citetitle>. James Clark, editor.
 W3C Recommendation. 16 November 1999.</bibliomixed>
 
-<bibliomixed xml:id="lastcall-xslt30"><abbrev>XSLT 3.0</abbrev>
-   <citetitle xlink:href="http://www.w3.org/TR/xslt-30/">XSL Transformations (XSLT) Version 3.0</citetitle>. Michael Kay,
-   W3C Recommendation 8 June 2017</bibliomixed>
-   
+  
 <bibliomixed xml:id="xpath2"><abbrev>XPath 2.0</abbrev>
 <citetitle xlink:href="http://www.w3.org/TR/xpath20/">XML Path Language (XPath)
 2.0</citetitle>. Anders Berglund, Scott Boag, Don Chamberlin, et. al., editors.
@@ -352,4 +354,10 @@ P. Koopman. June 2002.
   
   <bibliomixed xml:id="gzip"><abbrev>GZIP</abbrev>
     <citetitle xlink:href="https://tools.ietf.org/html/rfc1952">GZIP file format specification version 4.3</citetitle>.</bibliomixed>
+
+<bibliomixed xml:id="commonmark"><abbrev>CommonMark</abbrev>
+<citetitle xlink:href="https://spec.commonmark.org/current/">CommonMark Spec</citetitle>.
+John MacFarlane. 6 April 2019.
+</bibliomixed>
+
 </bibliography>

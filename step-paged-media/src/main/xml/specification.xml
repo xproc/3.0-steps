@@ -11,7 +11,14 @@
 <info>
 <title>XProc 3.0: paged media steps</title>
 <!-- defaults to date formatted <pubdate>2014-12-18</pubdate> -->
-<copyright><year>2018</year><holder>@@FIXME:</holder></copyright>
+<copyright><year>2018</year><year>2019</year><year>2020</year>
+<holder>the Contributors to the XProc 3.0 Standard Step Library
+specifications</holder>
+</copyright>
+
+<bibliomisc role="github-repo">xproc/3.0-steps</bibliomisc>
+<bibliomisc role="w3c-cg"
+            xlink:href="https://www.w3.org/community/xproc-next/">XProc Next</bibliomisc>
 
 <bibliorelation type="isformatof" xlink:href="specification.xml">XML</bibliorelation>
 <authorgroup>
@@ -36,15 +43,28 @@ steps for
 <citetitle>XProc 3.0: An XML Pipeline Language</citetitle>.</para>
 </abstract>
 
-<legalnotice role="status">
+<legalnotice xml:id="sotd" role="status">
+  <para>This specification was published by the
+  <link xlink:href="https://www.w3.org/community/xproc-next/">XProc
+  Next Community Group</link>. It is not a W3C Standard nor is it on
+  the W3C Standards Track. Please note that under the
+  <link xlink:href="https://www.w3.org/community/about/agreements/cla/">W3C
+  Community Contributor License Agreement (CLA)</link> there is a limited
+  opt-out and other conditions apply. Learn more about <link
+  xlink:href="https://www.w3.org/community/">W3C Community and Business
+  Groups</link>.
+  </para>
+  
+  <para>If you wish to make comments regarding this document, please
+  send them to
+  <link xlink:href="mailto:xproc-dev@w3.org">xproc-dev@w3.org</link>.
+  (<link xlink:href="mailto:xproc-dev-request@w3.org?subject=subscribe">subscribe</link>,
+  <link xlink:href="https://lists.w3.org/Archives/Public/xproc-dev/">archives</link>).
+  </para>
 
-<para><emphasis>This section describes the status of this document at
-the time of its publication. Other documents may supersede this
-document.</emphasis></para>
-
-<para>This document is derived from
-<link xlink:href="https://www.w3.org/TR/2010/REC-xproc-20100511/">XProc:
-An XML Pipeline Language</link> published by the W3C.</para>
+  <para>This document is derived from
+  <link xlink:href="https://www.w3.org/TR/2010/REC-xproc-20100511/">XProc:
+  An XML Pipeline Language</link> published by the W3C.</para>
 </legalnotice>
 </info>
 
@@ -68,16 +88,52 @@ steps is assumed; for background details, see
 <section xml:id="c.css-formatter">
 <title>p:css-formatter</title>
 
-<para>T.B.D.</para>
+<para>The <tag>p:css-formatter</tag> step applies <biblioref linkend="CSS"/>
+formatting to an XML or HTML document.
+The output of this step is often, but not necessarily, a PDF document.</para>
 
 <p:declare-step type="p:css-formatter">
-  <p:input port="source" content-types="application/xml text/xml */*+xml"/>
-  <p:output port="result" content-types="*/*"/>
+  <p:input port="source" content-types="xml html"/>
+  <p:input port="stylesheet" content-types="text" sequence="true"/>
+  <p:output port="result" content-types="any"/>
   <p:option name="parameters" as="map(xs:QName,item()*)?"/>
   <p:option name="content-type" as="xs:string?"/>
 </p:declare-step>
 
-<para>T.B.D.</para>
+<para>The document on the <port>source</port> port is formatted using one
+or more CSS stylesheets.
+The content-type of the output is controlled by the
+<option>content-type</option> option. This option specifies a media
+type as defined by <biblioref linkend="media-types"/>. The option may
+include media type parameters as well (e.g.
+"application/someformat; charset=UTF-8"). <impl>The use of media type
+parameters on the <option>content-type</option> option is
+<glossterm>implementation-defined</glossterm>.</impl>
+<impl>If the <option>content-type</option> option is not
+specified, the output type is
+<glossterm>implementation-defined</glossterm>.</impl> The default
+<rfc2119>should</rfc2119> be PDF.
+</para>
+
+<para>If one or more stylesheets are provided on the <port>stylesheet</port> port,
+they <rfc2119>should</rfc2119> be used. 
+<impl>The precise way that the <tag>p:css-formatter</tag> step selects
+stylesheets is <glossterm>implementation-defined</glossterm>.</impl>
+Because CSS stylesheets may have import statements that rely on relative
+URI references, it may be more convenient for authors and implementors to
+allow stylesheets to be specified as a list of URIs (in, for example,
+one of the <option>parameters</option>).</para>
+
+<para><impl>A formatter may take any number of optional rendering
+parameters via the step's <option>parameters</option>; such parameters
+are defined by the CSS implementation used and are
+<glossterm>implementation-defined</glossterm>.</impl></para>
+
+<para>
+<impl>The CSS level and the particular CSS features supported by
+<tag>p:css-formatter</tag> are
+<glossterm>implementation-defined</glossterm>.</impl>
+</para>
 
 <simplesect>
 <title>Document properties</title>
@@ -91,8 +147,8 @@ steps is assumed; for background details, see
 <para>The <tag>p:xsl-formatter</tag> step receives an <biblioref linkend="xsl11"/> document and renders the content.</para>
 
 <p:declare-step type="p:xsl-formatter">
-  <p:input port="source" content-types="application/xml text/xml */*+xml"/>
-  <p:output port="result" content-types="*/*"/>
+  <p:input port="source" content-types="xml"/>
+  <p:output port="result" content-types="any"/>
   <p:option name="parameters" as="map(xs:QName,item()*)?"/>
   <p:option name="content-type" as="xs:string?"/>
 </p:declare-step>
@@ -157,6 +213,7 @@ failure causes the entire pipeline to fail.</para>
 <bibliolist>
 <bibliomixed xml:id="xproc30"/>
 <bibliomixed xml:id="xproc30-steps"/>
+<bibliomixed xml:id="CSS"/>
 <bibliomixed xml:id="xsl11"/>
 <bibliomixed xml:id="media-types"/>
 </bibliolist>
