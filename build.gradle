@@ -99,7 +99,7 @@ task make_etc() {
 }
 
 ["steps", "step-file", "step-os", "step-paged-media",
- "step-run", "step-text", "step-rdf", "step-validation" ].each { spec ->
+ "step-run", "step-text", "step-mail", "step-rdf", "step-validation" ].each { spec ->
   Task t = task "copy_${spec}_build"(dependsOn: [ "buildspecs" ], type: Copy) {
     from "$spec/build/"
     exclude "xinclude.xml", "examples/**", "graphics/**", "glossary.xml"
@@ -531,6 +531,59 @@ task step_text_src(dependsOn: ["step-text:source"], type: Copy) {
 task step_text_xpl(dependsOn: ["step-text:library"], type: Copy) {
   from "step-text/build/"
   into "build/dist/text/"
+  include "library.xml"
+  rename ("library.xml", "steps.xpl")
+}
+
+// ======================================================================
+// step-mail
+
+task step_mail(type: DocBookTask,
+               dependsOn: [ "download_xproc_toc",
+                            "steps", "xproc_schemas", "spec_schemas",
+                            "step-mail:specification",
+                            "step_mail_assets",
+                            "step_mail_src", "step_mail_xpl" ]) {
+  inputs.files fileTree(dir: "tools/xsl/")
+  inputs.files fileTree(dir: "tools/xpl/")
+  inputs.file "build/xproc/toc.xml"
+  input("source", "step-mail/build/source.xml")
+  output("result", "build/dist/mail/index.html")
+
+  param("schemaext.schema", file("build/schema/dbspec.rng"))
+  param("travis", getenv("TRAVIS"))
+  param("travis-commit", getenv("TRAVIS_COMMIT"))
+  param("travis-build-number", getenv("TRAVIS_BUILD_NUMBER"))
+  param("travis-user", getenv("TRAVIS_USER"))
+  param("travis-repo", getenv("TRAVIS_REPO"))
+  param("travis-branch", getenv("TRAVIS_BRANCH"))
+  param("travis-tag", getenv("TRAVIS_TAG"))
+
+  option("style", file("tools/xsl/xproc-specs.xsl"))
+  // FIXME: enable diffs after the first draft is published
+  option("diff", "")
+  option("specid", "")
+  option("diffloc", buildAbsDir + "/mail/diff.html")
+
+  pipeline "tools/xpl/formatspec.xpl"
+}
+buildspecs.dependsOn "step_mail"
+
+task step_mail_assets(type: Copy) {
+  from "src/main/resources"
+  into "build/dist/mail/"
+}
+
+task step_mail_src(dependsOn: ["step-mail:source"], type: Copy) {
+  from "step-mail/build/"
+  into "build/dist/mail/"
+  include "source.xml"
+  rename ("source.xml", "specification.xml")
+}
+
+task step_mail_xpl(dependsOn: ["step-mail:library"], type: Copy) {
+  from "step-mail/build/"
+  into "build/dist/mail/"
   include "library.xml"
   rename ("library.xml", "steps.xpl")
 }
