@@ -234,6 +234,11 @@ W3C Recommendation. 25 March 2003.</bibliomixed>
 and XQuery Serialization 3.1</citetitle>.
 Andrew Coleman and C. M. Sperberg-McQueen, editors. W3C Recommendation. 21 March 2017.</bibliomixed>
 
+<bibliomixed xml:id="id-draft-klyne"><abbrev>XML format for mail</abbrev>
+<citetitle xlink:href="https://tools.ietf.org/html/draft-klyne-message-rfc822-xml-03">Internet Draft: An
+XML Format for mail and other messages</citetitle>.
+G. Klyne. Network Working Group, IETF, April 2002.</bibliomixed>
+
 <bibliomixed xml:id="rfc1321"><abbrev>MD5</abbrev>
 <citetitle xlink:href="https://doi.org/10.17487/RFC1321">RFC 1321:
 The MD5 Message-Digest Algorithm</citetitle>.
