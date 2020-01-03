@@ -560,9 +560,8 @@ task step_mail(type: DocBookTask,
   param("travis-tag", getenv("TRAVIS_TAG"))
 
   option("style", file("tools/xsl/xproc-specs.xsl"))
-  // FIXME: enable diffs after the first draft is published
-  option("diff", "")
-  option("specid", "")
+  option("diff", deltaxml())
+  option("specid", "mail")
   option("diffloc", buildAbsDir + "/mail/diff.html")
 
   pipeline "tools/xpl/formatspec.xpl"
