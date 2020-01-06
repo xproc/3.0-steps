@@ -22,7 +22,7 @@ with resources over HTTP or related protocols.</para>
   <p:option name="assert" as="xs:string" select="'.?status-code lt 400'" />
 </p:declare-step>
   
-<para>In the simple case the HTTP request is controlled by the <option>href</option>
+<para>In the most simple case, the HTTP request is controlled by the <option>href</option>
 option and the <option>method</option> option which defaults to 
 “<literal>GET</literal>”. The <option>method</option> option specifies the method 
   to be used against the IRI specified by the <option>href</option>, 
@@ -31,14 +31,14 @@ option and the <option>method</option> option which defaults to
 <para>The request body is constructed using the document(s) appearing on the 
 <port>source</port> port. If exactly one document appears on that port, the 
 <option>serialization</option> option is used to
-control the serialization from the document to the request body. If the document 
+control the serialization for this document in the request body. If the document 
 has a “<literal>serialization</literal>” property,
-the serialization is controlled by the merger of the two maps where the entries in the
-“<literal>serialization</literal>” property takes precedence. If more than one document 
+the serialization is controlled by the merger of the two maps, where the entries in the
+“<literal>serialization</literal>” property take precedence. If more than one document 
 appears on the <port>source</port> port, the <option>serialization</option> option is
-ignored and serialization is controlled exclusively by the document’s “<literal>serialization</literal>” 
-property. If no document appears on the <port>source</port> port, the request body will be
-empty. The request headers are constructed using the map provided as the <option>headers</option>
+ignored and serialization is controlled exclusively by the  “<literal>serialization</literal>” 
+properties of the separate documents. If no document appears on the <port>source</port> port, the request body will be
+empty. The request headers are constructed using the map provided with the <option>headers</option>
 options.</para>
   
   <note xml:id="note-http-methods">
@@ -48,34 +48,34 @@ options.</para>
       URIs using the <literal>file:</literal> scheme.</para></note>
   
 <para>The results of performing an HTTP request will appear on the <port>result</port>
-port and the <port>report</port> port. If the request was successful the documents
+port and the <port>report</port> port. If the request was successful, the documents
 contained in the message body (if any) will appear on the <port>result</port> port. The
-distinction between XML documents, HTML documents, text documents etc. is made by using 
-response header “<literal>Content-Type</literal>” or entry “<literal>content-type</literal>”
+distinction between XML documents, HTML documents, text documents etc. is made  using the
+response header's “<literal>Content-Type</literal>” or the entry “<literal>content-type</literal>”
 in the map provided as the <option>parameters</option> option (see below).
-The response's status code and the response header fields will be made available on
+The response's status code and the response's header fields will be made available on
 the <port>response</port> port as a <literal>map</literal>. The keys 
 “<literal>status-code</literal>” (associated with an instance of <code>xs:integer</code>) 
-and “<literal>headers</literal>” (associated with a <code>map(xs:string, xs:string)</code>
-will always be present although the map may be empty. All letters in header names will be 
-converted to uppercase letters while constructing the “<literal>headers</literal>” map.</para>
+and “<literal>headers</literal>” (associated with a <code>map(xs:string, xs:string)</code>)
+will always be present, although the map may be empty. Header names are
+converted to uppercase.</para>
   
-<para>For the convenience of pipeline authors <tag>p:http-request</tag> accepts documents
-on the <port>source</port> port although the semantics of sending a payload with the
+<para>For the convenience of pipeline authors, <tag>p:http-request</tag> accepts documents
+on the <port>source</port> port even when the semantics of sending a payload with the
 specified request method (like “<literal>GET</literal>” or “<literal>HEAD</literal>”) is not defined. 
 For those methods the documents on the <port>source</port> are ignored when constructing
-  the request unless the <option>parameters</option> option associates the key 
-  “<literal>send-body-anyway</literal>” explicitly with <code>true().</code></para>
+  the request, unless the <option>parameters</option> option associates the key 
+  “<literal>send-body-anyway</literal>” explicitly with <code>true()</code>.</para>
   
 <para>The <tag>p:http-request</tag> step has the following options:</para>
   <variablelist>
     <varlistentry>
       <term><option>href</option></term>
       <listitem>
-        <para>The <option>href</option> specifies the request's IRI. If it is not absolute, 
-          it will be resolved against the base URI of the element on which the option is 
+        <para>The <option>href</option> specifies the request's IRI. Relative values are resolved against the base URI of 
+                 the element on which the option is 
           specified (<tag>p:with-option</tag>  or the step in case of a syntactic shortcut value).</para>
-        <para>Any fragment identifiers will be removed, but any other query parameters will are
+        <para>Fragment identifiers will be removed. Query parameters are
           passed through unchanged.</para>
         <note xml:id="http-uri-query" role="editorial">
           <title>Editorial Note</title>
@@ -116,26 +116,26 @@ For those methods the documents on the <port>source</port> are ignored when cons
             </listitem>
             <listitem>
               <para>This header map is then merged with the entries of the <option>headers</option> option
-                (if present), where the later takes precedence. This means e.g. that the document property 
+                (if present), where the latter takes precedence. This means for instance that the document property 
                 “<literal>content-type</literal>” is overwritten by an entry for “<literal>Content-Type</literal>” 
-                in map provided for the <option>headers</option> option.</para>
+                (in the map provided for the <option>headers</option> option).</para>
             </listitem>
             <listitem>
               <para>Any entry for key “<literal>Authorization</literal>” is then overwritten or removed according
               to the values provided for the <option>auth</option> option (if present).</para>
             </listitem>
           </orderedlist>
-          <para>As HTTP headers are case-insensitive but keys in maps are, care has to been taken when specifying
+          <para>As HTTP headers are case-insensitive but keys in maps are, be careful when specifying
             the request's headers. <error code="CXXX6">It is a <glossterm>dynamic error</glossterm> if the 
               effective map from which the HTPP headers are constructed contains two keys which are case-blind
-            equal, i.e. <code>fn:uppercase($key1) = fn:uppercase($key2)</code> is <code>true()</code>.</error></para>
+            equal (<code>fn:uppercase($key1) = fn:uppercase($key2)</code>)</para>
       </listitem>
     </varlistentry>
     <varlistentry>
       <term><option>auth</option></term>
       <listitem>
         <para>The map provided for the <option>auth</option> is used to control the authentication process for
-        the HTTP request. If no value is provided or an empty map is provided, the value provided for
+        the HTTP request. If no value or an empty map is provided, the value provided for
         HTTP header “<literal>Authorization</literal>” (if present) is used as authentication. The following keys and 
           the expected type of their associated values are predefined: “<literal>username</literal>” (<code>xs:string</code>),
           “<literal>password</literal>” (<code>xs:string</code>), “<literal>method</literal>” (<code>xs:string</code>),
