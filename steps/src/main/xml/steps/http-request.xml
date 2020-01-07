@@ -128,7 +128,7 @@ For those methods the documents on the <port>source</port> are ignored when cons
           <para>As HTTP headers are case-insensitive but keys in maps are, be careful when specifying
             the request's headers. <error code="CXXX6">It is a <glossterm>dynamic error</glossterm> if the 
               effective map from which the HTPP headers are constructed contains two keys which are case-blind
-            equal (<code>fn:uppercase($key1) = fn:uppercase($key2)</code>)</para>
+            equal (<code>fn:uppercase($key1) = fn:uppercase($key2)</code>)</error></para>
       </listitem>
     </varlistentry>
     <varlistentry>
