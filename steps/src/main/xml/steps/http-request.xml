@@ -230,10 +230,10 @@ For those methods the documents on the <port>source</port> are ignored when cons
           <varlistentry>
             <term>transfer-encoding</term>
             <listitem>
-              <note xml:id="http-uri-transfer-encoding" role="editorial">
-                <title>Editorial Note</title>
-                <para>TBD: How does this entry differ from the "transfer-encoding" header?</para>
-              </note>
+              <para>The value associated with the “<literal>transfer-encoding</literal>” key must be an instance
+                of <code>xs:string</code>. If the key-value pair is present, the response will be treated as if the response
+                contained a “<literal>Transfer-Encoding</literal>” header given by its value. The original Transfer-Encoding
+                will however be reflected unchanged as entry in the document on the <port>report</port> port.</para>
             </listitem>
           </varlistentry>
           <varlistentry>
