@@ -23,8 +23,7 @@ option, a name/value pair is created for each value.</para>
 
 <simplesect>
 <title>Document properties</title>
-<para feature="www-form-urlencode-preserves-none">No document properties are preserved.
-The resulting value has no <property>base-uri</property> property.
-</para>
+<para feature="www-form-urlencode-preserves-none">The resulting text document has no properties 
+  apart from <property>content-type</property>. In particular, it has no <property>base-uri</property>.</para>
 </simplesect>
 </section>
