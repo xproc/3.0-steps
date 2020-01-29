@@ -239,10 +239,16 @@ Andrew Coleman and C. M. Sperberg-McQueen, editors. W3C Recommendation. 21 March
 XML Format for mail and other messages</citetitle>.
 G. Klyne. Network Working Group, IETF, April 2002.</bibliomixed>
 
-<bibliomixed xml:id="rfc1321"><abbrev>MD5</abbrev>
+<bibliomixed xml:id="rfc1321"><abbrev>RFC 1321</abbrev>
 <citetitle xlink:href="https://doi.org/10.17487/RFC1321">RFC 1321:
 The MD5 Message-Digest Algorithm</citetitle>.
 R. Rivest. Network Working Group, IETF, April 1992.</bibliomixed>
+
+<bibliomixed xml:id="rfc1521"><abbrev>RFC 1521</abbrev> <citetitle
+xlink:href="https://doi.org/10.17487/RFC1521">RFC 1521: MIME
+(Multipurpose Internet Mail Extensions) Part One: Mechanisms for
+Specifying and Describing the Format of Internet Message Bodies</citetitle>.
+N. Borenstein. Network Working Group, IETF, September 1993.</bibliomixed>
 
 <bibliomixed xml:id="rfc2045"><abbrev>RFC 2045</abbrev>
 <citetitle xlink:href="https://doi.org/10.17487/RFC2045">RFC 2045:
