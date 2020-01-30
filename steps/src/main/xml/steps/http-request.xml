@@ -60,12 +60,7 @@ the <port>report</port> port. The map will always contain
 “<literal>status-code</literal>” (an <code>xs:integer</code>) and
 “<literal>headers</literal>” (a <code>map(xs:string,
 xs:string)</code>). The header map may be empty. Header names are
-converted to uppercase.</para>
-
-<note xml:id="http-header-uppercase" role="editorial">
-<title>Editorial Note</title>
-<para>Uppercase? I’d have expected lowercase.</para>
-</note>
+converted to lowercase.</para>
 
 <para>The <tag>p:http-request</tag> step has the following options:</para>
 <variablelist>
