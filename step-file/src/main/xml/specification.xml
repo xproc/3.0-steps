@@ -406,7 +406,7 @@ steps is assumed; for background details, see
     in the <option>href</option> option.</para>
 
   <para><impl>Conformant processors <rfc2119>must</rfc2119> support URIs whose
-    scheme is <code>file</code>. It is
+    scheme is <code>file</code> for the <option>href</option> of <tag>p:file-info</tag>.
     <glossterm>implementation-defined</glossterm> what other schemes are
     supported by <tag>p:file-info</tag>, and what the interpretation
     of 'directory', 'file' and 'contents' is for those schemes.</impl>
@@ -692,7 +692,7 @@ option. If the file specified by <option>href</option> does not
 exist, an empty file will be created at the given location.</para>
 
   <para><impl>Conformant processors <rfc2119>must</rfc2119> support URIs whose
-    scheme is <code>file</code>. It is
+    scheme is <code>file</code> for the <option>href</option> option of <tag>p:file-touch</tag>. It is
     <glossterm>implementation-defined</glossterm> what other schemes are
     supported by <tag>p:file-touch</tag>, and what the interpretation
     of 'directory', 'file' and 'contents' is for those schemes.</impl>
