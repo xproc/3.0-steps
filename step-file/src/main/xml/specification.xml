@@ -405,7 +405,7 @@ steps is assumed; for background details, see
   <para>The <tag>p:file-info</tag> step returns information about the file, directory or other file system object named
     in the <option>href</option> option.</para>
 
-  <para><impl>Conformant processors <rfc2119>must</rfc2119> support file infos whose
+  <para><impl>Conformant processors <rfc2119>must</rfc2119> support URIs whose
     scheme is <code>file</code>. It is
     <glossterm>implementation-defined</glossterm> what other schemes are
     supported by <tag>p:file-info</tag>, and what the interpretation
@@ -691,7 +691,7 @@ timestamp of the file specified in the <option>href</option>
 option. If the file specified by <option>href</option> does not
 exist, an empty file will be created at the given location.</para>
 
-  <para><impl>Conformant processors <rfc2119>must</rfc2119> support <tag>p:file-touch</tag> whose
+  <para><impl>Conformant processors <rfc2119>must</rfc2119> support URIs whose
     scheme is <code>file</code>. It is
     <glossterm>implementation-defined</glossterm> what other schemes are
     supported by <tag>p:file-touch</tag>, and what the interpretation
