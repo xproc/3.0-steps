@@ -105,7 +105,9 @@ steps is assumed; for background details, see
     <para>If <option>path</option> is relative, it is made absolute against the 
       base URI of the element on which it is specified 
       (<tag>p:with-option</tag> or <tag>p:directory-list</tag> in the case of a 
-      syntactic shortcut value). <error code="C0017">It is a
+      syntactic shortcut value). <error code="D0064">It is a <glossterm>dynamic 
+        error</glossterm> if the base URI is not both absolute and valid according to <biblioref
+          linkend="rfc3986"/>.</error> <error code="C0017">It is a
         <glossterm>dynamic error</glossterm> if the absolute path does not
         identify a directory.</error> <error code="C0012">It is a
           <glossterm>dynamic error</glossterm> if the contents of the directory
@@ -751,6 +753,7 @@ failure causes the entire pipeline to fail.</para>
 <bibliomixed xml:id="xproc30"/>
 <bibliomixed xml:id="xproc30-steps"/>
 <bibliomixed xml:id="xpath31-functions"/>
+<bibliomixed xml:id="rfc3986" />
 </bibliolist>
 </appendix>
 
