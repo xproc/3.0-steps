@@ -262,4 +262,18 @@ linkend="rfc2119"/>.</para>
 <xi:include href="ancillary.xml"/>
 <xi:include href="credits.xml"/>
 
+  <appendix xml:id="changelog">
+    <title>Change Log</title>
+    <para>This appendix catalogs non-editorial changes made after the
+      February 2020
+      “<link xlink:href="https://spec.xproc.org/lastcall-2020-02/head/steps/">last call</link>”
+      draft:</para>
+  <itemizedlist>
+    <listitem>
+      <para>For <tag>p:cast-content-type</tag> the expected result type for casting a 
+        <literal>c:param-set</literal> document to “<literal>application/json</literal>” was
+      specified as <literal>map(xs:QName, xs:string)</literal>.</para>
+    </listitem>
+  </itemizedlist>
+  </appendix>
 </specification>
