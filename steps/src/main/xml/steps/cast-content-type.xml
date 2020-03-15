@@ -58,7 +58,8 @@
                implementations <rfc2119>must</rfc2119> produce the same result as 
                <literal>fn:parse-json(fn:xml-to-json())</literal>
                by default. If the input document has a <tag>c:param-set</tag> document element,
-               a map <rfc2119>must</rfc2119> be returned that represents the document's 
+               an instance of <literal>map(xs:QName, xs:string)</literal> 
+               <rfc2119>must</rfc2119> be returned that represents the document's 
                <tag>c:param</tag> elements. The serialization property is removed.
             </para>
          </listitem>
