@@ -492,7 +492,7 @@ are used to determine how serialization is performed.</para>
 <para>All of the document properties in the
 <code>http://www.w3.org/ns/xproc-http</code> namespace will be added
 as headers for the part, using the local-name of the property QName as
-the header name. In particular, this is now the
+the header name. In particular, this is how the
 “<literal>id</literal>”, “<literal>description</literal>”,
 “<literal>disposition</literal>” and other multipart headers can be
 provided.</para>
