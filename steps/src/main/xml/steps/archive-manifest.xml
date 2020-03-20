@@ -57,7 +57,7 @@
 
   <para>The generated manifest has the format as described in <xref linkend="cv.archive-manifest"/>.
     Implementations <rfc2119>must</rfc2119> supply an <tag>c:entry</tag> element and its
-      <code>name</code> and <code>content-type</code> attribute for every entry in the archive. The
+      <code>name</code> and <code>content-type</code> attributes for every entry in the archive. The
     value of the generated manifest's <code>c:entry/@href</code> attribute will be determined in the
     same way as a base URI of an unarchived document by <xref linkend="c.unarchive"/>. <error
       code="C0120">It is a <glossterm>dynamic error</glossterm> if the <option>relative-to</option>
