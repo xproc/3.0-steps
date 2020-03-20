@@ -221,6 +221,11 @@
           <impl>It is <glossterm>implementation-defined</glossterm> what compression levels are
             supported.</impl></para>
       </listitem>
+      <listitem>
+        <para>The <code>content-type</code> attribute specifies the content-type of the entry as
+          detected by the processor. It will be set by <tag>p:archive-manifest</tag> in constructing
+          the manifest. It will be ignored by <tag>p:archive</tag>.</para>
+      </listitem>
     </itemizedlist>
 
     <para>The <code>p:archive</code> step <rfc2119>should</rfc2119> strive to retain the order of
