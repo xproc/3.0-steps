@@ -102,9 +102,7 @@
 
   <xsl:text>    attribute </xsl:text>
   <xsl:value-of select="@name"/>
-  <xsl:text> { </xsl:text>
-  <xsl:value-of select="$type"/>
-  <xsl:text> }?,&#10;</xsl:text>
+  <xsl:text> { avt.datatype }?,&#10;</xsl:text>
 </xsl:template>
 
 </xsl:stylesheet>
