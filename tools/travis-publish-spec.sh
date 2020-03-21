@@ -37,7 +37,7 @@ cp -Rf $TRAVIS_BUILD_DIR/build/dist/* ./${TRAVIS_BRANCH}/${TIP}/
 
 git add --verbose -f .
 git commit -m "Travis build $TRAVIS_BUILD_NUMBER for $GIT_PUB_REPO"
-echo git push -fq origin gh-pages > /dev/null
+git push -fq origin gh-pages > /dev/null
 
 cd $HOME
 rm -rf gh-pages
@@ -63,7 +63,7 @@ if [ "$TRAVIS_REPO_SLUG" = "xproc/3.0-steps" ]; then
 
     git add --verbose -f .
     git commit -m "Travis build $TRAVIS_BUILD_NUMBER for $TRAVIS_REPO_SLUG"
-    echo git push -fq origin gh-pages > /dev/null
+    git push -fq origin gh-pages > /dev/null
 
     cd $HOME
     rm -rf gh-pages
