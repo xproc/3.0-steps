@@ -117,7 +117,7 @@ task xproc_schemas(dependsOn: [ "download_core30" ]) {
 }
 
 task download_core30(type: Download) {
-    src "$schemaBaseUri/core30.rng"
+    src "$schemaBaseUri/lib/core30.rng"
     dest file("build/core30.rng")
 }
 download_core30.onlyIf { !file("$buildDir/core30.rng").exists() }
@@ -125,7 +125,7 @@ download_core30.onlyIf { !file("$buildDir/core30.rng").exists() }
 [ "rnc", "rng" ].each { ext ->
     ["xproc", "xproc10", "xproc30"].each { base ->
         Task t = task "download_${base}_${ext}"(type: Download) {
-            src "$schemaBaseUri/$base.$ext"
+            src "$schemaBaseUri/relax-ng/$base.$ext"
             dest file("build/$base.$ext")
         }
         t.onlyIf { ! file("$buildDir/$base.$ext").exists () }
