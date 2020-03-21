@@ -59,11 +59,11 @@ if [ "$TRAVIS_REPO_SLUG" = "xproc/3.0-steps" ]; then
     cd grammar
     mkdir -p ./steps
     cp -Rf $TRAVIS_BUILD_DIR/build/dist/etc/* ./steps/
-    rm f ./steps/*/source.xml ./steps/*/toc.xml
+    rm -f ./steps/*/source.xml ./steps/*/toc.xml
 
     git add --verbose -f .
     git commit -m "Travis build $TRAVIS_BUILD_NUMBER for $TRAVIS_REPO_SLUG"
-    git push -fq origin gh-pages > /dev/null
+    git push -fq origin master > /dev/null
 
     cd $HOME
     rm -rf gh-pages
