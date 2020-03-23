@@ -9,6 +9,7 @@
     <p:output port="result" primary="true" sequence="true" content-types="any"/>
     <p:output port="secondary" sequence="true" content-types="any"/>
     <p:option name="parameters" as="map(xs:QName,item()*)?"/>
+    <p:option name="static-parameters" as="map(xs:QName,item()*)?"/>
     <p:option name="global-context-item" as="item()?"/>
     <p:option name="initial-mode" as="xs:QName?"/>
     <p:option name="template-name" as="xs:QName?"/>
@@ -29,6 +30,10 @@
     code="C0093"> It is a <glossterm>dynamic error</glossterm> if a static error occurs during the
     static analysis of the XSLT stylesheet.</error> Any parameters passed in the
     <option>parameters</option> option are used to define top-level stylesheet parameters.</para>
+  <para>Parameters passed in the <option>static-parameters</option> option are passed as static
+    parameters to the XSLT invocation. Whether static parameters are supported is
+      <glossterm>implementation defined</glossterm> and depends on the XSLT version (which must be
+    3.0 or higher). If static parameters are not supported the option is ignored.</para>
   <para><error code="C0095">It is a <glossterm>dynamic error</glossterm> if an error occurred during
     the transformation.</error>
     <error code="C0096">It is a <glossterm>dynamic error</glossterm> if the transformation is
