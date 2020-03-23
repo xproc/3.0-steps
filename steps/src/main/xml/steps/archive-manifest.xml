@@ -13,6 +13,7 @@
     <p:option name="format" as="xs:QName?"/>
     <p:option name="parameters" as="map(xs:QName, item()*)?"/>
     <p:option name="relative-to" as="xs:anyURI?"/>
+    <p:option name="override-content-types" as="array(array(xs:string))?"/>
   </p:declare-step>
 
   <para>The <code>p:archive-manifest</code> step inspects the archive appearing on its
@@ -68,9 +69,64 @@
 
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
+  <section xml:id="override-content-type">
+    <title>Overriding content types</title>
+
+    <para>The <option>override-content-types</option> option can be used to partially override the
+      content-type determination mechanism. If present, it must be an array of arrays, where the
+      inner arrays consist of exactly two strings: </para>
+    <itemizedlist>
+      <listitem>
+        <para>The first member in an inner array <rfc2119>must</rfc2119> be a regular expression as
+          specified in <biblioref linkend="xpath31-functions"/>, section 7.61 “<literal>Regular
+            Expression Syntax</literal>”.</para>
+      </listitem>
+      <listitem>
+        <para>The second member in an inner array <rfc2119>must</rfc2119> be a valid a MIME
+          content-type. <error code="C0130">It is a <glossterm>dynamic error</glossterm> if the
+            content-type specified is not a valid content type.</error></para>
+      </listitem>
+    </itemizedlist>
+
+    <para><error code="C0146">It is a <glossterm>dynamic error</glossterm> if the specified value
+        for the <option>override-content-types</option> option is not an array of arrays, where the
+        inner arrays have exactly two members of type <code>xs:string</code>.</error></para>
+
+    <para>Determining an entry's content-type is as follows:</para>
+    <itemizedlist>
+      <listitem>
+        <para>The XPath regular expressions (the first members of the inner arrays) will be matched
+          against the relative filename of the archive's entry (the relative path
+            <emphasis>in</emphasis> the archive, leading up to the entry, for instance
+            <code>img/logos/company-logo.png</code>). This will be done in the order of appearance
+          in the outer array (so order is significant). The matching is done unanchored: it's a
+          match if the regular expression matches part of the filename.</para>
+      </listitem>
+      <listitem>
+        <para>If a match is found, the content-type (the second member of the inner array for which
+          a match was found) is used as the entry's content-type.</para>
+      </listitem>
+      <listitem>
+        <para>If no match is found for all inner arrays, the normal
+            (<glossterm>implementation-defined</glossterm>) mechanism for determining the
+          content-type is used. </para>
+      </listitem>
+    </itemizedlist>
+
+    <para>For example: setting the <option>override-content-types</option> option to <code>[
+        ['.rels$', 'application/xml'], ['^special/', 'application/octet-stream'] ]</code> means that
+      all files ending with <code>.rels</code> will get the content-type
+        <code>application/xml</code>. All files in the archive's <code>special</code> directory
+      (including sub-directories) will get the content-type
+      <code>application/octet-stream</code>.</para>
+
+  </section>
+
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
   <simplesect>
     <title>Document properties</title>
-    <para feature="archive-manifest-preserves-none">No document properties are preserved.
-The manifest has no <property>base-uri</property>.</para>
+    <para feature="archive-manifest-preserves-none">No document properties are preserved. The
+      manifest has no <property>base-uri</property>.</para>
   </simplesect>
 </section>
