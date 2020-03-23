@@ -24,7 +24,7 @@
       <glossterm>dynamic error</glossterm> if the specified xslt version is not available.</error> If
     the step does not specify a version, the implementation may use any version it has available and
     may use any means to determine what version to use, including, but not limited to, examining the
-    version of the stylesheet. <impl>It is <glossterm>implementation defined</glossterm> which XSLT
+    version of the stylesheet. <impl>It is <glossterm>implementation-defined</glossterm> which XSLT
     version(s) is/are supported.</impl></para>
   <para>The XSLT stylesheet provided on the <port>stylesheet</port> port is invoked. <error
     code="C0093"> It is a <glossterm>dynamic error</glossterm> if a static error occurs during the
@@ -32,7 +32,7 @@
     <option>parameters</option> option are used to define top-level stylesheet parameters.</para>
   <para>Parameters passed in the <option>static-parameters</option> option are passed as static
     parameters to the XSLT invocation. Whether static parameters are supported is
-      <glossterm>implementation defined</glossterm> and depends on the XSLT version (which must be
+      <glossterm>implementation-defined</glossterm> and depends on the XSLT version (which must be
     3.0 or higher). If static parameters are not supported the option is ignored.</para>
   <para><error code="C0095">It is a <glossterm>dynamic error</glossterm> if an error occurred during
     the transformation.</error>
