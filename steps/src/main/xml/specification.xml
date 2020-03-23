@@ -275,7 +275,10 @@ draft:</para>
        <code>c:entry/@content-type</code> was added to the archive manifest, to be filled by the
        <tag>p:archive-manifest</tag> step. (2020-03-20)</para>
    </listitem>
-</orderedlist>
+   <listitem>
+     <para>A <option>static-parameters</option> was added to <tag>p:xslt</tag>. (2020-03-23)</para>
+   </listitem>
+ </orderedlist>
 </appendix>
 
 </specification>
