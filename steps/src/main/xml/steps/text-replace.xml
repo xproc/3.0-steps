@@ -21,10 +21,14 @@
       xlink:href="https://www.w3.org/TR/xpath-functions-31/#func-replace"><function>fn:replace</function></link>
     function to ease text replacements in the document flow of a pipeline.</para>
 
-  <para>The <option>pattern</option>, <option>replacement</option> and <option>flags</option> options are specified the
-    same as the parameters with the same names of the <link
-      xlink:href="https://www.w3.org/TR/xpath-functions-31/#func-replace"><function>fn:replace</function></link>
-    function.</para>
+  <para>The <option>pattern</option>, <option>replacement</option> and <option>flags</option>
+    options are specified the same as the parameters with the same names of the <link
+      xlink:href="https://www.w3.org/TR/xpath-functions-31/#func-replace"
+        ><function>fn:replace</function></link> function. The <option>pattern</option> option
+      <rfc2119>must</rfc2119> be a regular expression as specified in <biblioref
+      linkend="xpath31-functions"/>, section 7.61 “<literal>Regular Expression Syntax</literal>”.
+      <error code="C0147">It is a <glossterm>dynamic error</glossterm> if the specified value is not
+      a valid XPath regular expression.</error></para>
 
   <para>Replacing strings in text documents does not require identifying individual
 lines in each document, consequently no special end-of-line handling is
