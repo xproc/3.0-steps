@@ -279,7 +279,7 @@ draft:</para>
      <para>A <option>static-parameters</option> was added to <tag>p:xslt</tag>. (2020-03-23)</para>
    </listitem>
    <listitem>
-     <para>The <option>override-content-types</option> option was added to <tag>p:archive-manifest</tag> and <tag>p:unarchive</tag>. (2020-03-23)</para>
+     <para>The <option>override-content-types</option> option was added to <tag>p:archive-manifest</tag> and <tag>p:unarchive</tag>. (2020-03-30)</para>
    </listitem>
  </orderedlist>
 </appendix>
