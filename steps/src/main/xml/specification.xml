@@ -281,6 +281,10 @@ draft:</para>
    <listitem>
      <para>The <option>override-content-types</option> option was added to <tag>p:archive-manifest</tag> and <tag>p:unarchive</tag>. (2020-03-30)</para>
    </listitem>
+   <listitem>
+        <para>Clarified the regular expression matching for <tag>p:text-replace</tag> and
+            <tag>p:unarchive</tag>. Added an error code for invalid regular expressions. (2020-04-02)</para>
+   </listitem>
  </orderedlist>
 </appendix>
 
