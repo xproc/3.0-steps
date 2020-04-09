@@ -285,6 +285,9 @@ draft:</para>
         <para>Clarified the regular expression matching for <tag>p:text-replace</tag> and
             <tag>p:unarchive</tag>. Added an error code for invalid regular expressions. (2020-04-02)</para>
    </listitem>
+   <listitem>
+     <para>Replaced errors XC0070 and XC0130 with XD0079. (2020-04-09)</para>
+   </listitem>
  </orderedlist>
 </appendix>
 
