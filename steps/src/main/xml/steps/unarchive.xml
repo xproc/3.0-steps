@@ -59,7 +59,9 @@
           <option>exclude-filter</option> option <rfc2119>must</rfc2119> be a sequence of strings,
         each one representing a regular expressions as specified in <biblioref
           linkend="xpath31-functions"/>, section 7.61 “<literal>Regular Expression
-        Syntax</literal>”.</para>
+            Syntax</literal>”. <error code="C0147">It is a <glossterm>dynamic
+              error</glossterm> if a specified value is not a valid XPath regular
+              expression.</error></para>
 
       <para>If neither the <option>include-filter</option> option nor the
           <option>exclude-filter</option> option is specified, the <code>p:unarchive</code> step
@@ -90,6 +92,12 @@
       <para>As a result: an item is included if it matches (at least) one of the
           <option>include-filter</option> values and none of the <option>exclude-filter</option>
         values.</para>
+      <para>Matching will be done using the relative filename of the archive's entry (the relative
+        path <emphasis>in</emphasis> the archive, leading up to the entry, for instance
+          <code>img/logos/company-logo.png</code>). The matching is done unanchored: it is a match if
+        the regular expression matches part of the filename. Informally: matching behaves like
+        applying the XPath <code>matches#2</code> function, like in <code>matches($path-in-archive,
+          $regular-expression)</code>.</para>
     </listitem>
     <listitem>
       <para>The <option>relative-to</option> option, when present, is used in creating the base URI
