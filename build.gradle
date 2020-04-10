@@ -143,6 +143,12 @@ task download_xproc_toc(type: Download) {
 }
 download_xproc_toc.onlyIf { !file("$buildDir/xproc/toc.xml").exists() }
 
+task download_steps_toc(type: Download) {
+  src stepsTocUri
+  dest file("build/steps/toc.xml")
+}
+download_steps_toc.onlyIf { !file("$buildDir/steps/toc.xml").exists() }
+
 // ======================================================================
 // Specification schemas
 
@@ -435,7 +441,7 @@ task step_paged_media_xpl(dependsOn: ["step-paged-media:library"], type: Copy) {
 // step-file
 
 task step_file(type: DocBookTask,
-               dependsOn: [ "download_xproc_toc",
+               dependsOn: [ "download_xproc_toc", "download_steps_toc",
                             "steps", "xproc_schemas", "spec_schemas",
                             "step-file:specification",
                             "step_file_assets",

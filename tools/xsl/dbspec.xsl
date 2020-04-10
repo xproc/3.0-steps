@@ -818,10 +818,10 @@
       <xsl:variable name="href" as="xs:string">
         <xsl:choose>
           <xsl:when test="starts-with(@spec, 'step-')">
-            <xsl:value-of select="substring-after(@spec, 'step-')"/>
+            <xsl:value-of select="concat('../', substring-after(@spec, 'step-'))"/>
           </xsl:when>
           <xsl:otherwise>
-            <xsl:value-of select="@spec"/>
+            <xsl:value-of select="concat('../', @spec)"/>
           </xsl:otherwise>
         </xsl:choose>
       </xsl:variable>
