@@ -85,7 +85,13 @@ steps is assumed; for background details, see
 
 <para>The <tag>p:run</tag> step runs a dynamically loaded pipeline.</para>
 
-<e:rng-pattern name="Run"/>
+<!--<e:rng-pattern name="Run"/>-->
+  <note role="editorial">
+      <para>GI 2020-04-26: I commented out <literal>&lt;e:rng-pattern name="Run"/></literal> temporarily since I don’t know how
+        to render the pattern that is currently in <link
+          xlink:href="https://github.com/gimsieke/3.0-grammar/blob/run/steps/step-run/steps.rnc">steps/step-run/steps.rnc</link>
+          (<link xlink:href="https://github.com/xproc/3.0-grammar/pull/17">PR</link> pending).</para>
+  </note>
 
 <para>The <tag>p:run</tag> step functions mostly like an atomic step in that
 you can define inputs connections and option values for it. However,
@@ -173,7 +179,32 @@ the <tag>p:run</tag> invocation.
       <title>Example</title>
       <example xml:id="ex.c.run">
         <title>Dynamic Execution of a Transformation/Validation Pipeline</title>
-        <programlisting language="xml"><xi:include href="../../../build/examples/run.txt" parse="text"/></programlisting>
+        <programlisting language="xml">&lt;p:run name="runme" xslt-parameters="{map{{'foo':'bar'}}}">
+  &lt;p:with-input port="pipeline">
+    &lt;p:inline expand-text="true">
+      &lt;p:declare-step name="transform-n-validate">
+        &lt;p:input name="source" primary="true" sequence="true"/>
+        &lt;p:input name="stylesheet"/>
+        &lt;p:input name="xsd"/>
+        &lt;p:option name="assert-valid" as="xs:boolean" select="false()"/>
+        &lt;p:option name="xslt-parameters" as="map(xs:QName, item()*)?"/>
+        &lt;p:output port="result" primary="true"/>
+        &lt;p:output port="report" pipe="report@xsdval"/>
+        &lt;p:xslt parameters="{$xslt-parameters}">
+          &lt;p:with-input port="stylesheet" pipe="stylesheet"/>
+        &lt;/p:xslt>
+        &lt;p:validate-with-xml-schema assert-valid="{$assert-valid}" name="xsdval">
+          &lt;p:with-input port="schema" pipe="xsd"/>
+        &lt;/p:validate-with-xml-schema>
+      &lt;/p:declare-step>
+    &lt;/p:inline>
+  &lt;/p:with-input>
+  &lt;p:with-input name="source" href="my.xml"/>
+  &lt;p:with-input name="stylesheet" href="my.xsl"/>
+  &lt;p:with-input name="xsd" href="my.xsd"/>
+  &lt;p:output port="result" primary="true"/>
+  &lt;p:output port="report"/>
+&lt;/p:run></programlisting>
       </example>
     </section>
   
