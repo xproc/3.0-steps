@@ -288,6 +288,9 @@ draft:</para>
    <listitem>
      <para>Replaced errors XC0070 and XC0130 with XD0079. (2020-04-09)</para>
    </listitem>
+   <listitem>
+     <para>Changed signature of <tag>p:split-sequence</tag> so that any document can appear one port source.</para>
+   </listitem>
  </orderedlist>
 </appendix>
 
