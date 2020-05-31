@@ -55,9 +55,9 @@
     <itemizedlist>
       <listitem>
         <para>If there is a single document on the <port>source</port> port, this document will
-          become the value of the <option>global-context-item</option> option. Implementations
-            <rfc2119>should</rfc2119> provide node-identity between the global context item and the
-          document on the source port.</para>
+          become the value of the <option>global-context-item</option> option. Whether there will be
+          node-identity between the global context item and the source document is
+            <glossterm>implementation-dependent</glossterm>.</para>
       </listitem>
       <listitem>
         <para>If there are none or multiple documents on the <port>source</port> port, its value
