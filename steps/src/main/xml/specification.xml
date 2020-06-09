@@ -179,6 +179,12 @@ compatible versions.</para>
         <rfc2119>recommended</rfc2119> are to be interpreted as described in <biblioref
 linkend="rfc2119"/>.</para>
 
+<para>As described in <xspecref spec="xproc" xref="psvi-support"/>,
+steps may not produce PSVI output unless that behavior is explicitly
+described. In this specification, the steps that may produce PSVI
+output are <tag>p:identity</tag>, <tag>p:split-sequence</tag>,
+<tag>p:xslt</tag>, and <tag>p:xquery</tag>.</para>
+
 </section>
 
 <section xml:id="req-steps">
