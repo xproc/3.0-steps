@@ -292,6 +292,9 @@ draft:</para>
      <para>Changed signature of <tag>p:split-sequence</tag> so that any document can appear one port 
        source. (2020-05-22)</para>
    </listitem>
+   <listitem>
+     <para>Change the behavior of the <option>global-context-item</option> option of <tag>p:xslt</tag>. (2020-06-10)</para>
+   </listitem>
  </orderedlist>
 </appendix>
 
