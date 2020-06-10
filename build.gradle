@@ -341,7 +341,7 @@ task step_run(type: DocBookTask,
                             "steps", "xproc_schemas", "spec_schemas",
                             "step-run:specification",
                             "step_run_assets",
-                            "step_run_src", "step_run_xpl" ]) {
+                            "step_run_src" ]) {
   inputs.files fileTree(dir: "tools/xsl/")
   inputs.files fileTree(dir: "tools/xpl/")
   inputs.file "build/xproc/toc.xml"
@@ -376,13 +376,6 @@ task step_run_src(dependsOn: ["step-run:source"], type: Copy) {
   into "build/dist/run/"
   include "source.xml"
   rename ("source.xml", "specification.xml")
-}
-
-task step_run_xpl(dependsOn: ["step-run:library"], type: Copy) {
-  from "step-run/build/"
-  into "build/dist/run/"
-  include "library.xml"
-  rename ("library.xml", "steps.xpl")
 }
 
 // ======================================================================
