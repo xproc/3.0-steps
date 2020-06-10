@@ -56,35 +56,7 @@ task glossary(dependsOn: ["xinclude"], type: XMLCalabashTask) {
   pipeline "../tools/xpl/makeglossary.xpl"
 }
 
-task library(dependsOn: ["source"], type: XMLCalabashTask) {
-  inputs.file "build/source.xml"
-  inputs.file "../tools/xpl/typed-pipeline-library.xpl"
-  inputs.file "../tools/xsl/typed-pipeline-library.xsl"
-  outputs.file "build/library.xml"
-  input("source", "build/source.xml")
-  output("result", "build/library.xml")
-  pipeline "../tools/xpl/typed-pipeline-library.xpl"
-}
-
-task rnc(dependsOn: ["library"], type: XMLCalabashTask) {
-  inputs.file "build/library.xml"
-  inputs.file "../tools/xpl/library-to-rnc.xpl"
-  inputs.file "../tools/xsl/library-to-rnc.xsl"
-  outputs.file "build/steps.rnc"
-  input("source", "build/library.xml")
-  output("result", "build/steps.rnc")
-  pipeline "../tools/xpl/library-to-rnc.xpl"
-}
-
-task rng(dependsOn: ["rnc"], type: JavaExec) {
-  inputs.file "build/steps.rnc"
-  outputs.file "build/steps.rng"
-  classpath = configurations.tools
-  main = 'com.thaiopensource.relaxng.translate.Driver'
-  args = ["build/steps.rnc", "build/steps.rng"]
-}
-
-task specification(dependsOn: [ "source", "library", "rng" ]) {
+task specification(dependsOn: [ "source" ]) {
   // nop
 }
 
