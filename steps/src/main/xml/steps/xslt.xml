@@ -47,11 +47,21 @@
     PSVI annotations.</para>
   <para>The interpretation of the input and output ports as well as for the other options depends on
     the selected XSLT version.</para>
+  
   <section>
     <title>Invoking an XSLT 3.0 stylesheet</title>
     <para>The value of <option>global-context-item</option> is used as global context item for the
-      stylesheet invocation. If no value is supplied, the empty sequence is supplied to the
-      invocation.</para>
+      stylesheet invocation. If no value is supplied, the following applies:</para>
+    <itemizedlist>
+      <listitem>
+        <para>If there is a single document on the <port>source</port> port, this document will
+          become the value of the <option>global-context-item</option> option.</para>
+      </listitem>
+      <listitem>
+        <para>If there are none or multiple documents on the <port>source</port> port, its value
+          will be the empty sequence.</para>
+      </listitem>
+    </itemizedlist>
     <para>If no value is supplied for <option>template-name</option> option an “Apply-template
       invocation” is performed. The documents that appear on <port>source</port> are taken to be the
       initial match selection. The default collection is undefined. If a value is supplied for 
