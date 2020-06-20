@@ -314,6 +314,10 @@ draft:</para>
    <listitem>
      <para>Option <option>populate-default-collection</option> is added to the signature of <tag>p:xslt</tag>. (2020-06-20)</para>
    </listitem>
+   <listitem>
+     <para>Clarified how the default <literal>content-type</literal> header of <tag>p:http-request</tag> is 
+     constructed if a single document appears on <port>source</port> port. (2020-06-20)</para>
+   </listitem>
  </orderedlist>
 </appendix>
 
