@@ -42,7 +42,12 @@ determined as follows:</para>
 <para>If a <property>content-type</property> property is specified
 in <option>document-properties</option> or <option>content-type</option> is present,
 then each document <rfc2119>must</rfc2119> be interpreted according to
-that content type. <error code="D0062">It is a <glossterm>dynamic error</glossterm>
+that content type.
+  <error code="D0079">It is a <glossterm>dynamic error</glossterm> if a supplied content-type is not 
+    a valid media type of the form 
+    “<literal><replaceable>type</replaceable>/<replaceable>subtype</replaceable>+<replaceable>ext</replaceable></literal>” 
+    or “<literal><replaceable>type</replaceable>/<replaceable>subtype</replaceable></literal>”.</error> 
+<error code="D0062">It is a <glossterm>dynamic error</glossterm>
 if the <tag class="attribute">content-type</tag> is specified and the
 document-properties has a “<code>content-type</code>” that is not the
 same.</error>
