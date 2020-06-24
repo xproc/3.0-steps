@@ -5,10 +5,10 @@
 <title>p:load</title>
 
 <para>The <code>p:load</code> step has no inputs but produces as its
-result a document (or documents) specified by an IRI.</para>
+result a document specified by an IRI.</para>
 
 <p:declare-step type="p:load">
-  <p:output port="result" sequence="true" content-types="any"/>
+  <p:output port="result" content-types="any"/>
   <p:option name="href" required="true" as="xs:anyURI"/>
   <p:option name="parameters" as="map(xs:QName,item()*)?"/>
   <p:option name="content-type" as="xs:string?"/>
@@ -24,8 +24,8 @@ result a document (or documents) specified by an IRI.</para>
       error</glossterm> if the base URI is not both absolute and valid according to <biblioref
         linkend="rfc3986"/>.</error></para>
 
-<para>The document or documents identified by the
-<option>href</option> URI are loaded and returned. If the URI protocol
+<para>The document identified by the
+<option>href</option> URI is loaded and returned. If the URI protocol
 supports redirection, then redirects <rfc2119>must</rfc2119> be
 followed.</para>
 
@@ -34,14 +34,14 @@ if the resource referenced by a <code>p:load</code> element does not exist
 or cannot be accessed.</error></para>
 
 <para>The behavior of this step depends on the content type of the
-document or documents loaded. The content type of each document is
+document loaded. The content type of a document is
 determined as follows:</para>
 
 <orderedlist>
 <listitem>
 <para>If a <property>content-type</property> property is specified
 in <option>document-properties</option> or <option>content-type</option> is present,
-then each document <rfc2119>must</rfc2119> be interpreted according to
+then the document <rfc2119>must</rfc2119> be interpreted according to
 that content type.
   <error code="D0079">It is a <glossterm>dynamic error</glossterm> if a supplied content-type is not 
     a valid media type of the form 
@@ -54,7 +54,7 @@ same.</error>
 </para>
 </listitem>
 <listitem>
-<para>If the documents are retrieved with a URI protocol that specifies
+<para>If the document is retrieved with a URI protocol that specifies
 a content type (for example, <literal>http:</literal>), then the document
 <rfc2119>must</rfc2119> be interpreted according to that content type.
 </para>
