@@ -319,7 +319,11 @@ draft:</para>
      constructed if a single document appears on <port>source</port> port. (2020-06-20)</para>
    </listitem>
    <listitem>
-     <para>Added error (XD0079) to <tag>p:http-request</tag> and <tag>p:http-request</tag> for invalid content-types. (2020-06-23)</para>
+     <para>Added error (XD0079) to <tag>p:http-request</tag> and <tag>p:load</tag> for invalid content-types. (2020-06-23)</para>
+   </listitem>
+   <listitem>
+     <para>Changed signature of the <port>result</port> port of <tag>p:load</tag> to <literal>sequence="false"</literal> and
+       adapted the prose accordingly. (2020-06-24)</para>
    </listitem>
  </orderedlist>
 </appendix>
