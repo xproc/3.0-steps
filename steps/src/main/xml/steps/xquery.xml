@@ -43,7 +43,7 @@ is empty.</para>
     </listitem>
     <listitem>
       <para>Otherwise the serialization of the document <rfc2119>must</rfc2119> be treated as
-        the query.</para>
+        the query. The document's serialization property (if present) is used.</para>
     </listitem>
 </itemizedlist>
  
