@@ -205,6 +205,7 @@ task steps(dependsOn: [ "xproc_schemas", "spec_schemas",
   option("diff", deltaxml())
   option("specid", "steps")
   option("diffloc", buildAbsDir + "/steps/diff.html")
+  option("lcdiffloc", buildAbsDir + "/steps/lcdiff.html")
 
   pipeline "tools/xpl/formatspec.xpl"
 }
