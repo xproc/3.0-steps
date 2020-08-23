@@ -1,0 +1,23 @@
+<p:declare-step xmlns:p="http://www.w3.org/ns/xproc"
+  xmlns:c="http://www.w3.org/ns/xproc-step" version="3.0" 
+  name="transform-n-validate">
+  <p:input port="source" primary="true" sequence="true"/>
+  <p:input port="stylesheet"/>
+  <p:input port="xsd"/>
+  <p:option name="assert-valid" as="xs:boolean" select="false()"/>
+  <p:option name="xslt-parameters" as="map(xs:QName, item()*)?"/>
+  <p:option name="mode" as="xs:QName?"/>
+  <p:option name="template" as="xs:QName?"/>
+  <p:output port="result" primary="true"/>
+  <p:output port="report" pipe="report@xsdval"/>
+  <p:xslt>
+    <p:with-option name="initial-mode" select="$mode"/>
+    <p:with-option name="template-name" select="$template"/>
+    <p:with-option name="parameters" select="$xslt-parameters"/>
+    <p:with-input port="stylesheet" pipe="stylesheet"/>
+  </p:xslt>
+  <p:validate-with-xml-schema name="xsdval">
+    <p:with-option name="assert-valid" select="$assert-valid"/>
+    <p:with-input port="schema" pipe="xsd@transform-n-validate"/>
+  </p:validate-with-xml-schema>
+</p:declare-step>
