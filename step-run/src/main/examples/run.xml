@@ -1,26 +1,22 @@
-<p:run name="runme" xslt-parameters="{map{{'foo':'bar'}}}">
-  <p:with-input port="pipeline">
-    <p:inline expand-text="true">
-      <p:declare-step name="transform-n-validate">
-        <p:input name="source" primary="true" sequence="true"/>
-        <p:input name="stylesheet"/>
-        <p:input name="xsd"/>
-        <p:option name="assert-valid" as="xs:boolean" select="false()"/>
-        <p:option name="xslt-parameters" as="map(xs:QName, item()*)?"/>
-        <p:output port="result" primary="true"/>
-        <p:output port="report" pipe="report@xsdval"/>
-        <p:xslt parameters="{$xslt-parameters}">
-          <p:with-input port="stylesheet" pipe="stylesheet"/>
-        </p:xslt>
-        <p:validate-with-xml-schema assert-valid="{$assert-valid}" name="xsdval">
-          <p:with-input port="schema" pipe="xsd"/>
-        </p:validate-with-xml-schema>
-      </p:declare-step>
-    </p:inline>
-  </p:with-input>
-  <p:with-input name="source" href="my.xml"/>
-  <p:with-input name="stylesheet" href="my.xsl"/>
-  <p:with-input name="xsd" href="my.xsd"/>
-  <p:output port="result" primary="true"/>
-  <p:output port="report"/>
-</p:run>
+<p:declare-pipeline xmlns:p="http://www.w3.org/ns/xproc"
+  xmlns:c="http://www.w3.org/ns/xproc-step" version="3.1" 
+  name="sample-run-invocation">
+  <p:variable name="xsl-params" select="map{'foo': 'bar'}" 
+    as="map(xs:QName, item()*)"/>
+  <p:variable name="assert-valid" select="false()" as="xs:boolean"/>
+  <p:variable name="mode" as="xs:QName?"/>
+  <p:variable name="template" as="xs:QName?"/>
+  <p:run name="runme">
+    <p:with-input href="transform-n-validate.xpl"/>
+    <p:run-option name="mode" select="$mode"/>
+    <p:run-option name="template" select="$template"/>
+    <p:run-option name="xslt-parameters" select="$xsl-params"/>,
+    <p:run-option name="assert-valid" select="$assert-valid"/>
+    <p:run-input port="source" href="my.xml" primary="true"/>
+    <p:run-input port="stylesheet" href="my.xsl"/>
+    <p:run-input port="xsd" href="my.xsd"/>
+    <p:output port="result" primary="true"/>
+    <p:output port="report"/>
+  </p:run>
+</p:declare-pipeline>
+
