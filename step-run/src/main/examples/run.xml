@@ -1,22 +1,26 @@
-<p:declare-pipeline xmlns:p="http://www.w3.org/ns/xproc"
+<p:declare-step xmlns:p="http://www.w3.org/ns/xproc"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
   xmlns:c="http://www.w3.org/ns/xproc-step" version="3.1" 
   name="sample-run-invocation">
-  <p:variable name="xsl-params" select="map{'foo': 'bar'}" 
-    as="map(xs:QName, item()*)"/>
+  
+  <p:variable name="xsl-params" select="map{'foo': 'bar'}"  as="map(xs:QName, item()*)"/>
   <p:variable name="assert-valid" select="false()" as="xs:boolean"/>
-  <p:variable name="mode" as="xs:QName?"/>
-  <p:variable name="template" as="xs:QName?"/>
+  <p:variable name="mode" as="xs:QName?" select="()"/>
+  <p:variable name="template" as="xs:QName?" select="()"/>
   <p:run name="runme">
     <p:with-input href="transform-n-validate.xpl"/>
-    <p:run-option name="mode" select="$mode"/>
+
+    <p:run-option name="mode" select="$mode" />
+        <p:run-option name="mode" select="$mode" />
+
     <p:run-option name="template" select="$template"/>
-    <p:run-option name="xslt-parameters" select="$xsl-params"/>,
+    <p:run-option name="xslt-parameters" select="$xsl-params"/>
     <p:run-option name="assert-valid" select="$assert-valid"/>
     <p:run-input port="source" href="my.xml" primary="true"/>
     <p:run-input port="stylesheet" href="my.xsl"/>
-    <p:run-input port="xsd" href="my.xsd"/>
+    <p:run-input port="xsd" href="my.xsd"/> 
     <p:output port="result" primary="true"/>
     <p:output port="report"/>
   </p:run>
-</p:declare-pipeline>
+</p:declare-step>
 
