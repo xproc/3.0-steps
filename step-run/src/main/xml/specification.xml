@@ -145,19 +145,20 @@ a different name than implicitly or explicitly specified in the <tag>p:run</tag>
       <title>Example</title>
       <example xml:id="ex.c.run">
         <title>Dynamic Execution of a Transformation/Validation Pipeline</title>
-        <programlisting language="xml">&lt;p:declare-pipeline xmlns:p="http://www.w3.org/ns/xproc"
-  xmlns:c="http://www.w3.org/ns/xproc-step" version="3.1" 
+        <programlisting language="xml">&lt;p:declare-step xmlns:p="http://www.w3.org/ns/xproc"
+  xmlns:c="http://www.w3.org/ns/xproc-step"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema" version="3.1" 
   name="sample-run-invocation">
   &lt;p:variable name="xsl-params" select="map{'foo': 'bar'}" 
     as="map(xs:QName, item()*)"/>
   &lt;p:variable name="assert-valid" select="false()" as="xs:boolean"/>
-  &lt;p:variable name="mode" as="xs:QName?"/>
-  &lt;p:variable name="template" as="xs:QName?"/>
+  &lt;p:variable name="mode" as="xs:QName?" select="()"/>
+  &lt;p:variable name="template" as="xs:QName?" select="()"/>
   &lt;p:run name="runme">
     &lt;p:with-input href="transform-n-validate.xpl"/>
     &lt;p:run-option name="mode" select="$mode"/>
     &lt;p:run-option name="template" select="$template"/>
-    &lt;p:run-option name="xslt-parameters" select="$xsl-params"/>,
+    &lt;p:run-option name="xslt-parameters" select="$xsl-params"/>
     &lt;p:run-option name="assert-valid" select="$assert-valid"/>
     &lt;p:run-input port="source" href="my.xml" primary="true"/>
     &lt;p:run-input port="stylesheet" href="my.xsl"/>
@@ -165,10 +166,11 @@ a different name than implicitly or explicitly specified in the <tag>p:run</tag>
     &lt;p:output port="result" primary="true"/>
     &lt;p:output port="report"/>
   &lt;/p:run>
-&lt;/p:declare-pipeline></programlisting>
+&lt;/p:declare-step></programlisting>
         <para>with this pipeline in <filename>transform-n-validate.xpl</filename>:</para>
         <programlisting language="xml">&lt;p:declare-step xmlns:p="http://www.w3.org/ns/xproc"
-  xmlns:c="http://www.w3.org/ns/xproc-step" version="3.0" 
+  xmlns:c="http://www.w3.org/ns/xproc-step"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema" version="3.0" 
   name="transform-n-validate">
   &lt;p:input port="source" primary="true" sequence="true"/>
   &lt;p:input port="stylesheet"/>
