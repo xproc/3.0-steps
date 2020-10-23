@@ -31,10 +31,10 @@ matches. A pattern of the form <literal>h:div</literal> will replace
 ones.</para>
 </note>
 
-<para>This step produces a single document; if the document element is
-unwrapped, the result might not be well-formed XML. If the step produces a
-document node with a single text child, the result will have content type 
-“<literal>text/plain</literal>”.</para>
+  <para>This step produces a single document; if the document element is unwrapped, the result might
+    not be well-formed XML. If an empty element is unwrapped, the result will be a document node
+    with a single empty text child. If the step produces a document node with a single text child (empty or not),
+    the result will have content type “<literal>text/plain</literal>”.</para>
 
 <simplesect>
 <title>Document properties</title>
