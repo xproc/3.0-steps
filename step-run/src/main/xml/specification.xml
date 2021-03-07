@@ -118,8 +118,10 @@ Input ports of the dynamically executed pipeline that are not declared with <tag
 the <tag>p:run</tag> invocation will receive a <tag>p:empty</tag> connection.
 Input ports that are declared in <tag>p:run-input</tag> but not in the dynamically
 executed pipeline will be silently ignored.</para>
-<para>The default readable port of the <tag>p:run</tag> step becomes the default readable port 
-of the pipeline.</para>
+<para>The context item used to evaluate expressions on <tag>p:run-option</tag> comes from the 
+<glossterm>default readable port</glossterm> of the <tag>p:run</tag> step. Additionally, if 
+<tag>p:run-input</tag> implicitly or explicitly identifies a primary input port, the default
+readable port will be connected to it if no explicit connection is provided.</para>
   
   <para>Other than <tag>p:with-option</tag>, <tag>p:run-option</tag> accepts a boolean attribute
   <tag class="attribute">static</tag> that defaults to “<literal>false</literal>”. If it is “<literal>true</literal>”,
