@@ -10,8 +10,23 @@ fi
 
 echo "Deploying website updates for $BRANCH branch"
 
-if [ `set | grep GIT_EMAIL | wc -l` = 0 -o `set | grep GIT_USER | wc -l` = 0 ]; then
+if [ -z "${GIT_EMAIL}" -o -z "{$GIT_USER}" ]; then
     echo "No identity configured with GIT_USER/GIT_EMAIL"
+    exit
+fi
+
+if [ -z "${GIT_PUB_REPO}" ]; then
+    echo "No publication repository configured with GIT_PUB_REPO"
+    exit
+fi
+
+if [ -z "${GIT_GRAMMAR_REPO}" ]; then
+    echo "No grammar repository configured with GIT_GRAMMAR_REPO"
+    exit
+fi
+
+if [ -z "${GH_TOKEN}" ]; then
+    echo "No github token configured with GH_TOKEN for publication"
     exit
 fi
 
@@ -21,3 +36,4 @@ git config --global user.name $GIT_USER
 # N.B. This publish script actually updates the grammar repository
 # and the gh-pages branch of the 3.0-specification repository!
 
+pwd
