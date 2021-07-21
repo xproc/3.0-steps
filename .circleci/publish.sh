@@ -36,4 +36,16 @@ git config --global user.name $GIT_USER
 # N.B. This publish script actually updates the grammar repository
 # and the gh-pages branch of the 3.0-specification repository!
 
+STEPHOME=`pwd`
+TIP=${CIRCLE_TAG:="head"}
+
+echo "Publishing to gh-pages/${BRANCH}/${TIP} in ${GIT_PUB_REPO}"
+
+cd ..
+
 pwd
+
+git clone --quiet --branch=gh-pages \
+    https://${GH_TOKEN}@github.com/${GIT_PUB_REPO} pub-gh-pages > /dev/null
+
+ls -lA pub-gh-pages
