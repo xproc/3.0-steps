@@ -43,9 +43,37 @@ echo "Publishing to gh-pages/${BRANCH}/${TIP} in ${GIT_PUB_REPO}"
 
 cd ..
 
-pwd
+if [ ! -d pub-gh-pages ]; then
+    git clone --quiet --branch=gh-pages \
+        https://${GH_TOKEN}@github.com/${GIT_PUB_REPO} pub-gh-pages > /dev/null
+fi
 
-git clone --quiet --branch=gh-pages \
-    https://${GH_TOKEN}@github.com/${GIT_PUB_REPO} pub-gh-pages > /dev/null
+cd pub-gh-pages
+mkdir -p ./${BRANCH}/${TIP}
+cp -Rf ${STEPHOME}/build/dist/* ./${BRANCH}/${TIP}/
+git add -f .
+git commit -m "Successful CircleCI build $CIRCLE_BUILD_NUM"
+git push -fq origin gh-pages 
 
-ls -lA pub-gh-pages
+echo "Published."
+
+cd ${STEPHOME}
+
+echo "Publishing library and grammar files to ${GIT_GRAMMAR_REPO}"
+
+cd ..
+
+if [ ! -d pub-grammar ]; then
+    git clone --quiet --branch=master \
+        https://${GH_TOKEN}@github.com/${GIT_GRAMMAR_REPO} pub-grammar > /dev/null
+fi
+
+cd pub-grammar
+cp -Rf ${STEPHOME}/build/dist/etc/* ./steps/
+rm -f ./steps/*/source.xml ./steps/*/toc.xml
+
+git add --verbose -f .
+git commit -m "Successful CircleCI build $CIRCLE_BUILD_NUM"
+git push -fq origin master
+
+echo "Published."
