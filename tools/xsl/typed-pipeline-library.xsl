@@ -2,7 +2,7 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 		xmlns:p="http://www.w3.org/ns/xproc"
 		xmlns:e="http://www.w3.org/1999/XSL/Spec/ElementSyntax"
-		version="2.0">
+		version="3.0">
 
 <xsl:output method="xml" indent="yes"/>
 
@@ -50,17 +50,6 @@
     <xsl:apply-templates select="@*" mode="copystep"/>
     <xsl:apply-templates mode="copystep"/>
   </xsl:element>
-</xsl:template>
-
-<xsl:template match="@as" mode="copystep">
-  <xsl:choose>
-    <xsl:when test="contains(., '(')">
-      <xsl:attribute name="as" select="'xs:string'"/>
-    </xsl:when>
-    <xsl:otherwise>
-      <xsl:copy/>
-    </xsl:otherwise>
-  </xsl:choose>
 </xsl:template>
 
 <xsl:template match="attribute()" mode="copystep">
