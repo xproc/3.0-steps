@@ -100,7 +100,8 @@ task make_etc() {
 }
 
 ["steps", "step-file", "step-os", "step-paged-media",
- "step-run", "step-text", "step-mail", "step-rdf", "step-validation" ].each { spec ->
+ "step-run", "step-text", "step-mail", "step-rdf", "step-validation",
+ "step-ixml" ].each { spec ->
   Task t = task "copy_${spec}_build"(dependsOn: [ "buildspecs" ], type: Copy) {
     from "$spec/build/"
     exclude "xinclude.xml", "examples/**", "graphics/**", "glossary.xml"
@@ -376,6 +377,51 @@ task step_run_assets(type: Copy) {
 task step_run_src(dependsOn: ["step-run:source"], type: Copy) {
   from "step-run/build/"
   into "build/dist/run/"
+  include "source.xml"
+  rename ("source.xml", "specification.xml")
+}
+
+// ======================================================================
+// step-ixml
+
+task step_ixml(type: DocBookTask,
+               dependsOn: [ "download_xproc_toc",
+                            "steps", "xproc_schemas", "spec_schemas",
+                            "step-ixml:specification",
+                            "step_ixml_assets",
+                            "step_ixml_src" ]) {
+  inputs.files fileTree(dir: "tools/xsl/")
+  inputs.files fileTree(dir: "tools/xpl/")
+  inputs.file "build/xproc/toc.xml"
+  input("source", "step-ixml/build/source.xml")
+  output("result", "build/dist/ixml/index.html")
+
+  param("schemaext.schema", file("build/schema/dbspec.rng"))
+  param("travis", getenv("TRAVIS"))
+  param("travis-commit", getenv("TRAVIS_COMMIT"))
+  param("travis-build-number", getenv("TRAVIS_BUILD_NUMBER"))
+  param("travis-user", getenv("TRAVIS_USER"))
+  param("travis-repo", getenv("TRAVIS_REPO"))
+  param("travis-branch", getenv("TRAVIS_BRANCH"))
+  param("travis-tag", getenv("TRAVIS_TAG"))
+
+  option("style", file("tools/xsl/xproc-specs.xsl"))
+  option("diff", deltaxml())
+  option("specid", "ixml")
+  option("diffloc", buildAbsDir + "/ixml/diff.html")
+
+  pipeline "tools/xpl/formatspec.xpl"
+}
+buildspecs.dependsOn "step_ixml"
+
+task step_ixml_assets(type: Copy) {
+  from "src/main/resources"
+  into "build/dist/ixml/"
+}
+
+task step_ixml_src(dependsOn: ["step-ixml:source"], type: Copy) {
+  from "step-ixml/build/"
+  into "build/dist/ixml/"
   include "source.xml"
   rename ("source.xml", "specification.xml")
 }
