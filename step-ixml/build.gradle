@@ -1,0 +1,85 @@
+repositories {
+  mavenLocal()
+  mavenCentral()
+}
+
+configurations {
+  tools {
+    description = "ixml tools"
+    transitive = true
+  }
+}
+
+dependencies {
+  tools (
+    [group: 'org.relaxng', name: 'jing', version: '20181204'],
+    [group: 'org.relaxng', name: 'trang', version: '20181204']
+  )
+}
+
+defaultTasks 'specification'
+
+apply plugin: 'com.xmlcalabash.task'
+
+import com.xmlcalabash.XMLCalabashTask
+import com.nwalsh.tasks.StripAmblesTask
+
+task xinclude(dependsOn: [":spec_schemas"], type: XMLCalabashTask) {
+  inputs.files fileTree(dir: "src/main/xml/")
+  outputs.file "build/xinclude.xml"
+  input("source", "src/main/xml/specification.xml")
+  output("result", "build/xinclude.xml")
+  pipeline "../tools/xpl/validate.xpl"
+}
+xinclude.doFirst {
+  mkdir("build")
+}
+
+task source(dependsOn: ["glossary"], type: XMLCalabashTask) {
+  inputs.file "../tools/xsl/masterbib.xsl"
+  inputs.file "../src/main/xml/bibliography.xml"
+  inputs.file "src/main/xml/specification.xml"
+  inputs.file "build/glossary.xml"
+  outputs.file "build/source.xml"
+  input("source", "src/main/xml/specification.xml")
+  output("result", "build/source.xml")
+  pipeline "../tools/xpl/validate.xpl"
+}
+
+task glossary(dependsOn: ["xinclude"], type: XMLCalabashTask) {
+  inputs.file "build/xinclude.xml"
+  inputs.file "../tools/xpl/makeglossary.xpl"
+  inputs.file "../tools/xsl/makeglossary.xsl"
+  outputs.file "build/glossary.xml"
+  input("source", "build/xinclude.xml")
+  output("result", "build/glossary.xml")
+  pipeline "../tools/xpl/makeglossary.xpl"
+}
+
+task specification(dependsOn: [ "source" ]) {
+  // nop
+}
+
+// ================================================================================
+// Process the examples
+
+def stripFiles = [ ]
+
+stripFiles.each { String name ->
+  String newname = name.substring(0, name.lastIndexOf(".")) + ".txt"
+
+  task "process_$name"(type: StripAmblesTask) {
+    input = file("src/main/examples/$name")
+    output = file("$buildDir/examples/$newname")
+  }
+  xinclude.dependsOn "process_$name"
+}
+
+// ================================================================================
+// Process the examples
+
+task clean() {
+  doFirst {
+    delete("build")
+  }
+}
