@@ -206,17 +206,17 @@ different possible ways to parse the input. By default, one of them is returned.
 <para>This might return any one of these parses:</para>
 
 <programlisting language="xml"
-><![CDATA[<letters><X>a</X><C><digits>123</digits></C></letters>]]></programlisting>
+><![CDATA[<letters ixml:state="ambiguous" xmlns:ixml="http://invisiblexml.org/NS"><X>a</X><C><digits>123</digits></C></letters>]]></programlisting>
 
 <para>or</para>
 
 <programlisting language="xml"
-><![CDATA[<letters><X>a</X><A><digits>123</digits></A></letters>]]></programlisting>
+><![CDATA[<letters ixml:state="ambiguous" xmlns:ixml="http://invisiblexml.org/NS"><X>a</X><A><digits>123</digits></A></letters>]]></programlisting>
 
 <para>or</para>
 
 <programlisting language="xml"
-><![CDATA[<letters><X>a</X><B><digits>123</digits></B></letters>]]></programlisting>
+><![CDATA[<letters ixml:state="ambiguous" xmlns:ixml="http://invisiblexml.org/NS"><X>a</X><B><digits>123</digits></B></letters>]]></programlisting>
 
 <para>All are equally correct.</para>
 
