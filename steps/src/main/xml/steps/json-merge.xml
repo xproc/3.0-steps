@@ -17,7 +17,7 @@ port <port>result</port>.</para>
 <p:declare-step type="p:json-merge">
   <p:input port="source" sequence="true" content-types="any"> </p:input>
   <p:output port="result" content-types="application/json"/>
-  <p:option name="duplicates" as="xs:token" values="('reject', 'use-first', 'use-last', 'use-any', 'combine')" select="'use-first'"/>
+  <p:option name="duplicates" values="('reject', 'use-first', 'use-last', 'use-any', 'combine')" select="'use-first'"/>
   <p:option name="key" as="xs:string" select="'concat(&#34;_&#34;,$p:index)'" e:type="XPathExpression"/>
 </p:declare-step>
 
