@@ -36,6 +36,6 @@ of the element on which it occurred.</para>
    <para feature="delete-preserves-partially">If the resulting document contains exactly one text node,
       the <literal>content-type</literal> property is changed to <literal>text/plain</literal> and the 
       <literal>serialization</literal> property is removed, while all other document properties are 
-      preserved. For other document types, all document properties are preserved.</para>
+      preserved. In all other cases, all document properties are preserved.</para>
 </simplesect>
 </section>
