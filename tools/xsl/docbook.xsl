@@ -129,7 +129,14 @@
 			 mode="m:titlepage-mode"/>
 
     <h2>
-      <xsl:text>Draft Community Group Report </xsl:text>
+      <xsl:choose>
+        <xsl:when test="$w3c-doctype='ed'">
+          <xsl:text>Draft Community Group Report </xsl:text>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:text>Community Group Report </xsl:text>
+        </xsl:otherwise>
+      </xsl:choose>
 
       <time class="dt-published">
         <xsl:attribute name="datetime"
@@ -163,11 +170,11 @@
                                       '[Y0001][M01][D01]T[H01]:[m01]:[s01]Z')"/>
             <xsl:value-of select="format-dateTime($dtz, '[H01]:[m01]&#160;UTC')"/>
           </time>
-          <xsl:if test="$travis-build-number != ''">
+          <xsl:if test="$circleci-build-number != ''">
             <xsl:text> (</xsl:text>
-            <a href="https://github.com/{$travis-user}/{$travis-repo}/commit/{$travis-commit}">
+            <a href="https://github.com/{$circleci-user}/{$circleci-repo}/commit/{$circleci-commit}">
               <xsl:text>build </xsl:text>
-              <xsl:value-of select="$travis-build-number"/>
+              <xsl:value-of select="$circleci-build-number"/>
             </a>
             <xsl:text>)</xsl:text>
           </xsl:if>
@@ -252,7 +259,7 @@
         </a>
       </dd>
 
-      <xsl:if test="$travis-build-number != '' or $auto-diff">
+      <xsl:if test="$circleci-build-number != '' or $auto-diff">
         <dt>Changes:</dt>
         <xsl:if test="/*/@xml:id = 'steps'">
           <dd>
@@ -264,9 +271,9 @@
             <a href="diff.html">Diff against current “status quo” draft</a>
           </dd>
         </xsl:if>
-        <xsl:if test="$travis-build-number != ''">
+        <xsl:if test="$circleci-build-number != ''">
           <dd>
-            <a href="http://github.com/{$travis-user}/{$travis-repo}/commits/{$travis-branch}">
+            <a href="http://github.com/{$circleci-user}/{$circleci-repo}/commits/{$circleci-branch}">
               <xsl:text>Commits for this specification</xsl:text>
             </a>
           </dd>

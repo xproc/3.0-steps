@@ -39,24 +39,20 @@
   <p:with-option name="style"
                  select="resolve-uri($style)"/>
 
-  <p:with-param name="travis"
-                select="string(/c:result/c:env[@name='TRAVIS']/@value)"/>
-  <p:with-param name="travis-commit"
-                select="string(/c:result/c:env[@name='TRAVIS_COMMIT']/@value)"/>
-  <p:with-param name="travis-tag"
-                select="string(/c:result/c:env[@name='TRAVIS_TAG']/@value)"/>
-  <p:with-param name="travis-build-number"
-                select="string(/c:result/c:env[@name='TRAVIS_BUILD_NUMBER']/@value)"/>
-  <p:with-param name="travis-branch"
-                select="string(/c:result/c:env[@name='TRAVIS_BRANCH']/@value)"/>
-  <p:with-param name="travis-user"
-                select="substring-before(
-                          /c:result/c:env[@name='TRAVIS_REPO_SLUG']/@value,
-                          '/')"/>
-  <p:with-param name="travis-repo"
-                select="substring-after(
-                          /c:result/c:env[@name='TRAVIS_REPO_SLUG']/@value,
-                          '/')"/>
+  <p:with-param name="circleci"
+                select="string(/c:result/c:env[@name='CIRCLECI']/@value)"/>
+  <p:with-param name="circleci-commit"
+                select="string(/c:result/c:env[@name='CIRCLE_SHA1']/@value)"/>
+  <p:with-param name="circleci-tag"
+                select="string(/c:result/c:env[@name='CIRCLE_TAG']/@value)"/>
+  <p:with-param name="circleci-build-number"
+                select="string(/c:result/c:env[@name='CIRCLE_BUILD_NUM']/@value)"/>
+  <p:with-param name="circleci-branch"
+                select="string(/c:result/c:env[@name='CIRCLE_BRANCH']/@value)"/>
+  <p:with-param name="circleci-user"
+                select="string(/c:result/c:env[@name='CIRCLE_PROJECT_USERNAME']/@value)"/>
+  <p:with-param name="circleci-repo"
+                select="string(/c:result/c:env[@name='CIRCLE_PROJECT_REPONAME']/@value)"/>
   <p:with-param name="auto-diff" select="$diff != '' and $specid != ''"/>
 </dbp:docbook>
 
@@ -92,7 +88,7 @@
     <p:exec command="java" result-is-xml="false" cx:depends-on="fix2">
       <p:input port="source"><p:empty/></p:input>
       <p:with-option name="args"
-                     select="concat('-jar deltaxml/command-10.3.1.jar compare xhtml ',
+                     select="concat('-jar deltaxml/command-10.3.1.jar compare xhtml-patch ',
                                     'build/', $specid, '-current.html build/', $specid, '-updated.html ', $diffloc)">
         <p:empty/>
       </p:with-option>
