@@ -123,8 +123,12 @@
 
       <xsl:variable name="type" as="xs:string*">
 	<xsl:choose xmlns:e="http://www.w3.org/1999/XSL/Spec/ElementSyntax">
+          <xsl:when test="@values">
+	    <xsl:value-of select="'string'"/>
+          </xsl:when>
 	  <xsl:when test="not(@as) and not(@e:type)">
 	    <xsl:message>Warning: no e:type!!!</xsl:message>
+            <xsl:message><xsl:sequence select="."/></xsl:message>
 	    <xsl:value-of select="'item()*'"/>
 	  </xsl:when>
           <xsl:when test="not(@e:type)"/>
