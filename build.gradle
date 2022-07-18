@@ -185,7 +185,7 @@ spec_sch.doFirst {
 
 def buildAbsDir = file("build/dist").getAbsolutePath()
 
-task steps(dependsOn: [ "xproc_schemas", "spec_schemas",
+task steps(dependsOn: [ "download_xproc_toc", "xproc_schemas", "spec_schemas",
                         "steps:specification", "steps_assets", "steps_src",
                         "steps_xpl" ],
            type: DocBookTask) {
@@ -213,8 +213,72 @@ task steps(dependsOn: [ "xproc_schemas", "spec_schemas",
 }
 buildspecs.dependsOn "steps"
 
+task steps_pdf_xform(dependsOn: [ "steps" ], type: XMLCalabashTask) {
+  inputs.file "${projectDir}/tools/xsl/htmlprint.xsl"
+  inputs.file "${buildDir}/dist/steps/index.html"
+  outputs.file "${buildDir}/dist/steps/pdf.html"
+
+  input("source", "${buildDir}/dist/steps/index.html")
+  output("result", "${buildDir}/dist/steps/pdf.html")
+
+  pipeline "tools/xpl/pdfspec.xpl"
+}
+
+task steps_pdf(dependsOn: ["steps_pdf_a4", "steps_pdf_letter"]) {
+  // nop
+}
+
+task steps_pdf_a4(dependsOn: [ "steps_pdf_xform", "steps_assets"], type: Exec) {
+  inputs.files fileTree(dir: "${projectDir}/tools/xsl/")
+  inputs.file "${buildDir}/dist/steps/pdf.html"
+  inputs.files fileTree(dir: "${buildDir}/dist/steps/css")
+  inputs.files fileTree(dir: "${projectDir}/tools/xpl/")
+  inputs.files fileTree(dir: "${projectDir}/steps/src/")
+  outputs.file "${buildDir}/dist/steps/steps_a4.pdf" 
+
+  doFirst {
+    copy {
+      from("${projectDir}/src/main/resources/css") {
+        include "print-a4.css"
+      }
+      into "${buildDir}/dist/steps/css"
+      rename ("print-a4.css", "print.css")
+    }
+  }
+
+  commandLine "/usr/local/AHFormatterV72/bin/AHFCmd",
+    "-f", "xhtml", "-d", "${buildDir}/dist/steps/pdf.html",
+    "-o", "${buildDir}/dist/steps/steps_a4.pdf"
+}
+
+task steps_pdf_letter(dependsOn: [ "steps_pdf_xform", "steps_assets"], type: Exec) {
+  inputs.files fileTree(dir: "${projectDir}/tools/xsl/")
+  inputs.file "${buildDir}/dist/steps/pdf.html"
+  inputs.files fileTree(dir: "${buildDir}/dist/steps/css")
+  inputs.files fileTree(dir: "${projectDir}/tools/xpl/")
+  inputs.files fileTree(dir: "${projectDir}/steps/src/")
+  outputs.file "${buildDir}/dist/steps/steps_letter.pdf" 
+
+  doFirst {
+    copy {
+      from("${projectDir}/src/main/resources/css") {
+        include "print-letter.css"
+      }
+      into "${buildDir}/dist/steps/css"
+      rename ("print-letter.css", "print.css")
+    }
+  }
+
+  commandLine "/usr/local/AHFormatterV72/bin/AHFCmd",
+    "-f", "xhtml", "-d", "${buildDir}/dist/steps/pdf.html",
+    "-o", "${buildDir}/dist/steps/steps_letter.pdf"
+}
+
 task steps_assets(type: Copy) {
-  from "src/main/resources"
+  from ("${projectDir}/src/main/resources") {
+    exclude "css/print-a4.css"
+    exclude "css/print-letter.css"
+  }
   into "build/dist/steps/"
 }
 

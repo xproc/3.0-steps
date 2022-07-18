@@ -225,11 +225,20 @@
 
 <xsl:template match="rng:interleave">
   <xsl:param name="repeat" select="''"/>
-  <ss:group type="interleave" repeat="{$repeat}">
-    <xsl:apply-templates>
-      <xsl:with-param name="repeat" select="$repeat"/>
-    </xsl:apply-templates>
-  </ss:group>
+
+  <xsl:variable name="content" as="element()*">
+    <xsl:for-each select="*">
+      <xsl:apply-templates select=".">
+        <xsl:with-param name="repeat" select="$repeat"/>
+      </xsl:apply-templates>
+    </xsl:for-each>
+  </xsl:variable>
+
+  <xsl:if test="$content">
+    <ss:group type="interleave" repeat="{$repeat}">
+      <xsl:sequence select="$content"/>
+    </ss:group>
+  </xsl:if>
 </xsl:template>
 
 <xsl:template match="rng:attribute[@name]" priority="10">
