@@ -377,4 +377,9 @@ Specification (Draft)</citetitle>.
 Steven Pemberton, editor. Version 2021-12-14.
 </bibliomixed>
 
+<bibliomixed xml:id="jsonschema2020-12"><abbrev>JSON schema</abbrev>
+  <citetitle xlink:href="https://json-schema.org/draft/2020-12/json-schema-validation.html">JSON Schema Validation: A Vocabulary for 
+    Structural Validation of JSON</citetitle>.
+A.Wright, H. Andrews and B. Hutton, editors.
+Internet Engineering Task Force. June, 2022.</bibliomixed>
 </bibliography>
