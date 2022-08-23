@@ -291,7 +291,7 @@ steps is assumed; for background details, see
       
       <para><impl>Any other attributes on
         <tag>c:file</tag>, <tag>c:directory</tag>, or <tag>c:other</tag>
-        are <glossterm>implementation-defined</glossterm>.</impl></para>
+        are <glossterm>implementation-defined</glossterm>.</impl>, but they must be in a namespace.</para>
     </section>
     
     <simplesect>
