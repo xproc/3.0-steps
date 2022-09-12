@@ -22,14 +22,9 @@
     <bibliomixed xml:id="rfc3986"/>
     <bibliomixed xml:id="bib.uuid"/>
     <bibliomixed xml:id="bib.sha"/>
+    <bibliomixed xml:id="bib.crc"/>
     <bibliomixed xml:id="zip"/>
     <bibliomixed xml:id="gzip"/>
-  </bibliolist>
-</section>
-<section xml:id="informative-references">
-  <title>Informative References</title>
-  <bibliolist>
-    <bibliomixed xml:id="bib.crc"/>
   </bibliolist>
 </section>
 </appendix>
