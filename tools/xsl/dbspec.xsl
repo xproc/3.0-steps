@@ -820,6 +820,11 @@
           <xsl:when test="starts-with(@spec, 'step-')">
             <xsl:value-of select="concat('../', substring-after(@spec, 'step-'))"/>
           </xsl:when>
+          <xsl:when test="/db:specification/db:info/db:bibliomisc[@role='final-uri']">
+            <xsl:variable name="uri" as="xs:string"
+                          select="/db:specification/db:info/db:bibliomisc[@role='final-uri']"/>
+            <xsl:sequence select="replace($uri, '/steps/', '/'||@spec)"/>
+          </xsl:when>
           <xsl:otherwise>
             <xsl:value-of select="concat('../', @spec)"/>
           </xsl:otherwise>
