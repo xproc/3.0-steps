@@ -1,6 +1,6 @@
-<bibliography xmlns="https://docbook.org/ns/docbook"
-	      xmlns:xlink="https://www.w3.org/1999/xlink"
-	      xmlns:xi='https://www.w3.org/2001/XInclude'
+<bibliography xmlns="http://docbook.org/ns/docbook"
+	      xmlns:xlink="http://www.w3.org/1999/xlink"
+	      xmlns:xi='http://www.w3.org/2001/XInclude'
 	      version="5.0">
 
 <!-- This is the master bibliography -->
@@ -323,16 +323,6 @@ The Unicode Consortium. 11 November 2008.</bibliomixed>
 
 <bibliomixed xml:id="media-types"><abbrev>IANA Media Types</abbrev>
 <citetitle xlink:href="https://www.iana.org/assignments/media-types/">IANA MIME Media Types</citetitle>. Internet Engineering Task Force.
-</bibliomixed>
-
-<bibliomixed xml:id="tidy"><abbrev>HTML Tidy</abbrev>
-<citetitle xlink:href="https://tidy.sourceforge.net/">HTML Tidy Library
-Project</citetitle>. SourceForge project.
-</bibliomixed>
-
-<bibliomixed xml:id="tagsoup"><abbrev>TagSoup</abbrev>
-<citetitle xlink:href="https://ccil.org/~cowan/XML/tagsoup/">TagSoup - Just Keep On Truckin'</citetitle>.
-John Cowan.
 </bibliomixed>
 
 <bibliomixed xml:id="bib.uuid"><abbrev>UUID</abbrev>
