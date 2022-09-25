@@ -1,0 +1,52 @@
+name: build-pr
+on:
+  pull_request_target:
+    types: [assigned, opened, edited, synchronize, reopened]
+    branches:
+      - master
+jobs:
+  build-and-deploy-pr:
+    runs-on: ubuntu-latest
+    env:
+      HAVE_ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN != '' }}
+      PR_NUMBER: ${{ github.event.number }}
+    steps:
+      # We don’t have to preserve anything here because a PR
+      # should always replace what it previously published
+      # (if it previously published anything)
+
+      - name: Checkout the pull request
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+
+      - name: Save the XML
+        run: |
+          mkdir /tmp/pr-sources
+          for f in src step-* steps; do
+            mkdir /tmp/pr-sources/$f
+            rsync -ar $f/ /tmp/pr-sources/$f/
+          done
+
+      - name: Checkout the repository base
+        uses: actions/checkout@v3
+
+      - name: Update the XML
+        run: rsync -var /tmp/pr-sources/ ./
+
+      - name: Build specifications
+        run: |
+          ./gradlew
+
+      - name: Check
+        run: ls -la build/dist
+
+#      - name: Publish the PR
+#        if: ${{ env.HAVE_ACCESS_TOKEN == 'true' }}
+#        uses: JamesIves/github-pages-deploy-action@v4
+#        with:
+#          folder: build/dist
+#          token: ${{ secrets.ACCESS_TOKEN }}
+#          repository-name: ${{ github.repository_owner}}/3.0-specification
+#          branch: gh-pages
+#          target-folder: /pr/${{ github.event.number }}
