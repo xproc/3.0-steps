@@ -9,6 +9,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       HAVE_ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN != '' }}
+      DIFFURI: ${{ secrets.DIFFURI }}
+      DIFFPW: ${{ secrets.DIFFPW }}
       PR_NUMBER: ${{ github.event.number }}
     steps:
       # We don’t have to preserve anything here because a PR
@@ -34,9 +36,21 @@ jobs:
       - name: Update the XML
         run: rsync -var /tmp/pr-sources/ ./
 
+      - name: Setup DeltaXML
+        run: |
+          echo Setup DeltaXML
+          if [[ -z "${DIFFURI}" ]]; then
+            echo "DeltaXML unavailable"
+          else
+            curl -s $DIFFURI | openssl enc -aes-256-cbc -salt -pbkdf2 -d -k $DIFFPW | tar zxf -
+          fi
+
       - name: Build specifications
         run: |
           ./gradlew
+
+      - name: Cleanup DeltaXML
+        run: rm -rf deltaxml
 
       - name: Publish the PR
         if: ${{ env.HAVE_ACCESS_TOKEN == 'true' }}
