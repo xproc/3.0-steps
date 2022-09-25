@@ -37,15 +37,12 @@ jobs:
         run: |
           ./gradlew
 
-      - name: Check
-        run: ls -la build/dist
-
-#      - name: Deploy to gh-pages on ${{ github.repository_owner}}/3.0-specification
-#        if: ${{ env.HAVE_ACCESS_TOKEN == 'true' }}
-#        uses: JamesIves/github-pages-deploy-action@v4
-#        with:
-#          folder: build/dist
-#          token: ${{ secrets.ACCESS_TOKEN }}
-#          repository-name: ${{ github.repository_owner}}/3.0-specification
-#          branch: gh-pages
-#          target-folder: /${{ github.ref_name }}/head
+      - name: Deploy to gh-pages on ${{ github.repository_owner}}/3.0-specification
+        if: ${{ env.HAVE_ACCESS_TOKEN == 'true' }}
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: build/dist
+          token: ${{ secrets.ACCESS_TOKEN }}
+          repository-name: ${{ github.repository_owner}}/3.0-specification
+          branch: gh-pages
+          target-folder: /${{ github.ref_name }}/head
