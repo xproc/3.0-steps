@@ -139,7 +139,7 @@ Anders Berglund, editor. W3C Recommendation. 5 December 2006.</bibliomixed>
 Query Language</citetitle>. Scott Boag, Don Chamberlin, Mary Fernández, et. al.,
 editors. W3C Recommendation. 23 January 2007.</bibliomixed>
 
-<bibliomixed xml:id="xvrl"><abbrev>XVRL</abbrev><citetitle xlink:href="https://spec.xproc.org/xvrl/">Extensible 
+  <bibliomixed xml:id="xvrl"><abbrev>XVRL</abbrev><citetitle xlink:href="https://spec.xproc.org/master/head/xvrl/">Extensible 
   Validation Reporting Language</citetitle>
 2019.
 </bibliomixed>
