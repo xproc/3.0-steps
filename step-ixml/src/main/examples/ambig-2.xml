@@ -5,7 +5,7 @@
 
 <p:ixml parameters="map{'ex:select':2}">
   <p:with-input port="grammar">
-    <p:inline>
+    <p:inline content-type="text/plain">
 letters: X, (A; B; C) .
 A: digits .
 B: digits .
@@ -15,7 +15,7 @@ digits: ["0"-"9"]+ .
     </p:inline>
   </p:with-input>
   <p:with-input port="source">
-    <p:inline>a123</p:inline>
+    <p:inline content-type="text/plain">a123</p:inline>
   </p:with-input>
 </p:ixml>
 

@@ -4,7 +4,7 @@
 
 <p:ixml fail-on-error="false">
   <p:with-input port="grammar">
-    <p:inline>
+    <p:inline content-type="text/plain">
 date: s?, day, s, month, (s, year)? .
 -s: -" "+ .
 day: digit, digit? .
@@ -16,7 +16,7 @@ year: (digit, digit)?, digit, digit .
     </p:inline>
   </p:with-input>
   <p:with-input port="source">
-    <p:inline>31 Mumble 2021</p:inline>
+    <p:inline content-type="text/plain">31 Mumble 2021</p:inline>
   </p:with-input>
 </p:ixml>
 

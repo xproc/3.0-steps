@@ -3,8 +3,9 @@
 <p:output port="result"/>
 
 <p:ixml>
+  <p:with-input port="grammar"><p:empty /></p:with-input>
   <p:with-input port="source">
-    <p:inline>
+    <p:inline content-type="text/plain">
 date: s?, day, s, month, (s, year)? .
 -s: -" "+ .
 day: digit, digit? .
