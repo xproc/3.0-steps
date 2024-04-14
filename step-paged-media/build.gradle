@@ -79,7 +79,7 @@ task rng(dependsOn: ["rnc"], type: JavaExec) {
   inputs.file "build/steps.rnc"
   outputs.file "build/steps.rng"
   classpath = configurations.tools
-  main = 'com.thaiopensource.relaxng.translate.Driver'
+  mainClass = 'com.thaiopensource.relaxng.translate.Driver'
   args = ["build/steps.rnc", "build/steps.rng"]
 }
 
