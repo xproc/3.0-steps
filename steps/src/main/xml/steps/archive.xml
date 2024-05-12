@@ -155,7 +155,7 @@
   </itemizedlist>
 
   <para><error code="C0085">It is a <glossterm>dynamic error</glossterm> if the format of the archive 
-    does not match the specified format, cannot be understood, determined and/or processed.</error></para>
+    cannot be understood, determined and/or processed.</error></para>
 
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
