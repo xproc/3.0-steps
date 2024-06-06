@@ -28,8 +28,7 @@ of the <port>replacement</port> document. Only non-nested matches are
 replaced. That is, once a node is replaced, its descendants cannot
 be matched.</para>
 
-<para>If the document node is matched, the result is a document node
-containing the replacement.</para>
+<para>If the document node is matched, the result is a text document.</para>
 
 <simplesect>
 <title>Document properties</title>
