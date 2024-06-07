@@ -236,6 +236,7 @@ PSVI annotations.</para>
 <xi:include href="steps/set-attributes.xml"/>
 <xi:include href="steps/set-properties.xml"/>
 <xi:include href="steps/sink.xml"/>
+<xi:include href="steps/sleep.xml"/>
 <xi:include href="steps/split-sequence.xml"/>
 <xi:include href="steps/store.xml"/>
 <xi:include href="steps/string-replace.xml"/>
