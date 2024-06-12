@@ -263,6 +263,18 @@ Multipurpose Internet Mail Extensions (MIME) Part Two: Media
 Types</citetitle>. N. Freed, N. Borenstein, editors. Internet
 Engineering Task Force. November, 1996.</bibliomixed>
 
+<bibliomixed xml:id="rfc4646"><abbrev>RFC 4646</abbrev>
+<citetitle xlink:href="http://www.ietf.org/rfc/rfc4646.txt">RFC 4646:
+Tags for Identifying Languages</citetitle>.
+A. Phillips and M. Davis, editors.
+Internet Engineering Task Force. September, 2006.</bibliomixed>
+
+<bibliomixed xml:id="rfc4647"><abbrev>RFC 4647</abbrev>
+<citetitle xlink:href="http://www.ietf.org/rfc/rfc4647.txt">RFC 4647:
+Matching of Language Tags</citetitle>.
+A. Phillips and M. Davis, editors.
+Internet Engineering Task Force. September, 2006.</bibliomixed>
+
 <bibliomixed xml:id="rfc2119"><abbrev>RFC 2119</abbrev>
 <citetitle xlink:href="https://doi.org/10.17487/RFC2119"
 >Key words for use in RFCs to Indicate Requirement Levels</citetitle>.
@@ -271,13 +283,13 @@ Network Working Group, IETF,
 Mar 1997.
 </bibliomixed>
 
-<bibliomixed xml:id="rfc2396"><abbrev>RFC 2396</abbrev>
-<citetitle xlink:href="https://doi.org/10.17487/RFC2396"
->Uniform Resource Identifiers (URI): Generic Syntax</citetitle>.
-T. Berners-Lee, R. Fielding, and L. Masinter.
-Network Working Group, IETF,
-Aug 1998.
-</bibliomixed>
+<bibliomixed xml:id="bcp47"><abbrev>BCP 47</abbrev>
+Best Current Practices 47. Concatenation of RFC 4646: Tags for Identifying
+Languages, ed. A. Phillips and M. Davis, September 2006,
+http://www.ietf.org/rfc/bcp/bcp47.txt, and RFC 4647: Matching of Language Tags,
+ed. A Phillips and M. Davis, September 2006,
+http://www.rfc-editor.org/rfc/bcp/bcp47.txt.
+Internet Engineering Task Force (IETF). September, 2006.</bibliomixed>
 
 <bibliomixed xml:id="rfc2616"><abbrev>RFC 2616</abbrev>
 <citetitle xlink:href="https://doi.org/10.17487/RFC2616">RFC 2616:

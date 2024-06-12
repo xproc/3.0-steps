@@ -20,6 +20,9 @@
     <bibliomixed xml:id="rfc2119"/>
     <bibliomixed xml:id="rfc2617"/>
     <bibliomixed xml:id="rfc3986"/>
+    <bibliomixed xml:id="rfc4646"/>
+    <bibliomixed xml:id="rfc4647"/>
+    <bibliomixed xml:id="bcp47"/>
     <bibliomixed xml:id="bib.uuid"/>
     <bibliomixed xml:id="bib.sha"/>
     <bibliomixed xml:id="bib.crc"/>
