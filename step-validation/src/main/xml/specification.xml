@@ -513,6 +513,7 @@ to allow it to be optional.</para>
   <p:input port="doctype" content-types="text" sequence="true"/>
   <p:output port="result" primary="true" content-types="xml"/>
   <p:output port="report" sequence="true" content-types="xml json"/>
+  <p:option name="document-element" as="xs:string?"/>
   <p:option name="general-entities" as="map(xs:string,item())?"/>     
   <p:option name="external-entities" as="map(xs:string,map(xs:string,xs:string))?"/>     
   <p:option name="report-format" select="'xvrl'" as="xs:string"/>
