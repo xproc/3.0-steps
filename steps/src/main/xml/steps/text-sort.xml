@@ -42,12 +42,20 @@
         lower-case letters. Its value <rfc2119>must</rfc2119> be one of <code>upper-first</code> or
           <code>lower-first</code>. The default is language-dependent.</para>
     </listitem>
-    <listitem>
-      <para>The <option>lang</option> option defines the language whose collating conventions are to be used. The
-        default depends on the processing environment. Its value must be a valid language code (e.g.
-        <code>en-EN</code>).</para>
-    </listitem>
-     <listitem>
+
+<listitem>
+<para>The <option>lang</option> option defines the language whose collating
+conventions are to be used.
+The <code>xs:language</code> data type represents natural language identifiers
+as defined by <biblioref linkend="bcp47"/> (currently
+represented by <biblioref linkend="rfc4646"/> and <biblioref linkend="rfc4647"/>
+or its successor(s).)
+The default depends on the processing environment.
+Its value must be a valid language code (e.g. <code>en-EN</code>).
+</para>
+</listitem>
+
+<listitem>
       <para>The <option>collation</option> option identifies how strings are to be compared with each other. Its value
         must be a valid collation URI. The only collation XProc processors <rfc2119>must</rfc2119> support is the
         Unicode Codepoint Collation <link xlink:href="http://www.w3.org/2005/xpath-functions/collation/codepoint/"
