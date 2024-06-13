@@ -84,13 +84,4 @@ newline (&amp;#10;).</para>
     <title>Document properties</title>
     <para feature="text-sort-preserves-all">All document properties are preserved.</para>
   </simplesect>
-
-<simplesect>
-<title>Erratum, April 2024</title>
-<para>The URI for the Unicode Codepoint Collation has been corrected to an <code>http:</code> URI rather than
-an <code>https:</code> one. The URI is an identifier and the correct identifier uses an <code>http:</code> URI.
-Implementations are encouraged to recognized collation URIs that begin with “<code>https://www.w3.org/</code>”
-and treat them as if they began “<code>http://www.w3.org/</code>”, with a warning, if practical.</para>
-</simplesect>
-
 </section>
