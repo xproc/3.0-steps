@@ -108,7 +108,7 @@
           supported.</impl></para>
       </listitem>
     </varlistentry>
-    <varlistentry>
+    <varlistentry xml:id="archive-parameters">
       <term><option>parameters</option></term>
       <listitem>
         <para>The <option>parameters</option> option can be used to supply parameters to control the
