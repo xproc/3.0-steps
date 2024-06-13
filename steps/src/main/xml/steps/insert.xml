@@ -66,10 +66,4 @@ as the source.</para>
 <port>source</port> port are preserved. The document properties on the
 <port>insertion</port> port are not preserved or present in the result document.</para>
 </simplesect>
-
-<simplesect>
-<title>Erratum, April 2024</title>
-<para>The content type of the <port>insertion</port> port has been expanded to allow
-text documents to be inserted.</para>
-</simplesect>
 </section>
