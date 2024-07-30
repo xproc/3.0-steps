@@ -84,7 +84,9 @@ An XML Pipeline Language</link> published by the W3C.</para>
   <title>Introduction</title>
 
 <para>This specification describes the standard, required atomic XProc
-steps. A machine-readable description of these steps may be found in
+steps. Changes made since the 3.0 specification was published are listed in
+<xref linkend="changelog"/>.
+A machine-readable description of these steps may be found in
 <link xlink:href="steps.xpl">steps.xpl</link>.
 </para>
 
@@ -306,6 +308,11 @@ to recognize the incorrect value, perhaps with a warning.
 <title>Substantive changes</title>
   
 <itemizedlist>
+<listitem>
+<para>Resolved <link xlink:href="https://github.com/xproc/3.0-steps/issues/587">issue 587</link>
+by adding a <option>parameters</option> option to the <tag>p:uuid</tag> step.
+</para>
+</listitem>
 <listitem>
 <para>Resolved <link xlink:href="https://github.com/xproc/3.0-steps/issues/574">issue 574</link>
 by adding a <tag>p:sleep</tag> step.
