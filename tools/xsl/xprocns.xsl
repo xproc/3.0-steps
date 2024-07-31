@@ -1,5 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="http://www.w3.org/1999/xhtml" xmlns:db="http://docbook.org/ns/docbook" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:p="http://www.w3.org/ns/xproc" exclude-result-prefixes="p xs db" version="2.0">
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:db="http://docbook.org/ns/docbook"
+                xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                xmlns:p="http://www.w3.org/ns/xproc" 
+                exclude-result-prefixes="#all"
+                version="3.0">
 
 <xsl:strip-space elements="p:*"/>
 

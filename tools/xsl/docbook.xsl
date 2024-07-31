@@ -11,7 +11,7 @@
 		xmlns:xlink="http://www.w3.org/1999/xlink"
                 xmlns:xs="http://www.w3.org/2001/XMLSchema"
 		exclude-result-prefixes="f h db m mp t xlink xs tp"
-                version="2.0">
+                version="3.0">
 
 <xsl:import href="https://cdn.docbook.org/release/xsl20/current/xslt/base/html/final-pass.xsl"/>
 

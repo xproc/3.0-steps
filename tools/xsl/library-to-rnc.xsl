@@ -3,7 +3,7 @@
 		xmlns:p="http://www.w3.org/ns/xproc"
 		xmlns:e="http://www.w3.org/1999/XSL/Spec/ElementSyntax"
 		xmlns:xs="http://www.w3.org/2001/XMLSchema"
-                version="2.0">
+                version="3.0">
 
 <!-- WTF!? Why am I generating the RNC form instead of the RNG form? -->
 

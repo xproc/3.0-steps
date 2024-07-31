@@ -3,7 +3,7 @@
 		xmlns:p="http://www.w3.org/ns/xproc"
 		xmlns:e="http://www.w3.org/1999/XSL/Spec/ElementSyntax"
 		exclude-result-prefixes="e"
-		version="2.0">
+		version="3.0">
 
 <xsl:output method="xml" indent="yes"/>
 
