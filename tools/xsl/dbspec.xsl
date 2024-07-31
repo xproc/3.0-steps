@@ -888,4 +888,14 @@
   </xsl:choose>
 </xsl:template>
 
+<xsl:template match="db:varlistentry/db:term/db:option">
+  <a id="{ancestor::db:section[1]/@xml:id}-def-{.}"/>
+  <xsl:next-match/>
+</xsl:template>
+
+<xsl:template match="db:varlistentry/db:term/db:port">
+  <a id="{ancestor::db:section[1]/@xml:id}-def-{.}"/>
+  <xsl:next-match/>
+</xsl:template>
+
 </xsl:stylesheet>

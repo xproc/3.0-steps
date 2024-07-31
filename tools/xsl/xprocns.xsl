@@ -7,6 +7,8 @@
                 exclude-result-prefixes="#all"
                 version="3.0">
 
+<xsl:import href="xprocns2.xsl"/>
+
 <xsl:strip-space elements="p:*"/>
 
 <!--
@@ -15,6 +17,17 @@
   <p:output port="result" sequence="yes"/>   
 </p:declare-step>
 -->
+
+<xsl:template match="p:declare-step" priority="100">
+  <div class="declare-step">
+    <p>Summary</p>
+    <xsl:apply-templates select="." mode="alternate-xprocns"/>
+    <details>
+      <summary>Declaration</summary>
+      <xsl:next-match/>
+    </details>
+  </div>
+</xsl:template>
 
 <xsl:template match="p:declare-step">
   <p>
