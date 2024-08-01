@@ -85,6 +85,9 @@ steps is assumed; for background details, see
 <biblioref linkend="xproc30-steps"/>.</para>
 </section>
 
+<section xml:id="library">
+<title>Step library</title>
+
 <section xml:id="c.css-formatter">
 <title>p:css-formatter</title>
 
@@ -204,6 +207,7 @@ cannot be produced.</error>
 <title>Document properties</title>
 <para feature="xsl-formatter-preserves-none">No document properties are preserved.</para>
 </simplesect>
+</section>
 </section>
 
 <section xmlns="http://docbook.org/ns/docbook" xml:id="errors">
