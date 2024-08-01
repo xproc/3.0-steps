@@ -84,9 +84,11 @@ the specified Invisible XML grammar.</para>
 
 <para>If no grammar is provided on the <port>grammar</port> port, the grammar for
 Invisible XML is assumed. If an XML or text grammar is provided it
-<rfc2119>should</rfc2119> be an Invisible XML grammar. 
-<impl>If any other grammar format is provided, its interpretation is
-<glossterm>implementation-defined</glossterm>.</impl></para>
+<rfc2119>must</rfc2119> be an Invisible XML grammar. 
+<error code="C0212">It is a <glossterm>dynamic error</glossterm> if the grammar
+provided is not a valid Invisible XML grammar.</error>
+<error code="C0211">It is a <glossterm>dynamic error</glossterm> if more than one
+document appears on the <port>grammar</port> port.</error></para>
 
 <para>The <port>source</port> to be processed is usually text, but
 there’s nothing in principle that prevents an Invisible XML grammar
