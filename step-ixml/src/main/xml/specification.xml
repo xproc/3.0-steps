@@ -77,7 +77,7 @@ the specified Invisible XML grammar.</para>
 <p:declare-step type="p:ixml">
   <p:input port="grammar" sequence="true" content-types="text xml"/>
   <p:input port="source" primary="true" content-types="any -xml -html"/>
-  <p:output port="result" content-types="any"/>
+  <p:output port="result" sequence="true" content-types="any"/>
   <p:option name="parameters" as="map(xs:QName, item()*)?"/>    
   <p:option name="fail-on-error" as="xs:boolean" select="true()"/>
 </p:declare-step>
@@ -120,16 +120,19 @@ in the output.</para>
 </itemizedlist>
 
 <section xml:id="example-ixml">
-<title>Example</title>
+<title>Examples</title>
 
-<para>The following pipeline parses an Invisible XML grammar and returns
-its XML representation:</para>
+<para>Several examples demonstrate features of the step.</para>
 
-<example xml:id="addr-1">
-<title>Parsing an ixml grammar</title>
+<section xml:id="example-parse-ixml">
+<title>Parsing an Invisible XML grammar</title>
+
+<para>In this first example, no grammar is provided, so the pipeline parses the
+Invisible XML grammar on the <port>source</port> port and returns its XML
+representation:</para>
+
 <programlisting language="xml"
 ><xi:include href="../examples/dates-1.xml" parse="text"/></programlisting>
-</example>
 
 <para>This would produce an XML version of the grammar:</para>
 
@@ -155,32 +158,35 @@ its XML representation:</para>
    <!-- … remaining rules elided for brevity … -->
 </ixml>]]></programlisting>
 
-<para>Providing the “date” grammar allows the step to parse dates:</para>
+</section>
+<section xml:id="example-parse-date">
+<title>Parsing a date</title>
 
-<example xml:id="addr-2">
-<title>Parsing a date with ixml</title>
+<para>If the grammar is provided on the <port>grammar</port> port, it can be
+used to parse input, the string “31 December 2021” in this case:</para>
+
 <programlisting language="xml"
 ><xi:include href="../examples/dates-2.xml" parse="text"/></programlisting>
-</example>
 
 <para>This would produce an XML version of the date:</para>
 
 <programlisting language="xml"><![CDATA[<date><day>31</day><month>December</month><year>2021</year></date>]]></programlisting>
 
+</section>
+<section xml:id="example-parse-fail">
+<title>Failed parses</title>
+
 <para>If a parse fails, the implementation <rfc2119>must</rfc2119> indicate
 this, but it may also provide information about where the processing failed.</para>
 
-<example xml:id="addr-3">
-<title>Failing to parse a date with ixml</title>
 <programlisting language="xml"
 ><xi:include href="../examples/dates-3.xml" parse="text"/></programlisting>
-</example>
 
 <para>Here the output might be something like this:</para>
 
-<programlisting language="xml"><![CDATA[<ixml xmlns:ixml="http://invisiblexml.org/NS"
-      xmlns:ex="http://example.com/NS"
-      ixml:state="failed" ex:lastChar="4">
+<programlisting language="xml"><![CDATA[<error xmlns:ixml="http://invisiblexml.org/NS"
+       xmlns:ex="http://example.com/NS"
+       ixml:state="failed" ex:lastChar="4">
 <parse>
 month ->  •  M  a  r  c  h
 month ->  M  •  a  r  c  h
@@ -189,21 +195,24 @@ month ->  M  •  a  r  c  h
 month ->  •  M  a  y
 month ->  M  •  a  y
 </parse>
-</ixml>]]></programlisting>
+</error>]]></programlisting>
 
-<para>There is <emphasis>nothing</emphasis> standard about this markup
-except the <tag class="attribute">ixml:state</tag> attribute with the
-value “<code>failed</code>”.</para>
+<para>In the case of failure, Invisible XML requires that the <tag
+class="attribute">ixml:state</tag> attribute appear on the root element
+containing the token “<code>failed</code>”. It doesn’t constrain the implementation’s
+choice of the root element or the content of the document.
+</para>
+
+</section>
+<section xml:id="example-parse-ambiguous-1">
+<title>Ambiguous parses</title>
 
 <para>An ixml grammar may be ambiguous. In the grammar below, there are three
 different possible ways to parse the input. By default, one of them is returned.
 </para>
 
-<example xml:id="ambig-1">
-<title>Parsing an ambiguous grammar</title>
 <programlisting language="xml"
 ><xi:include href="../examples/ambig-1.xml" parse="text"/></programlisting>
-</example>
 
 <para>This might return any one of these parses:</para>
 
@@ -221,41 +230,40 @@ different possible ways to parse the input. By default, one of them is returned.
 ><![CDATA[<letters ixml:state="ambiguous" xmlns:ixml="http://invisiblexml.org/NS"><X>a</X><B><digits>123</digits></B></letters>]]></programlisting>
 
 <para>All are equally correct.</para>
+</section>
+
+<section xml:id="example-parse-ambiguous-2">
+<title>Ambiguous parse selection</title>
 
 <para>An implementation might provide a parameter to allow the author to
 select a particular parse:
 </para>
 
-<example xml:id="ambig-2">
-<title>Selecting a particular parse</title>
 <programlisting language="xml"
 ><xi:include href="../examples/ambig-2.xml" parse="text"/></programlisting>
-</example>
 
 <para>This might return:</para>
 
 <programlisting language="xml"
-><![CDATA[<letters><X>a</X><A><digits>123</digits></A></letters>]]></programlisting>
+><![CDATA[<letters ixml:state="ambiguous"><X>a</X><A><digits>123</digits></A></letters>]]></programlisting>
+</section>
+
+<section xml:id="example-parse-ambiguous-3">
+<title>Multiple ambiguous outputs</title>
 
 <para>Or a processor might provide a parameter to return all of the parses.</para>
 
-<example xml:id="ambig-3">
-<title>Selecting a particular parse</title>
 <programlisting language="xml"
 ><xi:include href="../examples/ambig-3.xml" parse="text"/></programlisting>
-</example>
 
-<para>This might return:</para>
+<para>This might return three documents:</para>
 
-<programlisting language="xml"
-><![CDATA[<ixml parseCount='3'>
-<letters><X>a</X><C><digits>123</digits></C></letters>
-<letters><X>a</X><B><digits>123</digits></B></letters>
-<letters><X>a</X><A><digits>123</digits></A></letters>
-</ixml>]]></programlisting>
+<programlisting language="xml"><![CDATA[<letters ixml:state="ambiguous"><X>a</X><C><digits>123</digits></C></letters>
+<letters ixml:state="ambiguous"><X>a</X><B><digits>123</digits></B></letters>
+<letters ixml:state="ambiguous"><X>a</X><A><digits>123</digits></A></letters>]]></programlisting>
 
 <para>As before, there is nothing standardized about the results in this case.</para>
-
+</section>
 </section>
   
 <section>
