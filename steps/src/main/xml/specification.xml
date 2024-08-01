@@ -323,6 +323,8 @@ by adding a <tag>p:sleep</tag> step.
 <listitem>
 <para>Resolved <link xlink:href="https://github.com/xproc/Vnext/issues/39">V.next issue 29</link> by
 allowing the text documents on the <port>insertion</port> port of the <tag>p:insert</tag> step.
+Resolved <link xlink:href="https://github.com/xproc/3.0-steps/issues/583">issue 583</link> by
+allowing text documents on the <port>result</port> port.
 </para>
 </listitem>
 </itemizedlist>
