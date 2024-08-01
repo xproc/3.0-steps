@@ -101,6 +101,7 @@ task make_etc() {
 
 ["steps", "step-file", "step-os", "step-paged-media",
  "step-run", "step-text", "step-mail", "step-rdf", "step-validation",
+ "step-ixml"
  ].each { spec ->
   Task t = task "copy_${spec}_build"(dependsOn: [ "buildspecs" ], type: Copy) {
     from "$spec/build/"
@@ -649,6 +650,58 @@ task step_mail_src(dependsOn: ["step-mail:source"], type: Copy) {
 task step_mail_xpl(dependsOn: ["step-mail:library"], type: Copy) {
   from "step-mail/build/"
   into "build/dist/mail/"
+  include "library.xml"
+  rename ("library.xml", "steps.xpl")
+}
+
+// ======================================================================
+// step-ixml
+
+task step_ixml(type: DocBookTask,
+               dependsOn: [ "download_xproc_toc",
+                            "steps", "xproc_schemas", "spec_schemas",
+                            "step-ixml:specification",
+                            "step_ixml_assets",
+                            "step_ixml_src", "step_ixml_xpl" ]) {
+  inputs.files fileTree(dir: "tools/xsl/")
+  inputs.files fileTree(dir: "tools/xpl/")
+  inputs.file "build/xproc/toc.xml"
+  input("source", "step-ixml/build/source.xml")
+  output("result", "build/dist/ixml/index.html")
+
+  param("schemaext.schema", file("build/schema/dbspec.rng"))
+  param("ci", getenv("CIWORKFLOW"))
+  param("ci-commit", getenv("CI_SHA1"))
+  param("ci-build-number", getenv("CI_BUILD_NUM"))
+  param("ci-user", getenv("CI_PROJECT_USERNAME"))
+  param("ci-repo", getenv("CI_PROJECT_REPONAME"))
+  param("ci-branch", getenv("CI_BRANCH"))
+  param("ci-tag", getenv("CI_TAG"))
+
+  option("style", file("tools/xsl/xproc-specs.xsl"))
+  option("diff", deltaxml())
+  option("specid", "ixml")
+  option("diffloc", buildAbsDir + "/ixml/diff.html")
+
+  pipeline "tools/xpl/formatspec.xpl"
+}
+buildspecs.dependsOn "step_ixml"
+
+task step_ixml_assets(type: Copy) {
+  from "src/main/resources"
+  into "build/dist/ixml/"
+}
+
+task step_ixml_src(dependsOn: ["step-ixml:source"], type: Copy) {
+  from "step-ixml/build/"
+  into "build/dist/ixml/"
+  include "source.xml"
+  rename ("source.xml", "specification.xml")
+}
+
+task step_ixml_xpl(dependsOn: ["step-ixml:library"], type: Copy) {
+  from "step-ixml/build/"
+  into "build/dist/ixml/"
   include "library.xml"
   rename ("library.xml", "steps.xpl")
 }
