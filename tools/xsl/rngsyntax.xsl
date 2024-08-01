@@ -8,7 +8,7 @@
                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns:e="http://www.w3.org/1999/XSL/Spec/ElementSyntax"
                 exclude-result-prefixes="sa xs e rng ss f"
-                version="2.0">
+                version="3.0">
 
 <xsl:strip-space elements="rng:*"/>
 

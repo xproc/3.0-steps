@@ -3,7 +3,7 @@
                 xmlns:xs="http://www.w3.org/2001/XMLSchema"
                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
 		exclude-result-prefixes="xs rng"
-                version="2.0">
+                version="3.0">
 
 <xsl:param name="libraries" required="yes" as="xs:string"/>
 

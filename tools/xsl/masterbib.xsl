@@ -3,7 +3,7 @@
                 xmlns:xs="http://www.w3.org/2001/XMLSchema"
                 xmlns:db="http://docbook.org/ns/docbook"
 		exclude-result-prefixes="xs db"
-                version="2.0">
+                version="3.0">
 
 <xsl:variable name="bib" select="doc('../../src/main/xml/bibliography.xml')"/>
 

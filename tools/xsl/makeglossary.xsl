@@ -4,7 +4,7 @@
 		xmlns:db="http://docbook.org/ns/docbook"
 		xmlns="http://docbook.org/ns/docbook"
 		exclude-result-prefixes="xs"
-                version="2.0">
+                version="3.0">
 
 <xsl:key name="glossterm" match="db:glossterm"
 	 use="if (@baseform) then @baseform else normalize-space(.)"/>

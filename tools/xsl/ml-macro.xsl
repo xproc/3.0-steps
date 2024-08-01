@@ -4,7 +4,7 @@
 		xmlns:xdt="http://www.w3.org/2005/xpath-datatypes"
 		xmlns:xs="http://www.w3.org/2001/XMLSchema"
 		exclude-result-prefixes="ml xdt xs"
-                version="2.0">
+                version="3.0">
 
 <rdf:Description rdf:about=''
 		 xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'
