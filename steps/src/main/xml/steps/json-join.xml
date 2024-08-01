@@ -31,7 +31,7 @@ port <code>result</code>.</para>
     documents, their XDM representation is appended to the resulting array.</para>
   </listitem>
   <listitem>
-    <para><impl>It is <glossterm>implementation defined</glossterm> if <code>p:json-join</code> is
+    <para><impl>It is <glossterm>implementation-defined</glossterm> if <code>p:json-join</code> is
       able to process document types not mentioned yet, i.e. types of binary documents.</impl> If a processor
       supports a given type of documents, an entry is created as described above. <error code="C0111">
         It is a <glossterm>dynamic error</glossterm> if a document of an unsupported document type appears on 

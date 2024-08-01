@@ -666,7 +666,8 @@
       <xsl:value-of select="."/>
       <xsl:text> See </xsl:text>
       <xsl:call-template name="db:xref">
-	<xsl:with-param name="linkend" select="(ancestor::db:section|ancestor::db:appendix)[last()]/@xml:id"/>
+	<xsl:with-param name="linkend"
+                        select="(ancestor::db:section[@xml:id]|ancestor::db:appendix[@xml:id])[last()]/@xml:id"/>
       </xsl:call-template>
       <xsl:text>.</xsl:text>
     </li>

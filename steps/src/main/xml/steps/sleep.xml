@@ -15,7 +15,7 @@
 <para>The <tag>p:sleep</tag> step copies each of the documents on the
 <port>source</port> port to the <port>result</port> port without changing them.
 Before copying the documents, it pauses for a period of time not less
-than <code>duration</code> milliseconds.</para>
+than <option>duration</option> milliseconds.</para>
 
 <note>
 <para>In multi-threaded implementations, there is no guarantee that this
