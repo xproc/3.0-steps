@@ -195,11 +195,18 @@
 </xsl:template>
 
 <xsl:template match="db:error">
+  <a>
+    <xsl:attribute name="id">
+      <xsl:apply-templates select="." mode="m:inline-error-anchor"/>
+    </xsl:attribute>
+  </a>
+  <xsl:apply-templates/>
+</xsl:template>
+
+<xsl:template match="db:error" mode="m:inline-error-anchor" expand-text="yes">
   <xsl:variable name="code" select="@code"/>
   <xsl:variable name="num" select="count(preceding::db:error[@code=$code])"/>
-
-  <a id="err.inline.{@code}{if ($num&gt;0) then concat('.',$num) else ''}"/>
-  <xsl:apply-templates/>
+ <xsl:text>err.inline.{@code}{if ($num&gt;0) then concat('.',$num) else ''}"</xsl:text>
 </xsl:template>
 
 <xsl:template match="db:impl">
@@ -236,6 +243,8 @@
 </xsl:template>
   
 <xsl:template match="db:port">
+  <xsl:variable name="name" select="string(.)"/>
+  <a id="port.inline.{.}-{count(preceding::db:port[. = $name])+1}"/>
   <xsl:call-template name="t:inline-monoseq"/>
 </xsl:template>
 
@@ -886,6 +895,12 @@
       <xsl:text>]</xsl:text>
     </xsl:otherwise>
   </xsl:choose>
+</xsl:template>
+
+<xsl:template match="db:option">
+  <xsl:variable name="name" select="string(.)"/>
+  <a id="opt.inline.{.}-{count(preceding::db:option[. = $name])+1}"/>
+  <xsl:call-template name="t:inline-monoseq"/>
 </xsl:template>
 
 <xsl:template match="db:varlistentry/db:term/db:option">

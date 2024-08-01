@@ -2,6 +2,7 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 		xmlns:e="http://www.w3.org/1999/XSL/Spec/ElementSyntax"
                 xmlns:db="http://docbook.org/ns/docbook"
+                xmlns:m="http://docbook.org/xslt/ns/mode"
                 xmlns:p="http://www.w3.org/ns/xproc" 
                 xmlns:xs="http://www.w3.org/2001/XMLSchema"
                 xmlns="http://www.w3.org/1999/xhtml"
@@ -115,7 +116,16 @@
           <xsl:for-each-group select="..//db:error" group-by="@code">
             <xsl:sort select="@code"/>
             <tr>
-              <td class="errcode">err:{current-group()[1]/@code/string()}</td>
+              <td class="errcode">
+                <a>
+                  <xsl:attribute name="href">
+                    <xsl:text>#</xsl:text>
+                    <xsl:apply-templates select="current-group()[1]"
+                                         mode="m:inline-error-anchor"/>
+                  </xsl:attribute>
+                  <xsl:text>err:{current-group()[1]/@code/string()}</xsl:text>
+                </a>
+              </td>
               <td class="description"><xsl:apply-templates select="current-group()[1]"/></td>
             </tr>
           </xsl:for-each-group>
@@ -128,9 +138,23 @@
     <details>
       <summary>Implementation details</summary>
       <table class="tableaux">
+        <thead>
+          <tr>
+            <th>Implementation</th>
+            <th>Description</th>
+          </tr>
+        </thead>
         <tbody>
           <xsl:for-each select="..//db:impl">
             <tr>
+              <td>
+                <a href="#impl-{count(preceding::db:impl)+1}">
+                  <xsl:choose>
+                    <xsl:when test="db:glossterm[. = 'implementation-defined']">Defined</xsl:when>
+                    <xsl:otherwise>Dependent</xsl:otherwise>
+                  </xsl:choose>
+                </a>
+              </td>
               <td class="description"><xsl:apply-templates select="."/></td>
             </tr>
           </xsl:for-each>
@@ -161,7 +185,13 @@
         <xsl:when test="../../db:variablelist/db:varlistentry/db:term/db:port[. = $port]">
           <a href="#{ancestor::db:section[1]/@xml:id}-def-{$port}">{$port}</a>
         </xsl:when>
-        <xsl:otherwise>{$port}</xsl:otherwise>
+        <xsl:when test="../following::db:port[. = $port]">
+          <xsl:variable name="first" select="(../following::db:port[. = $port])[1]"/>
+          <a href="#port.inline.{$port}-{count($first/preceding::db:port[. = $port])+1}">{$port}</a>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:text>{$port}</xsl:text>
+        </xsl:otherwise>
       </xsl:choose>
     </td>
     <td class="check">
@@ -211,6 +241,10 @@
       <xsl:choose>
         <xsl:when test="../../db:variablelist/db:varlistentry/db:term/db:option[. = $name]">
           <a href="#{ancestor::db:section[1]/@xml:id}-def-{$name}">{$name}</a>
+        </xsl:when>
+        <xsl:when test="../following::db:option[. = $name]">
+          <xsl:variable name="first" select="(../following::db:option[. = $name])[1]"/>
+          <a href="#opt.inline.{$name}-{count($first/preceding::db:option[. = $name])+1}">{$name}</a>
         </xsl:when>
         <xsl:otherwise>{$name}</xsl:otherwise>
       </xsl:choose>
