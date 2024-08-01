@@ -204,7 +204,7 @@ PSVI annotations.</para>
 </section>
 
 <section xml:id="req-steps">
-<title>The required steps</title>
+<title>Step library</title>
 
 <para>A conformant processor must support all of these steps.</para>
 
@@ -283,6 +283,12 @@ PSVI annotations.</para>
 draft:</para>
 
 <orderedlist>
+<listitem>
+<para>Allow the output of the <tag>p:insert</tag> step to be <literal>text</literal>.
+(issue
+<link xlink:href="https://github.com/xproc/3.0-steps/issues/583">583</link>.)
+</para>
+</listitem>
 <listitem>
 <para>Clarified that the manifest has precedence in the <tag>p:archive</tag> step.
 (issue

@@ -13,7 +13,7 @@ port's document relative to the matching elements in the
 <p:declare-step type="p:insert">
    <p:input port="source" primary="true" content-types="xml html"/>
    <p:input port="insertion" sequence="true" content-types="xml html text"/>
-   <p:output port="result" content-types="xml html"/>
+   <p:output port="result" content-types="xml html text"/>
    <p:option name="match" as="xs:string" select="'/*'" e:type="XSLTSelectionPattern"/>
    <p:option name="position" values="('first-child','last-child','before','after')" select="'after'"/>
 </p:declare-step>
@@ -65,11 +65,5 @@ as the source.</para>
 <para feature="insert-preserves-all">All document properties on the
 <port>source</port> port are preserved. The document properties on the
 <port>insertion</port> port are not preserved or present in the result document.</para>
-</simplesect>
-
-<simplesect>
-<title>Erratum, April 2024</title>
-<para>The content type of the <port>insertion</port> port has been expanded to allow
-text documents to be inserted.</para>
 </simplesect>
 </section>
