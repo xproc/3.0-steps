@@ -16,7 +16,7 @@
 <para>The <tag>p:markdown-to-html</tag> step transforms a text document containing
 Markdown, for example <biblioref linkend="commonmark"/>, into HTML.
 <impl>The flavor(s) of Markdown supported and the parameters allowed are
-<glossterm>implementation-defined</glossterm>.</impl>.</para>
+<glossterm>implementation-defined</glossterm>.</impl></para>
 
 <simplesect>
   <title>Document properties</title>
