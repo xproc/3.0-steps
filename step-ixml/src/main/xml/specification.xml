@@ -75,7 +75,7 @@ steps is assumed; for background details, see
 the specified Invisible XML grammar.</para>
 
 <p:declare-step type="p:ixml">
-  <p:input port="grammar" sequence="true" content-types="any"/>
+  <p:input port="grammar" sequence="true" content-types="text xml"/>
   <p:input port="source" primary="true" content-types="any -xml -html"/>
   <p:output port="result" content-types="any"/>
   <p:option name="parameters" as="map(xs:QName, item()*)?"/>    
