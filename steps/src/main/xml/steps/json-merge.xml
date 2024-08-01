@@ -45,7 +45,7 @@ port <port>result</port>.</para>
     the key-value pair.</para>
   </listitem>
   <listitem>
-    <para><impl>It is <glossterm>implementation defined</glossterm> if <code>p:json-merge</code> is
+    <para><impl>It is <glossterm>implementation-defined</glossterm> if <code>p:json-merge</code> is
     able to process document types not mentioned yet, i.e. types of binary documents.</impl> If a processor
     supports a given type of documents, the key-value pair is created as described above. <error code="C0107">
     It is a <glossterm>dynamic error</glossterm> if a document of a not supported document type appears on 

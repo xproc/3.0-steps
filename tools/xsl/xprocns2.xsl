@@ -151,7 +151,11 @@
                 <a href="#impl-{count(preceding::db:impl)+1}">
                   <xsl:choose>
                     <xsl:when test="db:glossterm[. = 'implementation-defined']">Defined</xsl:when>
-                    <xsl:otherwise>Dependent</xsl:otherwise>
+                    <xsl:when test="db:glossterm[. = 'implementation-dependent']">Dependent</xsl:when>
+                    <xsl:otherwise>
+                      <xsl:message>Bad markup in {serialize(.)}.</xsl:message>
+                      <xsl:text>Defined</xsl:text>
+                    </xsl:otherwise>
                   </xsl:choose>
                 </a>
               </td>

@@ -109,7 +109,7 @@ empty. Header names are converted to lowercase.</para>
 <listitem>
   <para>The <option>method</option> specifies the HTTP request method.
   The value is implicitly turned into an uppercase string if
-  necessary. <impl>It is <glossterm>implementation defined</glossterm>
+  necessary. <impl>It is <glossterm>implementation-defined</glossterm>
   which HTTP methods are supported.</impl> An implementation
   <rfc2119>should</rfc2119> implement at least the methods
   <literal>GET</literal>, <literal>POST</literal>,
@@ -239,7 +239,7 @@ empty. Header names are converted to lowercase.</para>
   <biblioref linkend="rfc2617"/>. <impl>The interpretation of values
   associated with the “<literal>auth-method</literal>” key other than
   “<literal>Basic</literal>” or “<literal>Digest</literal>” is
-  <glossterm>implementation defined</glossterm>.</impl></para>
+  <glossterm>implementation-defined</glossterm>.</impl></para>
   </listitem>
   </varlistentry>
   <varlistentry><term><literal>send-authorization</literal> (<code>xs:boolean</code>)</term>
@@ -260,7 +260,7 @@ empty. Header names are converted to lowercase.</para>
   </variablelist>
 
   <para><impl>Other key value pairs in map “<literal>auth</literal>”
-  are <glossterm>implementation defined</glossterm>.</impl> <error
+  are <glossterm>implementation-defined</glossterm>.</impl> <error
   code="C0123">It is a <glossterm>dynamic error</glossterm> if any key
   in the “<literal>auth</literal>” map is associated with a value that
   is not an instance of the required type.</error></para>
@@ -291,7 +291,7 @@ empty. Header names are converted to lowercase.</para>
     values for fine tuning the construction of the request and/or
     handling of the server response. A number of parameters are
     defined in this specification. <impl>It is
-    <glossterm>implementation defined</glossterm> which other
+    <glossterm>implementation-defined</glossterm> which other
     key/value pairs in the <option>parameters</option> option are
     supported.</impl></para>
 
@@ -375,7 +375,7 @@ empty. Header names are converted to lowercase.</para>
           response. A value of <literal>0</literal> indicates that redirects are not to be followed, 
           <literal>-1</literal> indicates that redirects are to be followed indefinitely, and a
           specific number indicates the maximum number of redirects to follow. <impl>The default
-          behaviour in case of a redirect response is <glossterm>implementation defined</glossterm>.</impl>
+          behaviour in case of a redirect response is <glossterm>implementation-defined</glossterm>.</impl>
           </para>
         </listitem>
       </varlistentry>
