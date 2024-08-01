@@ -123,6 +123,21 @@
       </table>
     </details>
   </xsl:if>
+
+  <xsl:if test="..//db:impl">
+    <details>
+      <summary>Implementation details</summary>
+      <table class="tableaux">
+        <tbody>
+          <xsl:for-each select="..//db:impl">
+            <tr>
+              <td class="description"><xsl:apply-templates select="."/></td>
+            </tr>
+          </xsl:for-each>
+        </tbody>
+      </table>
+    </details>
+  </xsl:if>
 </xsl:template>
 
 <xsl:template match="p:input|p:output">
