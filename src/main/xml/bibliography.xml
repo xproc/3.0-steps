@@ -17,6 +17,20 @@ Alex Milowski, James Fuller, and Norman Walsh editors.
 W3C Working Draft 5 November 2013.
 </bibliomixed>
 
+<!-- N.B. THESE ARE POINTERS TO THE LC! -->
+<bibliomixed xml:id="xproc31"><abbrev>XProc 3.1</abbrev>
+<citetitle xlink:href="https://spec.xproc.org/lastcall-2024-08/head/xproc/">XProc 3.1:
+An XML Pipeline Language</citetitle>.
+Norman Walsh, Achim Berndzen, Gerrit Imsieke and Erik Siegel, editors.
+</bibliomixed>
+
+<!-- N.B. THESE ARE POINTERS TO THE LC! -->
+<bibliomixed xml:id="steps31"><abbrev>Steps 3.1</abbrev>
+<citetitle xlink:href="https://spec.xproc.org/lastcall-2024-08/head/steps/">XProc 3.1: Standard
+Step Library</citetitle>.
+Norman Walsh, Achim Berndzen, Gerrit Imsieke and Erik Siegel, editors.
+</bibliomixed>
+
 <bibliomixed xml:id="xproc20"><abbrev>XProc 2.0</abbrev>
 <citetitle xlink:href="https://www.w3.org/TR/xproc20/">XProc 2.0:
 An XML Pipeline Language</citetitle>.

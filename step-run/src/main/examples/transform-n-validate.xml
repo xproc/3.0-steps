@@ -1,7 +1,7 @@
 <p:declare-step xmlns:p="http://www.w3.org/ns/xproc"
   xmlns:c="http://www.w3.org/ns/xproc-step"
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
-  version="3.0" 
+  version="3.1" 
   name="transform-n-validate">
   <p:input port="source" primary="true" sequence="true"/>
   <p:input port="stylesheet"/>

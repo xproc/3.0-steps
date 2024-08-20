@@ -79,7 +79,7 @@ properties with greater care in this case.
 </itemizedlist>
 
 <para>When a step uses an XPath to compute an option value, the XPath
-context is as defined in <biblioref linkend="xproc30"/>.</para>
+context is as defined in <biblioref linkend="xproc31"/>.</para>
 
 <para>When a step specifies a particular version of a technology,
 implementations <rfc2119>must</rfc2119> implement that

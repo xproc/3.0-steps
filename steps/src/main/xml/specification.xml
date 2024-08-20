@@ -6,7 +6,7 @@
                xmlns:xi="http://www.w3.org/2001/XInclude"
                xmlns:xlink="http://www.w3.org/1999/xlink"
                xml:id='steps'
-               class="ed"
+               class="wd"
                version="5.0-extension w3c-xproc">
 <info>
 <title>XProc 3.1: Standard Step Library</title>
@@ -69,8 +69,7 @@ specifications</holder>
   </para>
 
 <note role="editorial">
-<para>This draft is the “editor’s working draft” and may continue to evolve.
-A “last call” working draft is anticipated shortly.
+<para>This draft is a “last call” draft. This version is stable and will not be updated.
 </para>
 </note>
 
@@ -93,7 +92,7 @@ A machine-readable description of these steps may be found in
 </para>
 
 <para>Many atomic steps are available for <biblioref
-linkend="xproc30"/>. They are described in several specifications.
+linkend="xproc31"/>. They are described in several specifications.
 This specification describes the general background common to all
 steps. A conformant processor <rfc2119>must</rfc2119> implement all of
 the steps in this specification. Additional steps may also be
@@ -184,7 +183,7 @@ element for result information:</para>
 <e:rng-pattern name="VocabResult"/>
 
 <para>When a step uses an XPath to compute an option value, the XPath
-context is as defined in <biblioref linkend="xproc30"/>.</para>
+context is as defined in <biblioref linkend="xproc31"/>.</para>
 
 <para>When a step specifies a particular version of a technology,
 implementations <rfc2119>must</rfc2119> implement that
