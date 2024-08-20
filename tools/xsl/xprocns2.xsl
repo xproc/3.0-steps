@@ -123,7 +123,7 @@
                     <xsl:apply-templates select="current-group()[1]"
                                          mode="m:inline-error-anchor"/>
                   </xsl:attribute>
-                  <xsl:text>err:{current-group()[1]/@code/string()}</xsl:text>
+                  <xsl:text>err:X{current-group()[1]/@code/string()}</xsl:text>
                 </a>
               </td>
               <td class="description"><xsl:apply-templates select="current-group()[1]"/></td>
