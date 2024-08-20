@@ -38,7 +38,7 @@ serialization of content when it is stored. If the document to be stored
 has a “serialization” property, the serialization is controlled by the
 merger of the two maps where the entries in the “serialization” property
 take precedence. Serialization is described in
-<biblioref linkend="xproc30"/>.</para>
+<biblioref linkend="xproc31"/>.</para>
 
 <simplesect>
 <title>Document properties</title>

@@ -66,8 +66,8 @@
     <para>This specification describes the optional text related XProc steps. A machine-readable description of these steps may be found in <link
         xlink:href="steps.xpl">steps.xpl</link>. </para>
 
-    <para>Familarity with the general nature of <biblioref linkend="xproc30"/> steps is assumed; for background details,
-      see <biblioref linkend="xproc30-steps"/>.</para>
+    <para>Familarity with the general nature of <biblioref
+    linkend="xproc31"/> steps is assumed.</para>
   </section>
 
 <section xml:id="c.something-rdf">
@@ -116,8 +116,7 @@ The build for steps fails unless at least one step is defined.</para>
   <appendix xml:id="references">
     <title>References</title>
     <bibliolist>
-      <bibliomixed xml:id="xproc30"/>
-      <bibliomixed xml:id="xproc30-steps"/>
+      <bibliomixed xml:id="xproc31"/>
     </bibliolist>
   </appendix>
 

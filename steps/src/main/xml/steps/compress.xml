@@ -51,7 +51,7 @@
           content before compression takes place. If the document to be stored has a
             <code>serialization</code> property, the serialization is controlled by the merger of
           the two maps where the entries in the <code>serialization</code> property take precedence.
-          Serialization is described in <biblioref linkend="xproc30"/>.</para>
+          Serialization is described in <biblioref linkend="xproc31"/>.</para>
       </listitem>
     </varlistentry>
   </variablelist>
