@@ -97,13 +97,3 @@ jobs:
           repository-name: ${{ github.repository_owner}}/3.0-specification
           branch: gh-pages
           target-folder: /${{ github.ref_name }}/head
-
-      - name: Deploy libraries on ${{ github.repository_owner}}/3.0-grammar
-        if: ${{ env.HAVE_ACCESS_TOKEN == 'true' }}
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          folder: build/dist/etc
-          token: ${{ secrets.ACCESS_TOKEN }}
-          repository-name: ${{ github.repository_owner}}/3.0-grammar
-          branch: master
-          target-folder: /steps-3.1
