@@ -19,7 +19,7 @@
 </xsl:variable>
 
 <xsl:template match="/">
-  <p:library version='3.0'>
+  <p:library version='3.1'>
     <xsl:sequence select="$lib"/>
 
     <xsl:for-each select="key('id','std-required')//p:declare-step">
