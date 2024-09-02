@@ -115,18 +115,18 @@ task make_etc() {
 // ======================================================================
 // We need the core RNG grammars
 
-task xproc_schemas(dependsOn: [ "download_core30" ]) {
+task xproc_schemas(dependsOn: [ "download_core31" ]) {
     // nop
 }
 
-task download_core30(type: Download) {
-    src "$schemaBaseUri/lib/core30.rng"
-    dest file("build/core30.rng")
+task download_core31(type: Download) {
+    src "$schemaBaseUri/lib/core31.rng"
+    dest file("build/core31.rng")
 }
-download_core30.onlyIf { !file("$buildDir/core30.rng").exists() }
+download_core31.onlyIf { !file("$buildDir/core31.rng").exists() }
 
 [ "rnc", "rng" ].each { ext ->
-    ["xproc", "xproc10", "xproc30"].each { base ->
+    ["xproc", "xproc10", "xproc30", "xproc31"].each { base ->
         Task t = task "download_${base}_${ext}"(type: Download) {
             src "$schemaBaseUri/relax-ng/$base.$ext"
             dest file("build/$base.$ext")
