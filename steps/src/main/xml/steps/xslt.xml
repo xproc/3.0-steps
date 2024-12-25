@@ -52,8 +52,8 @@
   
   <section>
     <title>Invoking an XSLT 3.0 stylesheet</title>
-    <para>The value of <option>global-context-item</option> is used as global context item for the
-      stylesheet invocation. If no value is supplied, the following applies:</para>
+    <para>The value of <option>global-context-item</option> is used as the global context item for the
+      stylesheet invocation. If its value is the empty sequence, the following applies:</para>
     <itemizedlist>
       <listitem>
         <para>If there is a single document on the <port>source</port> port, this document will
@@ -67,15 +67,18 @@
     <para>The <option>populate-default-collection</option> option is used to control whether all
     the documents appearing on <port>source</port> port form the default collection for the XSLT
     transformation.</para>
-    <para>If no value is supplied for <option>template-name</option> option an “Apply-template
+    <para>If the value of the <option>template-name</option> option is the empty sequence, an “Apply-template
       invocation” is performed. The documents that appear on <port>source</port> are taken to be the
       initial match selection. if <option>populate-default-collection</option> is true, they
-      are also the default collection. If a value is supplied for 
-      the <option>initial-mode</option> option,
-      this value is used as the initial-mode for the invocation. <error code="C0008">It is a
-        <glossterm>dynamic error</glossterm> if the stylesheet does not support a given mode.</error> 
-      If no value is supplied, nothing is supplied to the invocation,
-      so the default behaviour defined for XSLT 3.0 could be applied.</para>
+      are also the default collection.</para>
+
+    <para>If the value of the <option>initial-mode</option> option is not the
+    empty sequence, the option value is used as the initial-mode for the
+    invocation. <error code="C0008">It is a <glossterm>dynamic error</glossterm>
+    if the stylesheet does not support a given mode.</error> If the value is 
+    the empty sequence, no initial-mode is specified and default XSLT 3.0 behavior
+    applies.</para>
+
     <para>If a value is supplied for option <option>template-name</option> a “Call template
       invocation” is performed. The documents on port <port>source</port> are taken as the default
       collection in this case. Option <option>initial-mode</option> is ignored. <error code="C0056"
@@ -97,7 +100,7 @@
       sequence a JSON document will be constructed and appear on the steps output port.</para>
     <para>Option <option>output-base-uri</option> sets the base output URI per XSLT 3.0
       specification. If a final result tree is constructed, this URI is used to resolve a relative
-      URI reference. If no value is supplied for <option>output-base-uri</option>, the base URI of
+      URI reference. If the value of <option>output-base-uri</option> is the empty sequence, the base URI of
       the first document in the <port>source</port> port's sequence is used. If no document is
       supplied on port <port>source</port> the base URI of the document on port <port>stylesheet</port>
       is used. <error code="C0121">It is a <glossterm>dynamic error</glossterm> if a document appearing
