@@ -27,8 +27,8 @@ supports redirection, then redirects <rfc2119>must</rfc2119> be
 followed.</para>
 
 <para><error code="D0011">It is a <glossterm>dynamic error</glossterm>
-if the resource referenced by a <code>p:load</code> element does not exist
-or cannot be accessed.</error></para>
+if the resource referenced by a <code>p:load</code> element does not exist,
+cannot be accessed, or if the access reports error (for example, an HTTP 404 error).</error></para>
 
 <para>The behavior of this step depends on the content type of the
 document loaded. The content type of a document is
