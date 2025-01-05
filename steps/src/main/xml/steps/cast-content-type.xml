@@ -104,7 +104,7 @@
      <para>A <tag>c:parameter-set</tag> is a wrapper around zero or more <tag>c:param</tag>
      elements.</para>
 
-     <e:rng-pattern name="VocabParamSet"/>
+     <e:rng-pattern name="VocabParamSet" xml:id="cv.param-set"/>
 
      <para><error code="D0018">It is a <glossterm>dynamic error</glossterm> if
      the parameter list contains any elements other than <tag>c:param</tag>.</error></para>
@@ -116,7 +116,7 @@
      
      <para xml:id="c.param">A <tag>c:param</tag> is a name/value pair with an optional namespace.</para>
 
-     <e:rng-pattern name="VocabParam"/>
+     <e:rng-pattern name="VocabParam" xml:id="cv.param"/>
 
      <para>The <tag class="attribute">name</tag> attribute of the
      <tag>c:param</tag> must have the lexical form of a QName.</para>

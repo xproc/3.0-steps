@@ -11,6 +11,7 @@
                 version="3.0">
 
 <xsl:strip-space elements="rng:*"/>
+<xsl:variable name="root" select="/"/>
 
 <!-- ============================================================ -->
 
@@ -536,9 +537,18 @@
       </var>
     </xsl:when>
     <xsl:otherwise>
-      <a href="#{$idpfx}{$basename}">
-	<xsl:value-of select="concat($prefix,':',$basename)"/>
-      </a>
+      <xsl:variable name="target" select="$idpfx||$basename"/>
+      <xsl:choose>
+        <xsl:when test="empty(id($target, $root))">
+          <xsl:message select="'Ignoring link to ' || $target || ' which does not exist in this document.'"/>
+	  <xsl:value-of select="concat($prefix,':',$basename)"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <a href="#{$idpfx}{$basename}">
+	    <xsl:value-of select="concat($prefix,':',$basename)"/>
+          </a>
+        </xsl:otherwise>
+      </xsl:choose>
       <xsl:value-of select="@repeat"/>
     </xsl:otherwise>
   </xsl:choose>
