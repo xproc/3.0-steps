@@ -76,10 +76,13 @@ between that line and a following line that contains no characters.)
 All lines returned by <tag>p:text-sort</tag> are terminated with a single
 newline (&amp;#10;).</para>
 
-  <para>The sort process performed by this step is the same as described in 
-    <link xlink:href="https://www.w3.org/TR/xslt-30/#xsl-sort">The xsl:sort Element</link>. Options <option>lang</option>
-    and <option>case-order</option> are only taken into consideration if no value is selected for option
-    <option>collation</option>.</para>
+  <para>The sort process performed by this step is the same as the process described in
+  <biblioref linkend="xslt30"/> for the
+  <link xlink:href="https://www.w3.org/TR/xslt-30/#xsl-sort">xsl:sort</link> element.
+  The options <option>lang</option>
+  and <option>case-order</option> are considered only if the value
+  of the <option>collation</option> option is the empty sequence.</para>
+
   <simplesect>
     <title>Document properties</title>
     <para feature="text-sort-preserves-all">All document properties are preserved.</para>
