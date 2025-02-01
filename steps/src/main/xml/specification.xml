@@ -221,6 +221,7 @@ PSVI annotations.</para>
 <xi:include href="steps/compress.xml"/>
 <xi:include href="steps/count.xml"/>
 <xi:include href="steps/delete.xml"/>
+<xi:include href="steps/encode.xml"/>
 <xi:include href="steps/error.xml"/>
 <xi:include href="steps/filter.xml"/>
 <xi:include href="steps/hash.xml"/>

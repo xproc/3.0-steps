@@ -37,8 +37,29 @@
    <section xml:id="casting-from-xml">
       <title>Casting from an XML media type</title> 
       <itemizedlist>
+        <listitem>
+          <para>If the input document is a <tag>c:data</tag> document, casting
+          decodes the text content of the <tag>c:data</tag> element according to the
+          <tag class="attribute">encoding</tag> and processes it according to its content type.
+          The resulting document will have the specified content type.
+          The serialization property is removed.</para>
+          <para><error code="C0052">It is a <glossterm>dynamic error</glossterm> if
+          the encoding specified is not supported by the implementation.</error></para>
+          <para><error code="C0072">It is a <glossterm>dynamic
+          error</glossterm> if the <tag>c:data</tag> contains content is not
+          a valid string according to the encoding.</error></para>
+          <para><error code="C0073">It is a <glossterm>dynamic
+          error</glossterm> if the <tag>c:data</tag> element does not have
+          a <tag class="attribute">content-type</tag> attribute.</error></para>
+          <para><error code="C0074">It is a <glossterm>dynamic
+          error</glossterm> if the <option>content-type</option> is supplied and is
+          not the same as the <tag class="attribute">content-type</tag> specified on
+          the <tag>c:data</tag> element.</error>
+          </para>
+        </listitem>
          <listitem>
-            <para>Casting from one XML media type to another simply changes the
+            <para>If the input document is not a <tag>c:data</tag> document,
+            casting from one XML media type to another simply changes the
                “<literal>content-type</literal>” document property.
             </para>
          </listitem>
@@ -71,23 +92,6 @@
                on the <port>result</port> port. The serialization property is removed.</para>
          </listitem>
          <listitem>
-            <para>Casting from an XML media type to any other media type
-               <rfc2119>must</rfc2119> support the case where the input document is
-               a <tag>c:data</tag> document. The resulting document will
-               have the specified media type and a representation that
-               is the content of the <tag>c:data</tag> element after decoding the base64
-               encoded content The serialization property is removed.</para>
-            <para><error code="C0072">It is a <glossterm>dynamic
-               error</glossterm> if the <tag>c:data</tag> contains content is not
-               a valid base64 string.</error></para>
-            <para><error code="C0073">It is a <glossterm>dynamic
-               error</glossterm> if the <tag>c:data</tag> element does not have
-               a <tag class="attribute">content-type</tag> attribute.</error></para>
-            <para><error code="C0074">It is a <glossterm>dynamic
-               error</glossterm> if the <option>content-type</option> is supplied and is
-               not the same as the <tag class="attribute">content-type</tag> specified on
-               the <tag>c:data</tag> element.</error>
-            </para>
             <para><impl>Casting from an XML media type to any other media type when
                the input document is not a <tag>c:data</tag> document is
                <glossterm>implementation-defined</glossterm>.</impl></para>
