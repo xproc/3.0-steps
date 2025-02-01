@@ -1,0 +1,52 @@
+<section xmlns="http://docbook.org/ns/docbook"
+         xmlns:e="http://www.w3.org/1999/XSL/Spec/ElementSyntax"
+         xmlns:p="http://www.w3.org/ns/xproc"
+         xmlns:xi="http://www.w3.org/2001/XInclude"
+         xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="c.encode">
+<title>p:encode</title>
+
+<para>The <code>p:encode</code> step encodes an input document, for example with base64 encoding.
+</para>
+
+<p:declare-step type="p:encode">
+  <p:input port="source"/>
+  <p:output port="result" content-types="application/xml"/>
+  <p:option name="encoding" as="xs:string" select="'base64'"/>
+  <p:option name="serialization" as="map(xs:QName,item()*)?"/>
+</p:declare-step>
+
+<para>The encode step produces an XML document by encoding its input. The
+encoding value “<literal>base64</literal>” <rfc2119>must</rfc2119> be supported.
+<impl>An implementation may support encodings other than
+<literal>base64</literal>, but these encodings and their names are
+<glossterm>implementation-defined</glossterm>.</impl> <error code="D0213">It is
+a <glossterm>dynamic error</glossterm> if the encoding specified is not supported
+by the implementation.</error>
+</para>
+
+<para>If the input document is a binary document, its content is encoded
+directly, otherwise the content is first serialized and the serialized
+representation is encoded. The <option>serialization</option> option is provided
+to control the serialization of content when it is stored. If the document to be
+stored has a “serialization” property, the serialization is controlled by the
+merger of the two maps where the entries in the “serialization” property take
+precedence. Serialization is described in <biblioref linkend="xproc31"/>.</para>
+
+<para>The result of encoding is a <tag>c:data</tag> element.</para>
+
+<e:rng-pattern name="VocabData"/>
+            
+<para>The content of the <tag>c:data</tag> element is the encoded representation
+of the content.</para>
+
+<note>
+<para>There is no <code>p:decode</code> step. Decoding is performed by the
+<tag>p:cast-content-type</tag> step if the input is a <tag>c:data</tag>
+document.</para>
+</note>
+
+<simplesect>
+<title>Document properties</title>
+<para feature="encode-preserves-none">No document properties are preserved.</para>
+</simplesect>
+</section>
