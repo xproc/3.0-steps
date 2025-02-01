@@ -13,6 +13,7 @@ fashion.</para>
    <p:input port="alternate" sequence="true" content-types="text xml html"/>
    <p:output port="result" sequence="true" content-types="application/xml"/>
    <p:option name="wrapper" required="true" as="xs:QName"/>
+   <p:option name="attributes" as="map(xs:QName, xs:anyAtomicType)?" />
 </p:declare-step>
 
 <para>The step takes each pair of documents, in order, one from the
@@ -20,6 +21,11 @@ fashion.</para>
 wraps them with a new element node whose QName is the value specified
 in the <option>wrapper</option> option, and writes that element to the
 <port>result</port> port as a document.</para>
+
+<para>If the <option>attributes</option> option is used, a new attribute is
+created on the wrapper element for each entry in the map. The attribute name is
+taken from the entry's key while the attribute value is taken from the string
+value of the entry's value.</para>
 
 <para>If the step reaches the end of one input sequence before the
 other, then it simply wraps each of the remaining documents in the

@@ -14,6 +14,7 @@ documents.</para>
    <p:output port="result" sequence="true" content-types="application/xml"/>
    <p:option name="wrapper" required="true" as="xs:QName"/>
    <p:option name="group-adjacent" as="xs:string?" e:type="XPathExpression"/>
+   <p:option name="attributes" as="map(xs:QName, xs:anyAtomicType)?" />
 </p:declare-step>
 
 <para>The value of the <option>group-adjacent</option> option
@@ -25,6 +26,11 @@ each document in the <port>source</port> sequence inside a new
 document element as sequential siblings. The name of the document
 element is the value specified in the <option>wrapper</option>
 option.</para>
+
+<para>If the <option>attributes</option> option is used, a new attribute is
+created on the wrapper element for each entry in the map. The attribute name is
+taken from the entry's key while the attribute value is taken from the string
+value of the entry's value.</para>
 
 <para>The <option>group-adjacent</option> option can be used to group
 adjacent documents.

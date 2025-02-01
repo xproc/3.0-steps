@@ -254,8 +254,8 @@ PSVI annotations.</para>
 <xi:include href="steps/uncompress.xml"/>
 <xi:include href="steps/unwrap.xml"/>
 <xi:include href="steps/uuid.xml"/>
-<xi:include href="steps/wrap-sequence.xml"/>
 <xi:include href="steps/wrap.xml"/>
+<xi:include href="steps/wrap-sequence.xml"/>
 <xi:include href="steps/www-form-urldecode.xml"/>
 <xi:include href="steps/www-form-urlencode.xml"/>
 <xi:include href="steps/xinclude.xml"/>
