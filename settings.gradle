@@ -1,2 +1,2 @@
 include 'steps', 'step-validation', 'step-os', 'step-paged-media', 'step-run',
-        'step-file', 'step-text', 'step-mail', 'step-ixml'
+        'step-file', 'step-text', 'step-mail', 'step-ixml', 'step-message'
