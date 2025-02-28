@@ -731,7 +731,7 @@ task step_message(type: DocBookTask,
   param("ci-tag", getenv("CI_TAG"))
 
   option("style", file("tools/xsl/xproc-specs.xsl"))
-  option("diff", '')
+  option("diff", deltaxml())
   option("specid", "message")
   option("diffloc", buildAbsDir + "/message/diff.html")
 
