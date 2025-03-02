@@ -233,6 +233,7 @@ PSVI annotations.</para>
 <xi:include href="steps/label-elements.xml"/>
 <xi:include href="steps/load.xml"/>
 <xi:include href="steps/make-absolute-uris.xml"/>
+<xi:include href="steps/message.xml"/>
 <xi:include href="steps/namespace-delete.xml" />
 <xi:include href="steps/namespace-rename.xml"/>
 <xi:include href="steps/pack.xml"/>
