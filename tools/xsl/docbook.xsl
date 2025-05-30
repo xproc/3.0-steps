@@ -296,9 +296,8 @@
       <xsl:if test="contains-token(@version, 'final')">
         <dt>Errata:</dt>
         <dd>
-          <a href="{db:info/db:bibliomisc[@role='final-uri']}errata.html">
-            <xsl:sequence select="db:info/db:bibliomisc[@role='final-uri'] || 'errata.html'"/>
-          </a>
+          <a href="https://specs.xproc.org/3.1/xproc/errata.html"
+             >https://specs.xproc.org/3.1/xproc/errata.html</a>
         </dd>
       </xsl:if>
     </dl>
